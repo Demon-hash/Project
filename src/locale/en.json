@@ -1,0 +1,9 @@
+{
+  "translation": {
+    "route": {
+      "home": "Home",
+      "auth":  "Auth",
+      "login": "Log In"
+    }
+  }
+}
