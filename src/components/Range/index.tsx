@@ -18,10 +18,10 @@ export const Range = forwardRef<
         )}
         {...props}
     >
-        <SliderPrimitive.Track className="relative h-2 w-full grow overflow-hidden rounded-full bg-neutral-200">
-            <SliderPrimitive.Range className="absolute h-full bg-neutral-400" />
+        <SliderPrimitive.Track className="relative h-2 w-full grow overflow-hidden rounded-full bg-foreground">
+            <SliderPrimitive.Range className="absolute h-full bg-muted-foreground" />
         </SliderPrimitive.Track>
-        <SliderPrimitive.Thumb className="block h-5 w-5 rounded-full shadow-neutral-950 shadow-sm bg-background disabled:pointer-events-none disabled:opacity-50" />
-        <SliderPrimitive.Thumb className="block h-5 w-5 rounded-full shadow-neutral-950 shadow-sm bg-background disabled:pointer-events-none disabled:opacity-50" />
+        <SliderPrimitive.Thumb className="block h-5 w-5 rounded-full shadow-neutral-950 shadow-sm bg-accent-foreground disabled:pointer-events-none disabled:opacity-50" />
+        <SliderPrimitive.Thumb className="block h-5 w-5 rounded-full shadow-neutral-950 shadow-sm bg-accent-foreground disabled:pointer-events-none disabled:opacity-50" />
     </SliderPrimitive.Root>
 ));

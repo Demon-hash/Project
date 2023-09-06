@@ -17,7 +17,9 @@ export const Breadcrumbs: FC = () => {
                     key={to}
                     className={twMerge(
                         'text-md text-center flex font-light',
-                        index < len ? 'text-neutral-400' : 'text-neutral-950',
+                        index < len
+                            ? 'text-primary-foreground'
+                            : 'text-important-foreground',
                     )}
                 >
                     <h1>

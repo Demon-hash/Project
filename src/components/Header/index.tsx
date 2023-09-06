@@ -16,14 +16,18 @@ export const Header: FC = () => {
                 url: ROUTE.CHILDREN,
             },
         ].map(({ title, url }) => (
-            <Link className="text-neutral-950 ml-5" to={url} key={url}>
+            <Link
+                className="text-primary-foreground ml-5 font-light"
+                to={url}
+                key={url}
+            >
                 {t(`categories.${title}`)}
             </Link>
         ));
     }, [t]);
 
     return (
-        <nav className="w-100 h-12 border-b border-neutral-300 relative flex">
+        <nav className="w-100 h-12 border-b border-foreground relative flex">
             <ul className="relative flex grow items-center w-100 px-16">
                 <li>
                     <Breadcrumbs />
