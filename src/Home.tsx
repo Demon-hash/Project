@@ -1,6 +1,7 @@
 import { Header } from 'components/Header';
 import { Container } from 'components/Container';
 import { CheckboxColor } from 'components/CheckboxColor';
+import { Range } from 'components/Range';
 
 export const Home = () => {
     const categories = [
@@ -32,8 +33,8 @@ export const Home = () => {
             <Header />
             <Container>
                 <div className="bg-gray-300 h-96">Carousel</div>
-                <div className="py-8">
-                    <div className="w-1/4">
+                <div className="py-8 grid grid-cols-3">
+                    <div className="col-span-1">
                         <h1 className="uppercase p-4 font-bold text-neutral-50 tracking-wider bg-neutral-700">
                             shop by
                         </h1>
@@ -52,6 +53,15 @@ export const Home = () => {
                                 </li>
                             ))}
                         </ul>
+
+                        <h1 className="p-4 uppercase tracking-wider">Price</h1>
+                        <div className="p-4">
+                            <Range defaultValue={[0, 100]} />
+                        </div>
+
+                        <h1 className="p-4 uppercase tracking-wider">
+                            Sort By
+                        </h1>
 
                         <h1 className="p-4 uppercase tracking-wider">Brands</h1>
                         <ul className="px-4">
