@@ -3,7 +3,13 @@
     "route": {
       "home": "Home",
       "auth":  "Auth",
-      "login": "Log In"
+      "login": "Log In",
+      "categories": "Categories"
+    },
+    "categories": {
+      "men": "Men",
+      "women": "Women",
+      "children": "Children"
     }
   }
 }
