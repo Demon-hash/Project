@@ -20,6 +20,7 @@
       "constants/*": ["./src/constants/*"],
       "hooks/*": ["./src/hooks/*"],
       "shared/*": ["./src/shared/*"],
+      "assets/*": ["./src/assets/*"],
       "utils": ["./src/utils/index.ts"]
     }
   },

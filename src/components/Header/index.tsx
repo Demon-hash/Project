@@ -1,30 +1,28 @@
-import { type FC, useMemo } from 'react';
-import { Link } from 'react-router-dom';
+import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
+
 import { Breadcrumbs } from 'components/Breadcrumbs';
 import { ROUTE } from 'constants/routers';
 
 export const Header: FC = () => {
     const { t } = useTranslation();
-
-    const categories = useMemo(() => {
-        return [
-            { title: 'women', url: ROUTE.WOMEN },
-            { title: 'men', url: ROUTE.MEN },
-            {
-                title: 'children',
-                url: ROUTE.CHILDREN,
-            },
-        ].map(({ title, url }) => (
-            <Link
-                className="text-primary-foreground ml-5 font-light"
-                to={url}
-                key={url}
-            >
-                {t(`categories.${title}`)}
-            </Link>
-        ));
-    }, [t]);
+    const categories = [
+        { title: 'women', url: ROUTE.WOMEN },
+        { title: 'men', url: ROUTE.MEN },
+        {
+            title: 'children',
+            url: ROUTE.CHILDREN,
+        },
+    ].map(({ title, url }) => (
+        <Link
+            className="text-primary-foreground ml-5 font-light"
+            to={url}
+            key={url}
+        >
+            {t(`categories.${title}`)}
+        </Link>
+    ));
 
     return (
         <nav className="w-100 h-12 border-b border-foreground relative flex">

@@ -1,6 +1,7 @@
 import type { FC } from 'react';
-import { twMerge } from 'tailwind-merge';
 import { Link, useMatches } from 'react-router-dom';
+
+import { twMerge } from 'tailwind-merge';
 
 export const Breadcrumbs: FC = () => {
     const matches = useMatches();

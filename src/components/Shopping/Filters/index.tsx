@@ -1,10 +1,12 @@
-import type { Variant } from 'shared/types';
 import { useTranslation } from 'react-i18next';
+
+import type { Variant } from 'shared/types';
+
 import { ListWithCount } from './ListWithCount';
 import { PriceRange } from './PriceRange';
 import { VariantsList } from './VariantsList';
 
-export const ShopFilters = () => {
+export const Filters = () => {
     const { t } = useTranslation();
 
     const categories: Variant[] = [
@@ -61,7 +63,7 @@ export const ShopFilters = () => {
 
     return (
         <>
-            <h1 className="uppercase p-4 font-bold text-accent tracking-wider bg-primary">
+            <h1 className="uppercase p-4 font-bold text-accent tracking-wider bg-primary h-14">
                 {t('shop.by')}
             </h1>
             <ListWithCount title="shop.categories" variants={categories} />

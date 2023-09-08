@@ -1,6 +1,8 @@
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
+
 import { Checkbox } from 'components/Checkbox';
+
 import { Heading } from '../Heading';
 
 interface Properties {

@@ -1,1 +1,1 @@
-/// <reference shared="vite/client" />
+// <reference shared="vite/client" />

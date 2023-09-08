@@ -1,11 +1,14 @@
+import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
 import {
     type ComponentPropsWithoutRef,
     type ElementRef,
     forwardRef,
 } from 'react';
+
 import type { VariantProps } from 'class-variance-authority';
-import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
+
 import { cn } from 'utils';
+
 import { checkboxConfig } from './config';
 
 interface CheckboxProperties

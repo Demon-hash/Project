@@ -1,6 +1,8 @@
 import type { FC } from 'react';
-import type { Variant } from 'shared/types';
 import { useTranslation } from 'react-i18next';
+
+import type { Variant } from 'shared/types';
+
 import { Heading } from '../Heading';
 
 interface Properties {

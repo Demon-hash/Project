@@ -1,5 +1,5 @@
 {
-  "name": "form",
+  "name": "project",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -7,18 +7,21 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prettier": "prettier src/**/*.{tsx,ts,json} --write --ignore-unknown --cache"
   },
   "dependencies": {
-    "@radix-ui/react-slider": "^1.1.2",
     "i18next": "^23.4.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.15.0"
   },
   "devDependencies": {
+    "@hookform/resolvers": "^3.3.1",
     "@radix-ui/react-checkbox": "^1.0.4",
+    "@radix-ui/react-slider": "^1.1.2",
     "@radix-ui/react-slot": "^1.0.2",
+    "@trivago/prettier-plugin-sort-imports": "^4.2.0",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
@@ -41,12 +44,26 @@
     "tailwindcss-animate": "^1.0.7",
     "typescript": "^5.0.2",
     "vite": "^4.4.5",
-    "vite-tsconfig-paths": "^4.2.0"
+    "vite-tsconfig-paths": "^4.2.0",
+    "zod": "^3.22.2"
   },
   "prettier": {
+    "printWidth": 80,
     "tabWidth": 4,
+    "trailingComma": "all",
     "semi": true,
     "singleQuote": true,
-    "arrowParens": "avoid"
+    "arrowParens": "avoid",
+    "plugins": ["@trivago/prettier-plugin-sort-imports"],
+    "importOrder": [
+      "<TYPES>",
+      "<TYPES>^[.]",
+      "react",
+      "<THIRD_PARTY_MODULES>",
+      "^(assets|constants|hooks|components|shared|utils)/?(.*)$",
+      "^[./]"
+    ],
+    "importOrderSeparation": true,
+    "importOrderSortSpecifiers": true
   }
 }

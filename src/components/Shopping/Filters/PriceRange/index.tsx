@@ -1,6 +1,8 @@
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
+
 import { Range } from 'components/Range';
+
 import { Heading } from '../Heading';
 
 interface Properties {

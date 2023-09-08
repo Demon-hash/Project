@@ -1,63 +1,63 @@
 {
-  "translation": {
-    "route": {
-      "home": "Home",
-      "auth": "Auth",
-      "login": "Log In",
-      "categories": "Categories"
-    },
-    "categories": {
-      "men": "Men",
-      "women": "Women",
-      "children": "Children"
-    },
-    "sort": {
-      "popularity": "Popularity",
-      "rating": "Rating",
-      "newness": "Newness",
-      "price": "Price"
-    },
-    "size": {
-      "xs": "XS",
-      "s": "S",
-      "m": "M",
-      "l": "L",
-      "xl": "XL",
-      "xxl": "XXL"
-    },
-    "colors": {
-      "red": "Red",
-      "orange": "Orange",
-      "yellow": "Yellow",
-      "green": "Green",
-      "sky": "Sky",
-      "blue": "Blue",
-      "violet": "Violet",
-      "purple": "Purple",
-      "pink": "Pink",
-      "white": "White",
-      "gray": "Gray",
-      "black": "Black"
-    },
-    "material": {
-      "synthetic": "Synthetic",
-      "wool": "Wool",
-      "linen": "Linen",
-      "denim": "Denim",
-      "leather": "Leather",
-      "silk": "Silk",
-      "chiffon": "Chiffon",
-      "other": "Other"
-    },
-    "shop": {
-      "by": "Shop By",
-      "categories": "Categories",
-      "brands": "Brands",
-      "price": "Price",
-      "sort": "Sort By",
-      "sizes": "Sizes",
-      "materials": "Materials",
-      "colors": "Colors"
+    "translation": {
+        "route": {
+            "home": "Home",
+            "auth": "Auth",
+            "login": "Log In",
+            "categories": "Categories"
+        },
+        "categories": {
+            "men": "Men",
+            "women": "Women",
+            "children": "Children"
+        },
+        "sort": {
+            "popularity": "Popularity",
+            "rating": "Rating",
+            "newness": "Newness",
+            "price": "Price"
+        },
+        "size": {
+            "xs": "XS",
+            "s": "S",
+            "m": "M",
+            "l": "L",
+            "xl": "XL",
+            "xxl": "XXL"
+        },
+        "colors": {
+            "red": "Red",
+            "orange": "Orange",
+            "yellow": "Yellow",
+            "green": "Green",
+            "sky": "Sky",
+            "blue": "Blue",
+            "violet": "Violet",
+            "purple": "Purple",
+            "pink": "Pink",
+            "white": "White",
+            "gray": "Gray",
+            "black": "Black"
+        },
+        "material": {
+            "synthetic": "Synthetic",
+            "wool": "Wool",
+            "linen": "Linen",
+            "denim": "Denim",
+            "leather": "Leather",
+            "silk": "Silk",
+            "chiffon": "Chiffon",
+            "other": "Other"
+        },
+        "shop": {
+            "by": "Shop By",
+            "categories": "Categories",
+            "brands": "Brands",
+            "price": "Price",
+            "sort": "Sort By",
+            "sizes": "Sizes",
+            "materials": "Materials",
+            "colors": "Colors"
+        }
     }
-  }
 }
