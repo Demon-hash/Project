@@ -33,7 +33,7 @@
 
     --border: 0 0% 18%;
     --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
+    --ring: 0 0% 76.1%;
 
     --radius: 0.5rem;
   }
@@ -74,6 +74,6 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-primary-foreground;
   }
 }

@@ -1,4 +1,8 @@
-import { type ClassValue, clsx } from 'clsx';
-import { twMerge } from 'tailwind-merge';
+export const formatNumberAsMoney = (amount: number): string => {
+    const instance = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+    });
 
-export const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs));
+    return instance.format(amount);
+};

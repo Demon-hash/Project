@@ -21,6 +21,7 @@
       "hooks/*": ["./src/hooks/*"],
       "shared/*": ["./src/shared/*"],
       "assets/*": ["./src/assets/*"],
+      "schemas/*": ["./src/schemas/*"],
       "utils": ["./src/utils/index.ts"]
     }
   },

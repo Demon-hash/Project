@@ -1,8 +1,7 @@
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-
+import { Link } from 'react-router-dom';
 import type { Variant } from 'shared/types';
-
 import { Heading } from '../Heading';
 
 interface Properties {
@@ -22,7 +21,9 @@ export const ListWithCount: FC<Properties> = ({ title, variants }) => {
                         className="flex items-center justify-between py-1 font-light"
                         key={title}
                     >
-                        <h3 className="text-accent-foreground">{title}</h3>
+                        <Link to="#" className="text-accent-foreground">
+                            {title}
+                        </Link>
                         <span className="text-right text-muted-foreground">
                             {count}
                         </span>

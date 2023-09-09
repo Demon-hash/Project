@@ -1,13 +1,20 @@
-import { useTranslation } from 'react-i18next';
-
+import { useCallback } from 'react';
+import { Form } from 'react-hook-form';
+import { Breadcrumbs } from 'components/Breadcrumbs';
+import { Button } from 'components/Button';
+import { useFiltersForm } from 'hooks/forms/use-filters-form';
+import type { ShopFilters } from 'schemas/shop-filters';
 import type { Variant } from 'shared/types';
-
 import { ListWithCount } from './ListWithCount';
 import { PriceRange } from './PriceRange';
 import { VariantsList } from './VariantsList';
 
 export const Filters = () => {
-    const { t } = useTranslation();
+    const { control, submit } = useFiltersForm(
+        useCallback(data => {
+            console.log(data);
+        }, []),
+    );
 
     const categories: Variant[] = [
         { title: 'Shirts', count: 5 },
@@ -64,24 +71,45 @@ export const Filters = () => {
     return (
         <>
             <h1 className="uppercase p-4 font-bold text-accent tracking-wider bg-primary h-14">
-                {t('shop.by')}
+                <Breadcrumbs />
             </h1>
-            <ListWithCount title="shop.categories" variants={categories} />
-            <ListWithCount title="shop.brands" variants={brands} />
-            <PriceRange title="shop.price" />
-            <VariantsList title="shop.sort" i18key="sort" variants={sort} />
-            <VariantsList title="shop.sizes" i18key="size" variants={sizes} />
-            <VariantsList
-                title="shop.materials"
-                i18key="material"
-                variants={materials}
-            />
-            <VariantsList
-                asColorList
-                title="shop.colors"
-                i18key="colors"
-                variants={colors}
-            />
+            <Form control={control}>
+                <ListWithCount title="shop.categories" variants={categories} />
+                <ListWithCount title="shop.brands" variants={brands} />
+                <PriceRange title="shop.price" />
+                <VariantsList<ShopFilters>
+                    name="sort"
+                    control={control}
+                    title="shop.sort"
+                    i18key="sort"
+                    variants={sort}
+                />
+                <VariantsList<ShopFilters>
+                    name="size"
+                    control={control}
+                    title="shop.sizes"
+                    i18key="size"
+                    variants={sizes}
+                />
+                <VariantsList<ShopFilters>
+                    name="material"
+                    control={control}
+                    title="shop.materials"
+                    i18key="material"
+                    variants={materials}
+                />
+                <VariantsList<ShopFilters>
+                    asColorList
+                    name="color"
+                    control={control}
+                    title="shop.colors"
+                    i18key="colors"
+                    variants={colors}
+                />
+                <Button type="submit" onClick={() => submit()}>
+                    Submit
+                </Button>
+            </Form>
         </>
     );
 };

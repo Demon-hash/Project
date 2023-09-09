@@ -1,19 +1,23 @@
-# Project
+## Convention
+```js 
+    let variableName; 
+    const CONSTANT_NAME = "something";
+```
 
-# (Third Party) Library / Framework
+### (Third Party) Library / Framework
 * React Router v6
 * i18next
 
-# UI
+### UI
 * shadcn/ui (Radix UI)
 * Tailwind
 
-# Forms
+### Forms
 * React Hook Form
 * Zod
 
-# Network
+### Network
 * Reatom
 
-# Prettier
+### Prettier
 * prettier-plugin-sort-imports

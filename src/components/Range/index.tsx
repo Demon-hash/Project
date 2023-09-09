@@ -5,7 +5,7 @@ import {
     forwardRef,
 } from 'react';
 
-import { cn } from 'utils';
+import { twMerge } from 'tailwind-merge';
 
 export const Range = forwardRef<
     ElementRef<typeof SliderPrimitive.Root>,
@@ -13,7 +13,7 @@ export const Range = forwardRef<
 >(({ className, ...props }, ref) => (
     <SliderPrimitive.Root
         ref={ref}
-        className={cn(
+        className={twMerge(
             'relative flex w-full touch-none select-none items-center',
             className,
         )}

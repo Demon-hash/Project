@@ -1,6 +1,5 @@
 import type { FC } from 'react';
 import { Link, useMatches } from 'react-router-dom';
-
 import { twMerge } from 'tailwind-merge';
 
 export const Breadcrumbs: FC = () => {
@@ -13,22 +12,25 @@ export const Breadcrumbs: FC = () => {
 
     return (
         <ul className="flex">
-            {breadcrumbs.map(({ props: { to, children } }, index) => (
-                <li
-                    key={to}
-                    className={twMerge(
-                        'text-md text-center flex font-light',
-                        index < len
-                            ? 'text-primary-foreground'
-                            : 'text-important-foreground',
-                    )}
-                >
-                    <h1>
-                        <Link to={to}>{children}</Link>
-                    </h1>
-                    {index < len ? <span className="px-2">/</span> : ''}
-                </li>
-            ))}
+            {breadcrumbs.map(({ props: { to, children } }, index) => {
+                const isLast = index === len;
+                return (
+                    <li
+                        key={to}
+                        className={twMerge(
+                            'text-md text-center flex font-light',
+                            isLast
+                                ? 'text-important-foreground'
+                                : 'text-primary-foreground',
+                        )}
+                    >
+                        <h1>
+                            <Link to={to}>{children}</Link>
+                        </h1>
+                        {isLast ? '' : <span className="px-2">/</span>}
+                    </li>
+                );
+            })}
         </ul>
     );
 };

@@ -1,8 +1,6 @@
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-
-import { Breadcrumbs } from 'components/Breadcrumbs';
 import { ROUTE } from 'constants/routers';
 
 export const Header: FC = () => {
@@ -27,9 +25,6 @@ export const Header: FC = () => {
     return (
         <nav className="w-100 h-12 border-b border-foreground relative flex">
             <ul className="relative flex grow items-center w-100 px-16">
-                <li>
-                    <Breadcrumbs />
-                </li>
                 <li className="grow flex items-end">
                     <div className="ml-auto">{categories}</div>
                 </li>
