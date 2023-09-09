@@ -4,7 +4,6 @@ import {
     type ElementRef,
     forwardRef,
 } from 'react';
-
 import { twMerge } from 'tailwind-merge';
 
 export const Range = forwardRef<
@@ -15,7 +14,7 @@ export const Range = forwardRef<
         ref={ref}
         className={twMerge(
             'relative flex w-full touch-none select-none items-center',
-            className,
+            className ?? '',
         )}
         {...props}
     >
