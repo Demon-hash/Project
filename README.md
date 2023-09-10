@@ -1,27 +1,35 @@
 ## Convention
-```js 
-    let variableName; 
-    const CONSTANT_NAME = "something";
+#### Code
+```ts 
+let variableName; 
+const CONSTANT_NAME = "something";
+
+import type { FC, ReactNode } from 'react';
+import type { Variant } from 'shared/types';
+import Sweater from 'assets/sweater.png';
+import { Breadcrumbs } from 'components/Breadcrumbs';
+import { useFiltersForm } from 'hooks/forms/use-filters-form';
+import { ROUTE } from 'constants/routers';
+import { config } from './config';
+```
+#### Files / Directories
+```
+file-name-here.ext
+ComponentName
 ```
 
-### (Third Party) Library / Framework
+### Stack
+* Vite
+* React 18
 * React Router v6
 * i18next
-
-### UI
 * shadcn/ui (Radix UI)
 * Tailwind
-
-### Forms
 * React Hook Form
 * Zod
-
-### Network
+* Typescript
+* ESLint
+* Prettier
+* Prettier Plugin Sort Imports
+* Husky
 * Reatom
-
-### Helpers / Tools
-* typescript
-* eslint
-* prettier
-* prettier-plugin-sort-imports
-* husky
