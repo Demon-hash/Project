@@ -6,6 +6,7 @@ import {
     createBrowserRouter,
     createRoutesFromElements,
 } from 'react-router-dom';
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import { Home } from '../Home';
 
 export const enum ROUTE {
@@ -18,12 +19,20 @@ export const enum ROUTE {
     LOGIN = '/auth/login',
 }
 
+const client = new ApolloClient({
+    uri: 'http://localhost:4000/',
+    cache: new InMemoryCache(),
+    connectToDevTools: true,
+});
+
 export const routers = createBrowserRouter(
     createRoutesFromElements(
         <Route
             element={
                 <>
-                    <Outlet />
+                    <ApolloProvider client={client}>
+                        <Outlet />
+                    </ApolloProvider>
                 </>
             }
         >
