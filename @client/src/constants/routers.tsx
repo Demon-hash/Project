@@ -6,7 +6,6 @@ import {
     createBrowserRouter,
     createRoutesFromElements,
 } from 'react-router-dom';
-
 import { Home } from '../Home';
 
 export const enum ROUTE {

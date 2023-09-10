@@ -1,0 +1,1 @@
+// <reference shared="vite/@client" />
