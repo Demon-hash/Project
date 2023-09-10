@@ -22,7 +22,7 @@ jobs:
       - name: Install deps
         run: npm ci
       - name: Lint checking
-        run: lint:check
+        run: npm run lint:check
       - name: Checking types
-        run: ts:check
+        run: npm run ts:check
 
