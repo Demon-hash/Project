@@ -22,6 +22,7 @@
       "shared/*": ["./src/shared/*"],
       "assets/*": ["./src/assets/*"],
       "schemas/*": ["./src/schemas/*"],
+      "graphql/*": ["./src/graphql/*"],
       "utils": ["./src/utils/index.ts"]
     }
   },

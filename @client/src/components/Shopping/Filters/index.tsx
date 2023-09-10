@@ -1,5 +1,6 @@
 import { useDeferredValue, useMemo } from 'react';
 import { Form } from 'react-hook-form';
+import { useQuery } from '@apollo/client';
 import { Breadcrumbs } from 'components/Breadcrumbs';
 import { useFiltersForm } from 'hooks/forms/use-filters-form';
 import type { ShopFilters } from 'schemas/shop-filters';
@@ -7,14 +8,17 @@ import type { Variant } from 'shared/types';
 import { ListWithCount } from './ListWithCount';
 import { PriceRange } from './PriceRange';
 import { VariantsList } from './VariantsList';
+import { GET_PRODUCTS_QUERY } from 'graphql/queries';
 
 export const Filters = () => {
     const { control, watch } = useFiltersForm();
-    const data = useDeferredValue(watch());
+    const formData = useDeferredValue(watch());
+
+    const { data } = useQuery(GET_PRODUCTS_QUERY);
 
     useMemo(() => {
         console.log(data);
-    }, [data]);
+    }, [formData, data]);
 
     const categories: Variant[] = [
         { title: 'Shirts', count: 5 },
@@ -70,53 +74,53 @@ export const Filters = () => {
 
     return (
         <>
-            <h1 className="uppercase p-4 font-bold text-accent tracking-wider bg-primary h-14">
+            <h1 className='uppercase p-4 font-bold text-accent tracking-wider bg-primary h-14'>
                 <Breadcrumbs />
             </h1>
             <Form control={control}>
                 <ListWithCount<ShopFilters>
-                    title="shop.categories"
-                    name="category"
+                    title='shop.categories'
+                    name='category'
                     control={control}
                     variants={categories}
                 />
                 <ListWithCount<ShopFilters>
-                    title="shop.brands"
-                    name="brand"
+                    title='shop.brands'
+                    name='brand'
                     control={control}
                     variants={brands}
                 />
                 <PriceRange<ShopFilters>
-                    title="shop.price"
-                    name="price"
+                    title='shop.price'
+                    name='price'
                     control={control}
                 />
                 <VariantsList<ShopFilters>
-                    title="shop.sort"
-                    i18key="sort"
-                    name="sort"
+                    title='shop.sort'
+                    i18key='sort'
+                    name='sort'
                     control={control}
                     variants={sort}
                 />
                 <VariantsList<ShopFilters>
-                    title="shop.sizes"
-                    i18key="size"
-                    name="size"
+                    title='shop.sizes'
+                    i18key='size'
+                    name='size'
                     control={control}
                     variants={sizes}
                 />
                 <VariantsList<ShopFilters>
-                    title="shop.materials"
-                    i18key="material"
-                    name="material"
+                    title='shop.materials'
+                    i18key='material'
+                    name='material'
                     control={control}
                     variants={materials}
                 />
                 <VariantsList<ShopFilters>
                     asColorList
-                    title="shop.colors"
-                    i18key="colors"
-                    name="color"
+                    title='shop.colors'
+                    i18key='colors'
+                    name='color'
                     control={control}
                     variants={colors}
                 />

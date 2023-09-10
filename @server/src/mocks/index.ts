@@ -1,6 +1,9 @@
 export const products = [
     {
-        title: 'Sweater',
+        title: {
+            en: 'Sweater',
+            ru: 'Свитер'
+        },
         price: 150,
         count: 10,
         color: ['red', 'blue'],
@@ -8,7 +11,10 @@ export const products = [
         material: ['denim']
     },
     {
-        title: 'Jacket',
+        title: {
+            en: 'Jacket',
+            ru: 'Куртка'
+        },
         price: 50,
         count: 5,
         color: ['yellow'],

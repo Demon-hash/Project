@@ -6,24 +6,9 @@ export const resolvers = {
     },
 
     Mutation: {
-        addProduct: (_, {
-            title,
-            price,
-            count,
-            color,
-            size,
-            material,
-        }) => {
-            const product = {
-                title,
-                price,
-                count,
-                color,
-                size,
-                material,
-            };
+        addProduct: (_, args) => {
+            const product = { ...args };
             products.push(product);
-
             return product;
         },
     },

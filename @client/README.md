@@ -1,5 +1,4 @@
-## :| GUIDES
-#### Code
+### Code
 ```ts
 import type { FC, ReactNode } from 'react';
 import type { Variant } from 'shared/types';
@@ -21,7 +20,7 @@ export const ComponentName: FC<Properties> = ({ propertyOne, propertyTwo }) => {
     const [state, setState] = useState(0);
 }
 ```
-#### Files / Directories
+### Files / Directories
 ```
 file-name-here.ext
 ComponentName

@@ -1,41 +1,24 @@
-export const typeDefs = `#graphql
+export const product = `#graphql
 enum ProductColor {
-    red
-    orange
-    yellow
-    green
-    sky
-    blue
-    violet
-    purple
-    pink
-    white
-    gray
-    black
+    red, orange, yellow,
+    green, sky, blue,
+    violet, purple, pink,
+    white, gray, black
 }
 
 enum ProductSize {
-    xs
-    s
-    m
-    l
-    xl
-    xxl
+    xs, s, m,
+    l, xl, xxl
 }
 
 enum ProductMaterial {
-    synthetic
-    wool
-    linen
-    denim
-    leather
-    silk
-    chiffon
-    other
+    synthetic, wool, linen,
+    denim, leather, silk,
+    chiffon, other
 }
 
 type Product {
-    title: String
+    title: Language
     price: Int
     count: Int
     color: [ProductColor!]
@@ -44,7 +27,7 @@ type Product {
 }
 
 input AddProductInput {
-    title: String!
+    title: LanguageInput!
     price: Int!
     count: Int!
     color: [ProductColor!]!
@@ -60,3 +43,4 @@ type Mutation {
     addProduct(product: AddProductInput!): Product
 }
 `;
+
