@@ -1,10 +1,18 @@
-export const books = [
+export const products = [
     {
-        title: 'The Awakening',
-        author: 'Kate Chopin',
+        title: 'Sweater',
+        price: 150,
+        count: 10,
+        color: ['red', 'blue'],
+        size: ['xs', 's', 'm'],
+        material: ['denim']
     },
     {
-        title: 'City of Glass',
-        author: 'Paul Auster',
+        title: 'Jacket',
+        price: 50,
+        count: 5,
+        color: ['yellow'],
+        size: ['m'],
+        material: ['wool']
     },
 ];

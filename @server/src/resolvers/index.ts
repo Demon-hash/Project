@@ -1,15 +1,30 @@
-import { books } from 'mocks';
+import { products } from 'mocks';
 
 export const resolvers = {
     Query: {
-        books: () => books,
+        products: () => products,
     },
-    Mutation: {
-        addBook: (_, { title, author }) => {
-            const product = { title, author };
-            books.push(product);
 
-            return books;
-        }
-    }
+    Mutation: {
+        addProduct: (_, {
+            title,
+            price,
+            count,
+            color,
+            size,
+            material,
+        }) => {
+            const product = {
+                title,
+                price,
+                count,
+                color,
+                size,
+                material,
+            };
+            products.push(product);
+
+            return product;
+        },
+    },
 };

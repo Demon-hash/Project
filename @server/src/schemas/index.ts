@@ -1,19 +1,62 @@
 export const typeDefs = `#graphql
-type Book {
-    title: String
-    author: String
+enum ProductColor {
+    red
+    orange
+    yellow
+    green
+    sky
+    blue
+    violet
+    purple
+    pink
+    white
+    gray
+    black
 }
 
-input AddBookInput {
+enum ProductSize {
+    xs
+    s
+    m
+    l
+    xl
+    xxl
+}
+
+enum ProductMaterial {
+    synthetic
+    wool
+    linen
+    denim
+    leather
+    silk
+    chiffon
+    other
+}
+
+type Product {
+    title: String
+    price: Int
+    count: Int
+    color: [ProductColor!]
+    size: [ProductSize!]
+    material: [ProductMaterial!]
+}
+
+input AddProductInput {
     title: String!
-    author: String!
+    price: Int!
+    count: Int!
+    color: [ProductColor!]!
+    size: [ProductSize!]!
+    material: [ProductMaterial!]!
 }
 
 type Query {
-    books: [Book]
+    products: [Product]
 }
 
 type Mutation {
-    addBook(book: AddBookInput!): [Book]
+    addProduct(product: AddProductInput!): Product
 }
 `;
