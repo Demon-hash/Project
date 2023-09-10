@@ -1,9 +1,6 @@
-## Convention
+## :| GUIDES
 #### Code
-```ts 
-let variableName; 
-const CONSTANT_NAME = "something";
-
+```ts
 import type { FC, ReactNode } from 'react';
 import type { Variant } from 'shared/types';
 import Sweater from 'assets/sweater.png';
@@ -11,6 +8,18 @@ import { Breadcrumbs } from 'components/Breadcrumbs';
 import { useFiltersForm } from 'hooks/forms/use-filters-form';
 import { ROUTE } from 'constants/routers';
 import { config } from './config';
+
+const CONSTANT_NAME = "something";
+
+interface Properties {
+    readonly propertyOne: number;
+    readonly propertyTwo?: string;
+}
+
+export const ComponentName: FC<Properties> = ({ propertyOne, propertyTwo }) => {
+    let variableName;
+    const [state, setState] = useState(0);
+}
 ```
 #### Files / Directories
 ```
@@ -32,4 +41,4 @@ ComponentName
 * Prettier
 * Prettier Plugin Sort Imports
 * Husky
-* Reatom
+* GraphQL
