@@ -7,8 +7,11 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "prettier": "prettier src/**/*.{tsx,ts,json} --write --ignore-unknown --cache"
+    "prepare": "husky install",
+    "lint:check": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "ts:check": "tsc",
+    "lint:fix": "eslint . --ext ts,tsx --fix",
+    "prettier:fix": "prettier src/**/*.{tsx,ts} --write --ignore-unknown --cache"
   },
   "dependencies": {
     "i18next": "^23.4.9",
@@ -34,7 +37,9 @@
     "eslint": "^8.45.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
+    "husky": "^8.0.3",
     "i18next-browser-languagedetector": "^7.1.0",
+    "lint-staged": "^14.0.1",
     "lucide-react": "^0.274.0",
     "postcss": "^8.4.29",
     "prettier": "^3.0.3",
@@ -47,6 +52,12 @@
     "vite": "^4.4.5",
     "vite-tsconfig-paths": "^4.2.0",
     "zod": "^3.22.2"
+  },
+  "lint-staged": {
+    "src/**/*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write --cache"
+    ]
   },
   "prettier": {
     "printWidth": 80,

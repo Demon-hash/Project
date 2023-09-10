@@ -19,5 +19,9 @@
 ### Network
 * Reatom
 
-### Prettier
+### Helpers / Tools
+* typescript
+* eslint
+* prettier
 * prettier-plugin-sort-imports
+* husky
