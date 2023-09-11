@@ -6,11 +6,13 @@
     "module": "nodenext",
     "moduleResolution": "nodenext",
     "esModuleInterop": true,
+    "resolveJsonModule": true,
     "types": ["node"],
     "baseUrl": ".",
     "paths": {
       "mocks": ["./src/mocks/index.ts"],
       "resolvers": ["./src/resolvers/index.ts"],
+      "schema": ["./src/schema/index.ts"]
     },
     "sourceMap": false
   },

@@ -1,16 +1,14 @@
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
-import { schema } from '../@graphql/schema';
+import { schema as typeDefs } from 'schema';
 import { resolvers } from 'resolvers';
 
 const server = new ApolloServer({
-    typeDefs: schema,
+    typeDefs,
     resolvers,
 });
 
 (async () => {
-    const { url } = await startStandaloneServer(server, {
-        listen: { port: 4000 },
-    });
-    console.log(`Server ready at: ${url}`);
+    const { url } = await startStandaloneServer(server);
+    console.log(`🚀 Server ready at ${url}`);
 })();

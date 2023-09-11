@@ -16,7 +16,7 @@ export const Filters = () => {
 
     useEffect(() => {
         console.log(data);
-    }, [updated]);
+    }, [data]);
 
     const categories: Variant[] = [
         { title: 'Shirts', count: 5 },
