@@ -4,10 +4,10 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "lint:check": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint:check": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --ignore-pattern src/graphql/",
     "ts:check": "tsc",
-    "lint:fix": "eslint . --ext ts,tsx --fix",
-    "prettier:fix": "prettier src/**/*.{tsx,ts} --write --ignore-unknown --cache",
+    "lint:fix": "eslint . --ext ts,tsx --fix --ignore-pattern src/graphql/",
+    "prettier:fix": "prettier src/**/*.{ts,tsx} --write --ignore-unknown --cache",
     "codegen": "graphql-codegen --config graphql-config.ts",
     "dev": "npm run codegen && vite",
     "build": "tsc && vite build",
@@ -58,8 +58,8 @@
     "zod": "^3.22.2"
   },
   "lint-staged": {
-    "src/**/^(?!graphql$).{ts,tsx}": [
-      "eslint --fix",
+    "src/**/*.{ts,tsx}": [
+      "eslint --fix --ignore-pattern src/graphql/",
       "prettier --write --cache"
     ]
   },
