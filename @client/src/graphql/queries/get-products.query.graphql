@@ -1,0 +1,9 @@
+query GetProducts {
+    products {
+        title {
+            en
+        }
+        price
+        size
+    }
+}

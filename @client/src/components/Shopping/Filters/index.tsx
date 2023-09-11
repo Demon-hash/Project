@@ -1,8 +1,7 @@
-import { useDeferredValue, useMemo } from 'react';
+import { useDeferredValue, useEffect } from 'react';
 import { Form } from 'react-hook-form';
-import { useQuery } from '@apollo/client';
 import { Breadcrumbs } from 'components/Breadcrumbs';
-import { GET_PRODUCTS_QUERY } from 'graphql/queries';
+import { useGetProductsQuery } from 'graphql/generated';
 import { useFiltersForm } from 'hooks/forms/use-filters-form';
 import type { ShopFilters } from 'schemas/shop-filters';
 import type { Variant } from 'shared/types';
@@ -12,13 +11,12 @@ import { VariantsList } from './VariantsList';
 
 export const Filters = () => {
     const { control, watch } = useFiltersForm();
-    const formData = useDeferredValue(watch());
+    const updated = useDeferredValue(watch());
+    const { data } = useGetProductsQuery(updated);
 
-    const { data } = useQuery(GET_PRODUCTS_QUERY);
-
-    useMemo(() => {
+    useEffect(() => {
         console.log(data);
-    }, [formData, data]);
+    }, [updated]);
 
     const categories: Variant[] = [
         { title: 'Shirts', count: 5 },
