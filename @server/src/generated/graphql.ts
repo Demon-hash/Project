@@ -6,7 +6,6 @@ export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: 
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
 export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
-export type RequireFields<T, K extends keyof T> = Omit<T, K> & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: { input: string; output: string; }
@@ -16,13 +15,22 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
-export type AddProductInput = {
-  color: Array<ProductColor>;
-  count: Scalars['Int']['input'];
-  material: Array<ProductMaterial>;
-  price: Scalars['Int']['input'];
-  size: Array<ProductSize>;
-  title: LanguageInput;
+export type Brand = {
+  __typename?: 'Brand';
+  title?: Maybe<Language>;
+  value?: Maybe<Scalars['String']['output']>;
+};
+
+export type Category = {
+  __typename?: 'Category';
+  title?: Maybe<Language>;
+  value?: Maybe<Scalars['String']['output']>;
+};
+
+export type Color = {
+  __typename?: 'Color';
+  title?: Maybe<Language>;
+  value?: Maybe<Scalars['String']['output']>;
 };
 
 export type Language = {
@@ -31,69 +39,42 @@ export type Language = {
   ru?: Maybe<Scalars['String']['output']>;
 };
 
-export type LanguageInput = {
-  en?: InputMaybe<Scalars['String']['input']>;
-  ru?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type Mutation = {
-  __typename?: 'Mutation';
-  addProduct?: Maybe<Product>;
-};
-
-
-export type MutationAddProductArgs = {
-  product: AddProductInput;
+export type Material = {
+  __typename?: 'Material';
+  title?: Maybe<Language>;
+  value?: Maybe<Scalars['String']['output']>;
 };
 
 export type Product = {
   __typename?: 'Product';
-  color?: Maybe<Array<ProductColor>>;
-  count?: Maybe<Scalars['Int']['output']>;
-  material?: Maybe<Array<ProductMaterial>>;
-  price?: Maybe<Scalars['Int']['output']>;
-  size?: Maybe<Array<ProductSize>>;
-  title?: Maybe<Language>;
+  brand?: Maybe<Array<Brand>>;
+  category?: Maybe<Array<Category>>;
+  color?: Maybe<Array<Color>>;
+  id: Scalars['ID']['output'];
+  imageUrl: Scalars['String']['output'];
+  material?: Maybe<Array<Material>>;
+  price: Scalars['Int']['output'];
+  size?: Maybe<Array<Size>>;
+  stock: Scalars['Int']['output'];
+  title: Language;
+  type?: Maybe<Array<Type>>;
 };
-
-export enum ProductColor {
-  Black = 'black',
-  Blue = 'blue',
-  Gray = 'gray',
-  Green = 'green',
-  Orange = 'orange',
-  Pink = 'pink',
-  Purple = 'purple',
-  Red = 'red',
-  Sky = 'sky',
-  Violet = 'violet',
-  White = 'white',
-  Yellow = 'yellow'
-}
-
-export enum ProductMaterial {
-  Chiffon = 'chiffon',
-  Denim = 'denim',
-  Leather = 'leather',
-  Linen = 'linen',
-  Other = 'other',
-  Silk = 'silk',
-  Synthetic = 'synthetic',
-  Wool = 'wool'
-}
-
-export enum ProductSize {
-  L = 'l',
-  M = 'm',
-  S = 's',
-  Xl = 'xl',
-  Xs = 'xs',
-  Xxl = 'xxl'
-}
 
 export type Query = {
   __typename?: 'Query';
   products?: Maybe<Array<Maybe<Product>>>;
+};
+
+export type Size = {
+  __typename?: 'Size';
+  title?: Maybe<Language>;
+  value?: Maybe<Scalars['String']['output']>;
+};
+
+export type Type = {
+  __typename?: 'Type';
+  title?: Maybe<Language>;
+  value?: Maybe<Scalars['String']['output']>;
 };
 
 
@@ -167,31 +148,54 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
-  AddProductInput: AddProductInput;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
+  Brand: ResolverTypeWrapper<Brand>;
+  Category: ResolverTypeWrapper<Category>;
+  Color: ResolverTypeWrapper<Color>;
+  ID: ResolverTypeWrapper<Scalars['ID']['output']>;
   Int: ResolverTypeWrapper<Scalars['Int']['output']>;
   Language: ResolverTypeWrapper<Language>;
-  LanguageInput: LanguageInput;
-  Mutation: ResolverTypeWrapper<{}>;
+  Material: ResolverTypeWrapper<Material>;
   Product: ResolverTypeWrapper<Product>;
-  ProductColor: ProductColor;
-  ProductMaterial: ProductMaterial;
-  ProductSize: ProductSize;
   Query: ResolverTypeWrapper<{}>;
+  Size: ResolverTypeWrapper<Size>;
   String: ResolverTypeWrapper<Scalars['String']['output']>;
+  Type: ResolverTypeWrapper<Type>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
-  AddProductInput: AddProductInput;
   Boolean: Scalars['Boolean']['output'];
+  Brand: Brand;
+  Category: Category;
+  Color: Color;
+  ID: Scalars['ID']['output'];
   Int: Scalars['Int']['output'];
   Language: Language;
-  LanguageInput: LanguageInput;
-  Mutation: {};
+  Material: Material;
   Product: Product;
   Query: {};
+  Size: Size;
   String: Scalars['String']['output'];
+  Type: Type;
+};
+
+export type BrandResolvers<ContextType = any, ParentType extends ResolversParentTypes['Brand'] = ResolversParentTypes['Brand']> = {
+  title?: Resolver<Maybe<ResolversTypes['Language']>, ParentType, ContextType>;
+  value?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type CategoryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Category'] = ResolversParentTypes['Category']> = {
+  title?: Resolver<Maybe<ResolversTypes['Language']>, ParentType, ContextType>;
+  value?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ColorResolvers<ContextType = any, ParentType extends ResolversParentTypes['Color'] = ResolversParentTypes['Color']> = {
+  title?: Resolver<Maybe<ResolversTypes['Language']>, ParentType, ContextType>;
+  value?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type LanguageResolvers<ContextType = any, ParentType extends ResolversParentTypes['Language'] = ResolversParentTypes['Language']> = {
@@ -200,17 +204,24 @@ export type LanguageResolvers<ContextType = any, ParentType extends ResolversPar
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
-  addProduct?: Resolver<Maybe<ResolversTypes['Product']>, ParentType, ContextType, RequireFields<MutationAddProductArgs, 'product'>>;
+export type MaterialResolvers<ContextType = any, ParentType extends ResolversParentTypes['Material'] = ResolversParentTypes['Material']> = {
+  title?: Resolver<Maybe<ResolversTypes['Language']>, ParentType, ContextType>;
+  value?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ProductResolvers<ContextType = any, ParentType extends ResolversParentTypes['Product'] = ResolversParentTypes['Product']> = {
-  color?: Resolver<Maybe<Array<ResolversTypes['ProductColor']>>, ParentType, ContextType>;
-  count?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  material?: Resolver<Maybe<Array<ResolversTypes['ProductMaterial']>>, ParentType, ContextType>;
-  price?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  size?: Resolver<Maybe<Array<ResolversTypes['ProductSize']>>, ParentType, ContextType>;
-  title?: Resolver<Maybe<ResolversTypes['Language']>, ParentType, ContextType>;
+  brand?: Resolver<Maybe<Array<ResolversTypes['Brand']>>, ParentType, ContextType>;
+  category?: Resolver<Maybe<Array<ResolversTypes['Category']>>, ParentType, ContextType>;
+  color?: Resolver<Maybe<Array<ResolversTypes['Color']>>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  imageUrl?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  material?: Resolver<Maybe<Array<ResolversTypes['Material']>>, ParentType, ContextType>;
+  price?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  size?: Resolver<Maybe<Array<ResolversTypes['Size']>>, ParentType, ContextType>;
+  stock?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  title?: Resolver<ResolversTypes['Language'], ParentType, ContextType>;
+  type?: Resolver<Maybe<Array<ResolversTypes['Type']>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -218,10 +229,27 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   products?: Resolver<Maybe<Array<Maybe<ResolversTypes['Product']>>>, ParentType, ContextType>;
 };
 
+export type SizeResolvers<ContextType = any, ParentType extends ResolversParentTypes['Size'] = ResolversParentTypes['Size']> = {
+  title?: Resolver<Maybe<ResolversTypes['Language']>, ParentType, ContextType>;
+  value?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type TypeResolvers<ContextType = any, ParentType extends ResolversParentTypes['Type'] = ResolversParentTypes['Type']> = {
+  title?: Resolver<Maybe<ResolversTypes['Language']>, ParentType, ContextType>;
+  value?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type Resolvers<ContextType = any> = {
+  Brand?: BrandResolvers<ContextType>;
+  Category?: CategoryResolvers<ContextType>;
+  Color?: ColorResolvers<ContextType>;
   Language?: LanguageResolvers<ContextType>;
-  Mutation?: MutationResolvers<ContextType>;
+  Material?: MaterialResolvers<ContextType>;
   Product?: ProductResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
+  Size?: SizeResolvers<ContextType>;
+  Type?: TypeResolvers<ContextType>;
 };
 

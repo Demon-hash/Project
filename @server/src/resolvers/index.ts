@@ -1,15 +1,15 @@
+import { Resolvers } from '../generated/graphql';
 import { products } from 'mocks';
 
-export const resolvers = {
+export const resolvers: Resolvers = {
     Query: {
         products: () => products,
     },
-
-    Mutation: {
+    /*Mutation: {
         addProduct: (_, args) => {
             const product = { ...args };
             products.push(product);
             return product;
         },
-    },
+    },*/
 };

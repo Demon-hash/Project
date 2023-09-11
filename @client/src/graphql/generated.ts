@@ -33,13 +33,22 @@ export type Scalars = {
     Float: { input: number; output: number };
 };
 
-export type AddProductInput = {
-    color: Array<ProductColor>;
-    count: Scalars['Int']['input'];
-    material: Array<ProductMaterial>;
-    price: Scalars['Int']['input'];
-    size: Array<ProductSize>;
-    title: LanguageInput;
+export type Brand = {
+    __typename?: 'Brand';
+    title?: Maybe<Language>;
+    value?: Maybe<Scalars['String']['output']>;
+};
+
+export type Category = {
+    __typename?: 'Category';
+    title?: Maybe<Language>;
+    value?: Maybe<Scalars['String']['output']>;
+};
+
+export type Color = {
+    __typename?: 'Color';
+    title?: Maybe<Language>;
+    value?: Maybe<Scalars['String']['output']>;
 };
 
 export type Language = {
@@ -48,68 +57,42 @@ export type Language = {
     ru?: Maybe<Scalars['String']['output']>;
 };
 
-export type LanguageInput = {
-    en?: InputMaybe<Scalars['String']['input']>;
-    ru?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type Mutation = {
-    __typename?: 'Mutation';
-    addProduct?: Maybe<Product>;
-};
-
-export type MutationAddProductArgs = {
-    product: AddProductInput;
+export type Material = {
+    __typename?: 'Material';
+    title?: Maybe<Language>;
+    value?: Maybe<Scalars['String']['output']>;
 };
 
 export type Product = {
     __typename?: 'Product';
-    color?: Maybe<Array<ProductColor>>;
-    count?: Maybe<Scalars['Int']['output']>;
-    material?: Maybe<Array<ProductMaterial>>;
-    price?: Maybe<Scalars['Int']['output']>;
-    size?: Maybe<Array<ProductSize>>;
-    title?: Maybe<Language>;
+    brand?: Maybe<Array<Brand>>;
+    category?: Maybe<Array<Category>>;
+    color?: Maybe<Array<Color>>;
+    id: Scalars['ID']['output'];
+    imageUrl: Scalars['String']['output'];
+    material?: Maybe<Array<Material>>;
+    price: Scalars['Int']['output'];
+    size?: Maybe<Array<Size>>;
+    stock: Scalars['Int']['output'];
+    title: Language;
+    type?: Maybe<Array<Type>>;
 };
-
-export enum ProductColor {
-    Black = 'black',
-    Blue = 'blue',
-    Gray = 'gray',
-    Green = 'green',
-    Orange = 'orange',
-    Pink = 'pink',
-    Purple = 'purple',
-    Red = 'red',
-    Sky = 'sky',
-    Violet = 'violet',
-    White = 'white',
-    Yellow = 'yellow',
-}
-
-export enum ProductMaterial {
-    Chiffon = 'chiffon',
-    Denim = 'denim',
-    Leather = 'leather',
-    Linen = 'linen',
-    Other = 'other',
-    Silk = 'silk',
-    Synthetic = 'synthetic',
-    Wool = 'wool',
-}
-
-export enum ProductSize {
-    L = 'l',
-    M = 'm',
-    S = 's',
-    Xl = 'xl',
-    Xs = 'xs',
-    Xxl = 'xxl',
-}
 
 export type Query = {
     __typename?: 'Query';
     products?: Maybe<Array<Maybe<Product>>>;
+};
+
+export type Size = {
+    __typename?: 'Size';
+    title?: Maybe<Language>;
+    value?: Maybe<Scalars['String']['output']>;
+};
+
+export type Type = {
+    __typename?: 'Type';
+    title?: Maybe<Language>;
+    value?: Maybe<Scalars['String']['output']>;
 };
 
 export type GetProductsQueryVariables = Exact<{ [key: string]: never }>;
@@ -118,20 +101,24 @@ export type GetProductsQuery = {
     __typename?: 'Query';
     products?: Array<{
         __typename?: 'Product';
-        price?: number | null;
-        size?: Array<ProductSize> | null;
-        title?: { __typename?: 'Language'; en?: string | null } | null;
+        id: string;
+        imageUrl: string;
+        stock: number;
+        price: number;
+        title: { __typename?: 'Language'; en?: string | null };
     } | null> | null;
 };
 
 export const GetProductsDocument = gql`
-    query GetProducts {
+    query getProducts {
         products {
+            id
+            imageUrl
+            stock
+            price
             title {
                 en
             }
-            price
-            size
         }
     }
 `;

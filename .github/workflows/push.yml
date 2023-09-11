@@ -11,15 +11,12 @@ jobs:
     defaults:
       run:
         working-directory: '@client'
-    strategy:
-      matrix:
-        node: [ 16, 18 ]
     steps:
       - uses: actions/checkout@v3
-      - name: Install Node ${{ matrix.node }}
+      - name: Install Node 18
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node }}
+          node-version: 18
           cache: 'npm'
           cache-dependency-path: '**/package-lock.json'
       - name: Install deps

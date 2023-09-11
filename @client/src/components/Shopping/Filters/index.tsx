@@ -1,10 +1,11 @@
-import { useDeferredValue, useEffect } from 'react';
+import { useDeferredValue } from 'react';
 import { Form } from 'react-hook-form';
 import { Breadcrumbs } from 'components/Breadcrumbs';
 import { useGetProductsQuery } from 'graphql/generated';
 import { useFiltersForm } from 'hooks/forms/use-filters-form';
 import type { ShopFilters } from 'schemas/shop-filters';
 import type { Variant } from 'shared/types';
+import { Products } from '../Products';
 import { ListWithCount } from './ListWithCount';
 import { PriceRange } from './PriceRange';
 import { VariantsList } from './VariantsList';
@@ -13,10 +14,6 @@ export const Filters = () => {
     const { control, watch } = useFiltersForm();
     const updated = useDeferredValue(watch());
     const { data } = useGetProductsQuery(updated);
-
-    useEffect(() => {
-        console.log(data);
-    }, [data]);
 
     const categories: Variant[] = [
         { title: 'Shirts', count: 5 },
@@ -72,57 +69,65 @@ export const Filters = () => {
 
     return (
         <>
-            <h1 className="uppercase p-4 font-bold text-accent tracking-wider bg-primary h-14">
-                <Breadcrumbs />
-            </h1>
-            <Form control={control}>
-                <ListWithCount<ShopFilters>
-                    title="shop.categories"
-                    name="category"
-                    control={control}
-                    variants={categories}
-                />
-                <ListWithCount<ShopFilters>
-                    title="shop.brands"
-                    name="brand"
-                    control={control}
-                    variants={brands}
-                />
-                <PriceRange<ShopFilters>
-                    title="shop.price"
-                    name="price"
-                    control={control}
-                />
-                <VariantsList<ShopFilters>
-                    title="shop.sort"
-                    i18key="sort"
-                    name="sort"
-                    control={control}
-                    variants={sort}
-                />
-                <VariantsList<ShopFilters>
-                    title="shop.sizes"
-                    i18key="size"
-                    name="size"
-                    control={control}
-                    variants={sizes}
-                />
-                <VariantsList<ShopFilters>
-                    title="shop.materials"
-                    i18key="material"
-                    name="material"
-                    control={control}
-                    variants={materials}
-                />
-                <VariantsList<ShopFilters>
-                    asColorList
-                    title="shop.colors"
-                    i18key="colors"
-                    name="color"
-                    control={control}
-                    variants={colors}
-                />
-            </Form>
+            <div className="py-8 grid grid-cols-3">
+                <div className="col-span-1 sticky top-0">
+                    <h1 className="uppercase p-4 font-bold text-accent tracking-wider bg-primary h-14">
+                        <Breadcrumbs />
+                    </h1>
+                    <Form control={control}>
+                        <ListWithCount<ShopFilters>
+                            title="shop.categories"
+                            name="category"
+                            control={control}
+                            variants={categories}
+                        />
+                        <ListWithCount<ShopFilters>
+                            title="shop.brands"
+                            name="brand"
+                            control={control}
+                            variants={brands}
+                        />
+                        <PriceRange<ShopFilters>
+                            title="shop.price"
+                            name="price"
+                            control={control}
+                        />
+                        <VariantsList<ShopFilters>
+                            title="shop.sort"
+                            i18key="sort"
+                            name="sort"
+                            control={control}
+                            variants={sort}
+                        />
+                        <VariantsList<ShopFilters>
+                            title="shop.sizes"
+                            i18key="size"
+                            name="size"
+                            control={control}
+                            variants={sizes}
+                        />
+                        <VariantsList<ShopFilters>
+                            title="shop.materials"
+                            i18key="material"
+                            name="material"
+                            control={control}
+                            variants={materials}
+                        />
+                        <VariantsList<ShopFilters>
+                            asColorList
+                            title="shop.colors"
+                            i18key="colors"
+                            name="color"
+                            control={control}
+                            variants={colors}
+                        />
+                    </Form>
+                </div>
+                <div className="col-span-2 ml-4">
+                    <div className="uppercase p-4 font-bold text-primary-foreground tracking-wider bg-primary h-14"></div>
+                    <Products products={data?.products} />
+                </div>
+            </div>
         </>
     );
 };
