@@ -11,19 +11,14 @@ In addition, it is planned in advance that there is the possibility of changing 
 
 There is a separate README for the client and server parts, which shows the convention for naming files / directories as well as code style
 
-### Functionality
-- Product Filtering
+### Product Filtering
+> Allows a person to filter the products available on the site according to his(er) tastes and interests, add item to cart
 
-Allows a person to filter the products available on the site according to his tastes and interests, add item to cart
+### Register / Log In
+> Allows a person or group of people to register on a website to save cart data and previous orders
 
-- Register / Log In
+### Product Review
+> Allows a person to leave a review of a product with its rating or start a discussion
 
-Allows a person or group of people to register on a website to save cart data and previous orders
-
-- Product Review
-
-Allows a person to leave a review of a product with its rating or start a discussion
-
-- Admin Panel
-
-Allows a person or group of people to customize products and track their statistics in the admin panel
+### Admin Panel
+> Allows a person or group of people to customize products and track their statistics in the admin panel
