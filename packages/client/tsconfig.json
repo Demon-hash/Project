@@ -1,0 +1,22 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "target": "ES2020",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "components/*": ["src/components/*"],
+      "constants/*": ["src/constants/*"],
+      "hooks/*": ["src/hooks/*"],
+      "shared/*": ["src/shared/*"],
+      "assets/*": ["src/assets/*"],
+      "schemas/*": ["src/schemas/*"],
+      "graphql/*": ["src/graphql/*"],
+      "utils": ["src/utils/index.ts"]
+    }
+  },
+  "exclude": ["dist"],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}

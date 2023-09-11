@@ -1,11 +1,44 @@
 {
   "name": "config",
   "version": "1.0.0",
+  "private": true,
   "license": "ISC",
+  "workspaces": [
+    "./packages/*"
+  ],
   "scripts": {
+    "client": "npm run dev --workspace=client",
+    "server": "npm run dev --workspace=server",
     "prepare": "husky install"
   },
   "devDependencies": {
-    "husky": "^8.0.3"
+    "@trivago/prettier-plugin-sort-imports": "^4.2.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^14.0.1",
+    "prettier": "^3.0.3"
+  },
+  "lint-staged": {
+    "packages/client/**/*.ts?(x)": "prettier --write --cache",
+    "packages/server/**/*.ts": "prettier --write --cache"
+  },
+  "prettier": {
+    "printWidth": 80,
+    "tabWidth": 4,
+    "trailingComma": "all",
+    "semi": true,
+    "singleQuote": true,
+    "arrowParens": "avoid",
+    "plugins": [
+      "@trivago/prettier-plugin-sort-imports"
+    ],
+    "importOrder": [
+      "react",
+      "<TYPES>",
+      "<TYPES>^[.]",
+      "<THIRD_PARTY_MODULES>",
+      "^(assets|constants|hooks|components|shared|utils|schemas|graphql)/?(.*)$",
+      "^[./]"
+    ],
+    "importOrderSortSpecifiers": true
   }
 }
