@@ -1,4 +1,4 @@
-import type { Size } from '../../generated/graphql';
+import type { Size } from 'generated';
 
 export const SIZE = (en: string, value: string) => ({
     title: {

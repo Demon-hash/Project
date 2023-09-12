@@ -1,4 +1,4 @@
-import type { Category } from '../../generated/graphql';
+import type { Category } from 'generated';
 
 export const CATEGORY = (en: string, value: string) => ({
     title: {

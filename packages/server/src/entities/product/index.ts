@@ -1,10 +1,10 @@
-import type { Product } from '../../generated/graphql';
-import { brands } from './brand';
-import { categories } from './category';
-import { colors } from './color';
-import { materials } from './material';
-import { sizes } from './size';
-import { types } from './type';
+import type { Product } from 'generated';
+import { brands } from '../brand';
+import { categories } from '../category';
+import { colors } from '../color';
+import { materials } from '../material';
+import { sizes } from '../size';
+import { types } from '../type';
 
 export const products: Product[] = [
     '0',

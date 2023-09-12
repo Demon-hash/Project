@@ -7,11 +7,11 @@
     "./packages/*"
   ],
   "scripts": {
-    "lint:check": "eslint packages/{client,server}/**/*.ts?(x) --report-unused-disable-directives --max-warnings 0 --ignore-pattern **/graphql/* --ignore-pattern **/generated/*",
-    "lint:fix": "eslint packages/{client,server}/**/*.ts?(x) --fix --ignore-pattern **/graphql/* --ignore-pattern **/generated/*",
-    "prettier:fix": "prettier --write --cache",
     "client": "npm run dev --workspace=client",
     "server": "npm run dev --workspace=server",
+    "lint:check": "eslint packages/{client,server}/**/*.ts?(x) --report-unused-disable-directives --max-warnings 0 --ignore-pattern **/graphql/*",
+    "lint:fix": "eslint packages/{client,server}/**/*.ts?(x) --fix --ignore-pattern **/graphql/*",
+    "prettier:fix": "prettier --write --cache",
     "prepare": "husky install"
   },
   "devDependencies": {

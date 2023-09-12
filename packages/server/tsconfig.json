@@ -9,9 +9,11 @@
     "resolveJsonModule": true,
     "types": ["node"],
     "paths": {
-      "mocks": ["./src/mocks/index.ts"],
+      "generated": ["./src/graphql/index.ts"],
       "resolvers": ["./src/resolvers/index.ts"],
-      "schema": ["./src/schema/index.ts"]
+      "entities": ["./src/entities/index.ts"],
+      "filter": ["./src/filter.ts"],
+      "schema": ["./src/entities/schema.ts"],
     },
     "sourceMap": false
   },

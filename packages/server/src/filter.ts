@@ -1,18 +1,12 @@
-import type {
-    InputMaybe,
-    InputProductsFilter,
-    QueryProductsArgs,
-} from '../generated/graphql';
-
-export class Filter<T> {
-    private entities: T[];
-    private readonly filter: InputMaybe<InputProductsFilter>;
+export class Filter<T, F> {
+    private entities: T[] = [];
+    private readonly filter: F | undefined = undefined;
     private readonly limit: number;
     private readonly offset: number;
 
-    constructor(entities: T[], { filter }: Partial<QueryProductsArgs>) {
-        this.entities = entities;
+    constructor(entities: T[], filter: F) {
         this.filter = filter;
+        this.entities = entities;
     }
 
     byId(field: string) {
@@ -34,19 +28,21 @@ export class Filter<T> {
     byField(field: string) {
         const data = this.filter?.[field] ?? [];
 
-        this.entities = this.entities.filter(product => {
+        this.entities = this.entities.filter(entity => {
             return data.length
-                ? product?.[field]?.some(v => data.includes(v.value))
+                ? entity?.[field]?.some(v => data.includes(v.value))
                 : true;
         });
         return this;
     }
 
-    byRange(field: string, defaults = [0, Infinity]) {
-        const price = [
-            this.filter?.price?.[0] ?? defaults[0],
-            this.filter?.price?.[1] ?? defaults[1],
-        ];
+    byRange(field: string, range = [0, Infinity]) {
+        const price = Array.isArray(this.filter?.[field])
+            ? [
+                  this.filter?.[field]?.[0] ?? range[0],
+                  this.filter?.[field]?.[1] ?? range[1],
+              ]
+            : range;
 
         this.entities = this.entities.filter(entity => {
             return entity?.[field] >= price[0] && entity?.[field] <= price[1];
@@ -59,7 +55,7 @@ export class Filter<T> {
         return this;
     }
 
-    get() {
+    get(): T[] {
         return this.entities;
     }
 }

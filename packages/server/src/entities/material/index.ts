@@ -1,4 +1,4 @@
-import type { Material } from '../../generated/graphql';
+import type { Material } from 'generated';
 
 export const MATERIAL = (en: string, value: string) => ({
     title: {

@@ -1,17 +1,19 @@
-import { Filter } from '../constructors/filter';
-import type { Resolvers } from '../generated/graphql';
-import { products } from '../mocks/product';
-import { brands } from '../mocks/product/brand';
-import { categories } from '../mocks/product/category';
-import { colors } from '../mocks/product/color';
-import { materials } from '../mocks/product/material';
-import { sizes } from '../mocks/product/size';
-import { types } from '../mocks/product/type';
+import {
+    brands,
+    categories,
+    colors,
+    materials,
+    products,
+    sizes,
+    types,
+} from 'entities';
+import { Filter } from 'filter';
+import type { Resolvers } from 'generated';
 
 export const resolvers: Resolvers = {
     Query: {
-        products: (_, args) => {
-            return new Filter(products, args)
+        products(_, { filter }) {
+            return new Filter(products, filter)
                 .byId('id')
                 .byRange('price')
                 .byCount('stock')
@@ -24,11 +26,23 @@ export const resolvers: Resolvers = {
                 .withPagination()
                 .get();
         },
-        brands: () => brands,
-        colors: () => colors,
-        sizes: () => sizes,
-        materials: () => materials,
-        categories: () => categories,
-        types: () => types,
+        brands() {
+            return brands;
+        },
+        colors() {
+            return colors;
+        },
+        sizes() {
+            return sizes;
+        },
+        materials() {
+            return materials;
+        },
+        categories() {
+            return categories;
+        },
+        types() {
+            return types;
+        },
     },
 };
