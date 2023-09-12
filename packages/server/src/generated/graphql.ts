@@ -54,9 +54,12 @@ export type InputProductsFilter = {
     category?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     color?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     id?: InputMaybe<Scalars['ID']['input']>;
+    limit?: InputMaybe<Scalars['Int']['input']>;
     material?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    offset?: InputMaybe<Scalars['Int']['input']>;
     price?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
     size?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+    sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     stock?: InputMaybe<Scalars['Int']['input']>;
     type?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
@@ -101,8 +104,6 @@ export type Query = {
 
 export type QueryProductsArgs = {
     filter?: InputMaybe<InputProductsFilter>;
-    limit?: InputMaybe<Scalars['Int']['input']>;
-    offset?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type Size = {

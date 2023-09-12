@@ -7,6 +7,7 @@ import { sizes } from './size';
 import { types } from './type';
 
 export const products: Product[] = [
+    '0',
     '1',
     '2',
     '3',
@@ -17,6 +18,7 @@ export const products: Product[] = [
     '8',
     '9',
     '10',
+    '11',
 ].map(id => ({
     id,
     title: {

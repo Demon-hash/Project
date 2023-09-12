@@ -7,6 +7,9 @@
     "./packages/*"
   ],
   "scripts": {
+    "lint:check": "eslint packages/{client,server}/**/*.ts?(x) --report-unused-disable-directives --max-warnings 0 --ignore-pattern **/graphql/* --ignore-pattern **/generated/*",
+    "lint:fix": "eslint packages/{client,server}/**/*.ts?(x) --fix --ignore-pattern **/graphql/* --ignore-pattern **/generated/*",
+    "prettier:fix": "prettier --write --cache",
     "client": "npm run dev --workspace=client",
     "server": "npm run dev --workspace=server",
     "prepare": "husky install"
@@ -18,8 +21,10 @@
     "prettier": "^3.0.3"
   },
   "lint-staged": {
-    "packages/client/**/*.ts?(x)": "prettier --write --cache",
-    "packages/server/**/*.ts": "prettier --write --cache"
+    "packages/{client,server}/**/*.ts?(x)": [
+      "npm run lint:fix",
+      "npm run prettier:fix"
+    ]
   },
   "prettier": {
     "printWidth": 80,

@@ -4,7 +4,6 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "lint:check": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --ignore-pattern src/graphql/",
     "codegen": "graphql-codegen --config graphql-config.ts",
     "dev": "npm run codegen && vite",
     "build": "tsc && vite build",

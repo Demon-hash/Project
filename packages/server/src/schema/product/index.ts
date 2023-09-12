@@ -23,10 +23,13 @@ input InputProductsFilter {
     category: [String]
     brand: [String]
     type: [String]
+    sort: [String]
+    limit: Int
+    offset: Int
 }
 
 type Query {
-    products(limit: Int, offset: Int, filter: InputProductsFilter): [Product]
+    products(filter: InputProductsFilter): [Product]
 }
 `;
 

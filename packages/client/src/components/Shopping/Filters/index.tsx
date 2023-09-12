@@ -12,8 +12,25 @@ import { VariantsList } from './VariantsList';
 
 export const Filters = () => {
     const { control, watch } = useFiltersForm();
-    const updated = useDeferredValue(watch());
-    const { data } = useGetProductQuery(updated);
+    const filter = useDeferredValue(
+        Object.entries(watch()).reduce(
+            (acc, [key, list]) => {
+                return {
+                    ...acc,
+                    [key]: list.map(({ value }) => value),
+                };
+            },
+            {
+                limit: 9,
+            },
+        ),
+    );
+
+    const { data } = useGetProductQuery({
+        variables: {
+            filter,
+        },
+    });
 
     const categories: Variant[] = [
         { title: 'Shirts', count: 5 },

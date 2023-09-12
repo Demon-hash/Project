@@ -1,4 +1,5 @@
-import { Resolvers } from '../generated/graphql';
+import { Filter } from '../constructors/filter';
+import type { Resolvers } from '../generated/graphql';
 import { products } from '../mocks/product';
 import { brands } from '../mocks/product/brand';
 import { categories } from '../mocks/product/category';
@@ -9,33 +10,19 @@ import { types } from '../mocks/product/type';
 
 export const resolvers: Resolvers = {
     Query: {
-        products: (_, { limit = 11, offset = 0, filter }) => {
-            const {
-                id,
-                price = [0, Infinity],
-                stock = 1,
-                color = [],
-                size = [],
-                type = [],
-                material = [],
-                category = [],
-                brand = [],
-            } = filter ?? {};
-            return products
-                .slice(offset, offset + limit)
-                .filter(product =>
-                    typeof id === 'string' ? product.id === id : true,
-                )
-                .filter(product => product.stock >= stock)
-                .filter(
-                    product =>
-                        product.price >= price[0] && product.price <= price[1],
-                )
-                .filter(product =>
-                    color.length
-                        ? product.color.some(c => color.includes(c.value))
-                        : true,
-                );
+        products: (_, args) => {
+            return new Filter(products, args)
+                .byId('id')
+                .byRange('price')
+                .byCount('stock')
+                .byField('color')
+                .byField('size')
+                .byField('type')
+                .byField('material')
+                .byField('category')
+                .byField('brand')
+                .withPagination()
+                .get();
         },
         brands: () => brands,
         colors: () => colors,
@@ -44,11 +31,4 @@ export const resolvers: Resolvers = {
         categories: () => categories,
         types: () => types,
     },
-    /*Mutation: {
-        addProduct: (_, args) => {
-            const product = { ...args };
-            products.push(product);
-            return product;
-        },
-    },*/
 };
