@@ -5,3 +5,4 @@ export { materials } from './material';
 export { products } from './product';
 export { sizes } from './size';
 export { types } from './type';
+export { sorts } from './sort';

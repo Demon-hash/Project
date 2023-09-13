@@ -101,6 +101,7 @@ export type Query = {
     materials?: Maybe<Array<Maybe<Material>>>;
     products?: Maybe<Array<Maybe<Product>>>;
     sizes?: Maybe<Array<Maybe<Size>>>;
+    sort?: Maybe<Array<Maybe<Sort>>>;
     types?: Maybe<Array<Maybe<Type>>>;
 };
 
@@ -114,17 +115,23 @@ export type Size = {
     value?: Maybe<Scalars['String']['output']>;
 };
 
+export type Sort = {
+    __typename?: 'Sort';
+    title?: Maybe<Language>;
+    value?: Maybe<Scalars['String']['output']>;
+};
+
 export type Type = {
     __typename?: 'Type';
     title?: Maybe<Language>;
     value?: Maybe<Scalars['String']['output']>;
 };
 
-export type GetProductQueryVariables = Exact<{
+export type GetProductsQueryVariables = Exact<{
     filter?: InputMaybe<InputProductsFilter>;
 }>;
 
-export type GetProductQuery = {
+export type GetProductsQuery = {
     __typename?: 'Query';
     products?: Array<{
         __typename?: 'Product';
@@ -136,8 +143,49 @@ export type GetProductQuery = {
     } | null> | null;
 };
 
-export const GetProductDocument = gql`
-    query getProduct($filter: InputProductsFilter) {
+export type GetShopFiltersQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetShopFiltersQuery = {
+    __typename?: 'Query';
+    brands?: Array<{
+        __typename?: 'Brand';
+        value?: string | null;
+        title?: { __typename?: 'Language'; en?: string | null } | null;
+    } | null> | null;
+    categories?: Array<{
+        __typename?: 'Category';
+        value?: string | null;
+        title?: { __typename?: 'Language'; en?: string | null } | null;
+    } | null> | null;
+    colors?: Array<{
+        __typename?: 'Color';
+        value?: string | null;
+        title?: { __typename?: 'Language'; en?: string | null } | null;
+    } | null> | null;
+    materials?: Array<{
+        __typename?: 'Material';
+        value?: string | null;
+        title?: { __typename?: 'Language'; en?: string | null } | null;
+    } | null> | null;
+    sizes?: Array<{
+        __typename?: 'Size';
+        value?: string | null;
+        title?: { __typename?: 'Language'; en?: string | null } | null;
+    } | null> | null;
+    types?: Array<{
+        __typename?: 'Type';
+        value?: string | null;
+        title?: { __typename?: 'Language'; en?: string | null } | null;
+    } | null> | null;
+    sort?: Array<{
+        __typename?: 'Sort';
+        value?: string | null;
+        title?: { __typename?: 'Language'; en?: string | null } | null;
+    } | null> | null;
+};
+
+export const GetProductsDocument = gql`
+    query getProducts($filter: InputProductsFilter) {
         products(filter: $filter) {
             id
             imageUrl
@@ -151,53 +199,154 @@ export const GetProductDocument = gql`
 `;
 
 /**
- * __useGetProductQuery__
+ * __useGetProductsQuery__
  *
- * To run a query within a React component, call `useGetProductQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetProductQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useGetProductsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetProductsQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGetProductQuery({
+ * const { data, loading, error } = useGetProductsQuery({
  *   variables: {
  *      filter: // value for 'filter'
  *   },
  * });
  */
-export function useGetProductQuery(
+export function useGetProductsQuery(
     baseOptions?: Apollo.QueryHookOptions<
-        GetProductQuery,
-        GetProductQueryVariables
+        GetProductsQuery,
+        GetProductsQueryVariables
     >,
 ) {
     const options = { ...defaultOptions, ...baseOptions };
-    return Apollo.useQuery<GetProductQuery, GetProductQueryVariables>(
-        GetProductDocument,
+    return Apollo.useQuery<GetProductsQuery, GetProductsQueryVariables>(
+        GetProductsDocument,
         options,
     );
 }
-export function useGetProductLazyQuery(
+export function useGetProductsLazyQuery(
     baseOptions?: Apollo.LazyQueryHookOptions<
-        GetProductQuery,
-        GetProductQueryVariables
+        GetProductsQuery,
+        GetProductsQueryVariables
     >,
 ) {
     const options = { ...defaultOptions, ...baseOptions };
-    return Apollo.useLazyQuery<GetProductQuery, GetProductQueryVariables>(
-        GetProductDocument,
+    return Apollo.useLazyQuery<GetProductsQuery, GetProductsQueryVariables>(
+        GetProductsDocument,
         options,
     );
 }
-export type GetProductQueryHookResult = ReturnType<typeof useGetProductQuery>;
-export type GetProductLazyQueryHookResult = ReturnType<
-    typeof useGetProductLazyQuery
+export type GetProductsQueryHookResult = ReturnType<typeof useGetProductsQuery>;
+export type GetProductsLazyQueryHookResult = ReturnType<
+    typeof useGetProductsLazyQuery
 >;
-export type GetProductQueryResult = Apollo.QueryResult<
-    GetProductQuery,
-    GetProductQueryVariables
+export type GetProductsQueryResult = Apollo.QueryResult<
+    GetProductsQuery,
+    GetProductsQueryVariables
 >;
-export function refetchGetProductQuery(variables?: GetProductQueryVariables) {
-    return { query: GetProductDocument, variables: variables };
+export function refetchGetProductsQuery(variables?: GetProductsQueryVariables) {
+    return { query: GetProductsDocument, variables: variables };
+}
+export const GetShopFiltersDocument = gql`
+    query getShopFilters {
+        brands {
+            title {
+                en
+            }
+            value
+        }
+        categories {
+            title {
+                en
+            }
+            value
+        }
+        colors {
+            title {
+                en
+            }
+            value
+        }
+        materials {
+            title {
+                en
+            }
+            value
+        }
+        sizes {
+            title {
+                en
+            }
+            value
+        }
+        types {
+            title {
+                en
+            }
+            value
+        }
+        sort {
+            title {
+                en
+            }
+            value
+        }
+    }
+`;
+
+/**
+ * __useGetShopFiltersQuery__
+ *
+ * To run a query within a React component, call `useGetShopFiltersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetShopFiltersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetShopFiltersQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetShopFiltersQuery(
+    baseOptions?: Apollo.QueryHookOptions<
+        GetShopFiltersQuery,
+        GetShopFiltersQueryVariables
+    >,
+) {
+    const options = { ...defaultOptions, ...baseOptions };
+    return Apollo.useQuery<GetShopFiltersQuery, GetShopFiltersQueryVariables>(
+        GetShopFiltersDocument,
+        options,
+    );
+}
+export function useGetShopFiltersLazyQuery(
+    baseOptions?: Apollo.LazyQueryHookOptions<
+        GetShopFiltersQuery,
+        GetShopFiltersQueryVariables
+    >,
+) {
+    const options = { ...defaultOptions, ...baseOptions };
+    return Apollo.useLazyQuery<
+        GetShopFiltersQuery,
+        GetShopFiltersQueryVariables
+    >(GetShopFiltersDocument, options);
+}
+export type GetShopFiltersQueryHookResult = ReturnType<
+    typeof useGetShopFiltersQuery
+>;
+export type GetShopFiltersLazyQueryHookResult = ReturnType<
+    typeof useGetShopFiltersLazyQuery
+>;
+export type GetShopFiltersQueryResult = Apollo.QueryResult<
+    GetShopFiltersQuery,
+    GetShopFiltersQueryVariables
+>;
+export function refetchGetShopFiltersQuery(
+    variables?: GetShopFiltersQueryVariables,
+) {
+    return { query: GetShopFiltersDocument, variables: variables };
 }

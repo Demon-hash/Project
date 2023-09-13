@@ -99,6 +99,7 @@ export type Query = {
     materials?: Maybe<Array<Maybe<Material>>>;
     products?: Maybe<Array<Maybe<Product>>>;
     sizes?: Maybe<Array<Maybe<Size>>>;
+    sort?: Maybe<Array<Maybe<Sort>>>;
     types?: Maybe<Array<Maybe<Type>>>;
 };
 
@@ -108,6 +109,12 @@ export type QueryProductsArgs = {
 
 export type Size = {
     __typename?: 'Size';
+    title?: Maybe<Language>;
+    value?: Maybe<Scalars['String']['output']>;
+};
+
+export type Sort = {
+    __typename?: 'Sort';
     title?: Maybe<Language>;
     value?: Maybe<Scalars['String']['output']>;
 };
@@ -237,6 +244,7 @@ export type ResolversTypes = {
     Product: ResolverTypeWrapper<Product>;
     Query: ResolverTypeWrapper<{}>;
     Size: ResolverTypeWrapper<Size>;
+    Sort: ResolverTypeWrapper<Sort>;
     String: ResolverTypeWrapper<Scalars['String']['output']>;
     Type: ResolverTypeWrapper<Type>;
 };
@@ -255,6 +263,7 @@ export type ResolversParentTypes = {
     Product: Product;
     Query: {};
     Size: Size;
+    Sort: Sort;
     String: Scalars['String']['output'];
     Type: Type;
 };
@@ -404,6 +413,11 @@ export type QueryResolvers<
         ParentType,
         ContextType
     >;
+    sort?: Resolver<
+        Maybe<Array<Maybe<ResolversTypes['Sort']>>>,
+        ParentType,
+        ContextType
+    >;
     types?: Resolver<
         Maybe<Array<Maybe<ResolversTypes['Type']>>>,
         ParentType,
@@ -415,6 +429,20 @@ export type SizeResolvers<
     ContextType = any,
     ParentType extends
         ResolversParentTypes['Size'] = ResolversParentTypes['Size'],
+> = {
+    title?: Resolver<
+        Maybe<ResolversTypes['Language']>,
+        ParentType,
+        ContextType
+    >;
+    value?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type SortResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['Sort'] = ResolversParentTypes['Sort'],
 > = {
     title?: Resolver<
         Maybe<ResolversTypes['Language']>,
@@ -448,5 +476,6 @@ export type Resolvers<ContextType = any> = {
     Product?: ProductResolvers<ContextType>;
     Query?: QueryResolvers<ContextType>;
     Size?: SizeResolvers<ContextType>;
+    Sort?: SortResolvers<ContextType>;
     Type?: TypeResolvers<ContextType>;
 };

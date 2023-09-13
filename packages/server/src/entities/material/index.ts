@@ -8,12 +8,12 @@ export const MATERIAL = (en: string, value: string) => ({
 });
 
 export const materials: Material[] = [
-    MATERIAL('synthetic', 'synthetic'),
-    MATERIAL('wool', 'wool'),
-    MATERIAL('linen', 'linen'),
-    MATERIAL('denim', 'denim'),
-    MATERIAL('leather', 'leather'),
-    MATERIAL('silk', 'silk'),
-    MATERIAL('chiffon', 'chiffon'),
-    MATERIAL('other', 'other'),
+    MATERIAL('Synthetic', 'synthetic'),
+    MATERIAL('Wool', 'wool'),
+    MATERIAL('Linen', 'linen'),
+    MATERIAL('Denim', 'denim'),
+    MATERIAL('Leather', 'leather'),
+    MATERIAL('Silk', 'silk'),
+    MATERIAL('Chiffon', 'chiffon'),
+    MATERIAL('Other', 'other'),
 ];

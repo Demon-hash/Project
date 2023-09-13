@@ -1,0 +1,44 @@
+query getShopFilters {
+    brands {
+        title {
+            en
+        }
+        value
+    }
+    categories {
+        title {
+            en
+        }
+        value
+    }
+    colors {
+        title {
+            en
+        }
+        value
+    }
+    materials {
+        title {
+            en
+        }
+        value
+    }
+    sizes {
+        title {
+            en
+        }
+        value
+    }
+    types {
+        title {
+            en
+        }
+        value
+    }
+    sort {
+        title {
+            en
+        }
+        value
+    }
+}

@@ -8,10 +8,12 @@ export const CATEGORY = (en: string, value: string) => ({
 });
 
 export const categories: Category[] = [
-    CATEGORY('boots', 'boots'),
-    CATEGORY('shirt', 'shirt'),
-    CATEGORY('sweater', 'sweater'),
-    CATEGORY('jacket', 'jacket'),
-    CATEGORY('swimsuit', 'swimsuit'),
-    CATEGORY('glasses', 'glasses'),
+    CATEGORY('Shirts', 'shirts'),
+    CATEGORY('Sunglasses', 'sunglasses'),
+    CATEGORY('Sneakers', 'sneakers'),
+    CATEGORY('Jackets', 'jackets'),
+    CATEGORY('Boots', 'boots'),
+    CATEGORY('Watches', 'watches'),
+    CATEGORY('Earrings', 'earrings'),
+    CATEGORY('Scarfs', 'scarfs'),
 ];

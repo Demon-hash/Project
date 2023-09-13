@@ -5,6 +5,7 @@ import LANGUAGE_SCHEMA from './language/schema';
 import MATERIAL_SCHEMA from './material/schema';
 import PRODUCT_SCHEMA from './product/schema';
 import SIZE_SCHEMA from './size/schema';
+import SORT_SCHEMA from './sort/schema';
 import TYPE_SCHEMA from './type/schema';
 
 const files = [
@@ -14,6 +15,7 @@ const files = [
     SIZE_SCHEMA,
     BRAND_SCHEMA,
     TYPE_SCHEMA,
+    SORT_SCHEMA,
     LANGUAGE_SCHEMA,
     PRODUCT_SCHEMA,
 ];

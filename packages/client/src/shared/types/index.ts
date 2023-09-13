@@ -1,4 +1,6 @@
+import type { Language } from 'generated';
+
 export interface Variant {
-    title: string;
-    count: number;
+    title: Language;
+    value: string;
 }

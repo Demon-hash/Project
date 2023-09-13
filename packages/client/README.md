@@ -2,7 +2,7 @@
 ```ts
 import type { FC, ReactNode } from 'react';
 import { Breadcrumbs } from 'components/Breadcrumbs';
-import { useFiltersForm } from 'hooks/forms/use-filters-form';
+import { useShopFiltersForm } from 'hooks/forms/use-shop-filters-form';
 import { config } from './config';
 
 const CONSTANT_NAME = 'something';

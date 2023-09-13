@@ -8,10 +8,10 @@ export const TYPE = (en: string, value: string) => ({
 });
 
 export const types: Type[] = [
-    TYPE('women', 'women'),
-    TYPE('men', 'men'),
-    TYPE('children', 'children'),
-    TYPE('unisex', 'unisex'),
-    TYPE('onesize', 'onesize'),
-    TYPE('other', 'other'),
+    TYPE('Women', 'women'),
+    TYPE('Men', 'men'),
+    TYPE('Children', 'children'),
+    TYPE('Unisex', 'unisex'),
+    TYPE('Onesize', 'onesize'),
+    TYPE('Other', 'other'),
 ];

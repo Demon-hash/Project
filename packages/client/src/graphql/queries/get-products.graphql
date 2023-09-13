@@ -1,4 +1,4 @@
-query getProduct($filter: InputProductsFilter) {
+query getProducts($filter: InputProductsFilter) {
     products(filter: $filter) {
         id
         imageUrl

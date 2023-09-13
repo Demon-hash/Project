@@ -5,10 +5,12 @@ import { routers } from 'constants/routers';
 import './i18n';
 import './index.css';
 
+const { VITE_GRAPHQL_SCHEMA_URL, DEV } = import.meta.env;
+
 const client = new ApolloClient({
-    uri: 'http://localhost:4000/',
+    uri: VITE_GRAPHQL_SCHEMA_URL,
     cache: new InMemoryCache(),
-    connectToDevTools: true,
+    connectToDevTools: DEV,
 });
 
 createRoot(document.getElementById('root')).render(

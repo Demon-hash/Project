@@ -16,7 +16,7 @@ interface Properties<C extends FieldValues> {
     readonly name: Path<C>;
     readonly control: Control<C>;
     readonly title: string;
-    readonly variants: Variant[];
+    readonly variants?: Variant[];
 }
 
 export const ListWithCount = <C extends FieldValues>({
@@ -25,7 +25,7 @@ export const ListWithCount = <C extends FieldValues>({
     title,
     variants,
 }: Properties<C>) => {
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
 
     const { fields, append, replace } = useFieldArray<C>({
         control,
@@ -50,28 +50,23 @@ export const ListWithCount = <C extends FieldValues>({
                 <>
                     <Heading title={t(title)} />
                     <ul className="px-4">
-                        {variants.map(({ title, count }) => (
+                        {variants?.map(({ title, value }) => (
                             <li
-                                className="flex items-center justify-between py-1 font-light"
-                                key={title}
+                                className="flex items-center py-1 space-x-4 font-light"
+                                key={value}
                             >
-                                <div className="flex items-center space-x-2">
-                                    <Checkbox
-                                        id={title}
-                                        onCheckedChange={state =>
-                                            onChange(state, title)
-                                        }
-                                    />
-                                    <label
-                                        htmlFor={title}
-                                        className="text-accent-foreground leading-none cursor-pointer peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                                    >
-                                        {title}
-                                    </label>
-                                </div>
-                                <span className="text-right text-muted-foreground">
-                                    {count}
-                                </span>
+                                <Checkbox
+                                    id={value}
+                                    onCheckedChange={state =>
+                                        onChange(state, value)
+                                    }
+                                />
+                                <label
+                                    htmlFor={value}
+                                    className="text-accent-foreground leading-none cursor-pointer peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                                >
+                                    {title?.[i18n.language]}
+                                </label>
                             </li>
                         ))}
                     </ul>

@@ -5,6 +5,7 @@ import {
     materials,
     products,
     sizes,
+    sorts,
     types,
 } from 'entities';
 import { Filter } from 'filter';
@@ -43,6 +44,9 @@ export const resolvers: Resolvers = {
         },
         types() {
             return types;
+        },
+        sort() {
+            return sorts;
         },
     },
 };

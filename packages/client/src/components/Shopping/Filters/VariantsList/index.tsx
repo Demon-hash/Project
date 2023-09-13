@@ -1,35 +1,34 @@
 import {
+    type ArrayPath,
     type Control,
     Controller,
     type FieldArray,
     type FieldValues,
-    type Path,
     useFieldArray,
 } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { twMerge } from 'tailwind-merge';
 import { Toggle } from 'components/Toggle';
+import type { Variant } from 'shared/types';
 import { VARIANT_COLORS } from 'shared/variant-colors';
 import { Heading } from '../Heading';
 
 interface Properties<C extends FieldValues> {
-    readonly name: Path<C>;
+    readonly name: ArrayPath<C>;
     readonly control: Control<C>;
-    readonly i18key: string;
     readonly title: string;
-    readonly variants: string[];
+    readonly variants?: Variant[];
     readonly asColorList?: boolean;
 }
 
 export const VariantsList = <C extends FieldValues>({
     title,
-    i18key,
     variants,
     asColorList,
     name,
     control,
 }: Properties<C>) => {
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
 
     const { fields, append, replace } = useFieldArray<C>({
         control,
@@ -50,27 +49,27 @@ export const VariantsList = <C extends FieldValues>({
                 <>
                     <Heading title={t(title)} />
                     <ul className="px-4 grid lg:grid-cols-3 xl:grid-cols-4 gap-2">
-                        {variants.map(variant => (
+                        {variants?.map(({ title, value }) => (
                             <li
                                 className="flex items-center justify-center py-1 font-light"
-                                key={variant}
+                                key={value}
                             >
                                 <Toggle
-                                    id={variant}
+                                    id={value}
                                     className="relative flex items-center justify-center"
                                     onPressedChange={state =>
-                                        onChange(state, variant)
+                                        onChange(state, value)
                                     }
                                 >
                                     {asColorList && (
                                         <span
                                             className={twMerge(
                                                 'mr-2 w-4 h-4 rounded',
-                                                VARIANT_COLORS[variant],
+                                                VARIANT_COLORS[value],
                                             )}
                                         ></span>
                                     )}
-                                    <span>{t(`${i18key}.${variant}`)}</span>
+                                    <span>{title?.[i18n.language]}</span>
                                 </Toggle>
                             </li>
                         ))}

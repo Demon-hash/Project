@@ -8,10 +8,10 @@ export const SIZE = (en: string, value: string) => ({
 });
 
 export const sizes: Size[] = [
-    SIZE('xs', 'xs'),
-    SIZE('s', 's'),
-    SIZE('m', 'm'),
-    SIZE('l', 'l'),
-    SIZE('xl', 'xl'),
-    SIZE('xxl', 'xxl'),
+    SIZE('XS', 'xs'),
+    SIZE('S', 's'),
+    SIZE('M', 'm'),
+    SIZE('L', 'l'),
+    SIZE('XL', 'xl'),
+    SIZE('XXL', 'xxl'),
 ];
