@@ -20,7 +20,7 @@ const mockProductData = {
         color: [COLOR('Black', 'black'), COLOR('Red', 'red')],
     },
     sneakers: {
-        en: 'Nike Sneakers',
+        en: 'Running Sneakers',
         imageUrl: 'https://pngimg.com/d/running_shoes_PNG5824.png',
         color: [
             COLOR('White', 'white'),
@@ -43,7 +43,7 @@ const mockProductData = {
         en: 'Modern Watches',
         imageUrl:
             'https://www.pngall.com/wp-content/uploads/2016/04/Watch-Free-Download-PNG.png',
-        color: [COLOR('White', 'white'), COLOR('Black', 'Black')],
+        color: [COLOR('White', 'white'), COLOR('Black', 'black')],
     },
     boots: {
         en: 'Orange Boots',

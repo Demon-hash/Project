@@ -7,6 +7,7 @@ module.exports = {
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
   rules: {
+    'no-duplicate-imports': ["error", { "includeExports": true }],
     '@typescript-eslint/consistent-type-imports': 'error',
     '@typescript-eslint/no-unused-vars': "warn",
     '@typescript-eslint/ban-ts-comment': 'off'

@@ -140,6 +140,7 @@ export type GetProductsQuery = {
         stock: number;
         price: number;
         title: { __typename?: 'Language'; en?: string | null };
+        color?: Array<{ __typename?: 'Color'; value?: string | null }> | null;
     } | null> | null;
 };
 
@@ -193,6 +194,9 @@ export const GetProductsDocument = gql`
             price
             title {
                 en
+            }
+            color {
+                value
             }
         }
     }

@@ -64,7 +64,7 @@ export const VariantsList = <C extends FieldValues>({
                                     {asColorList && (
                                         <span
                                             className={twMerge(
-                                                'mr-2 w-4 h-4 rounded',
+                                                'mr-2 w-4 h-4 rounded-full',
                                                 VARIANT_COLORS[value],
                                             )}
                                         ></span>

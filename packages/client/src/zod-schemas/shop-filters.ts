@@ -11,13 +11,13 @@ export const initialShopFiltersSchema: ShopFilters = {
 };
 
 export const shopFiltersSchema = z.object({
-    category: z.array(z.object({ value: z.string() })).optional(),
-    brand: z.array(z.object({ value: z.string() })).optional(),
-    price: z.array(z.object({ value: z.string() })).optional(),
-    sort: z.array(z.object({ value: z.string() })).optional(),
-    size: z.array(z.object({ value: z.string() })).optional(),
-    material: z.array(z.object({ value: z.string() })).optional(),
-    color: z.array(z.object({ value: z.string() })).optional(),
+    category: z.array(z.object({ value: z.string() })),
+    brand: z.array(z.object({ value: z.string() })),
+    price: z.array(z.object({ value: z.string() })),
+    sort: z.array(z.object({ value: z.string() })),
+    size: z.array(z.object({ value: z.string() })),
+    material: z.array(z.object({ value: z.string() })),
+    color: z.array(z.object({ value: z.string() })),
 });
 
 export type ShopFilters = z.infer<typeof shopFiltersSchema>;

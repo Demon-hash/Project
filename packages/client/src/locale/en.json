@@ -11,8 +11,10 @@
             "women": "Women",
             "children": "Children"
         },
+        "cart": {
+            "add": "Add to cart"
+        },
         "shop": {
-            "by": "Shop By",
             "categories": "Categories",
             "brands": "Brands",
             "price": "Price",

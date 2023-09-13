@@ -37,9 +37,9 @@
       "@trivago/prettier-plugin-sort-imports"
     ],
     "importOrder": [
-      "react",
       "<TYPES>",
       "<TYPES>^[.]",
+      "react",
       "<THIRD_PARTY_MODULES>",
       "^(assets|constants|hooks|components|shared|utils|schemas|graphql)/?(.*)$",
       "^[./]"

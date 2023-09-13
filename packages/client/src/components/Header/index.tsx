@@ -1,3 +1,4 @@
+import { Menu } from 'lucide-react';
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
@@ -23,12 +24,20 @@ export const Header: FC = () => {
     ));
 
     return (
-        <nav className="w-100 h-12 border-b border-foreground relative flex">
-            <ul className="relative flex grow items-center w-100 px-16">
-                <li className="grow flex items-end">
-                    <div className="ml-auto">{categories}</div>
-                </li>
-            </ul>
-        </nav>
+        <header className="w-100 border-b border-foreground sticky top-0 bg-background z-50">
+            <nav className="flex h-12 relative">
+                <ul className="relative flex grow items-center w-100 px-2 lg:px-4 xl:px-6 2xl:px-8">
+                    <li>
+                        <Link to={ROUTE.HOME}>MY WEBSHOP PROJECT NAME</Link>
+                    </li>
+                    <li className="grow flex items-end">
+                        <Menu className="block lg:hidden ml-auto" />
+                        <div className="hidden lg:block ml-auto">
+                            {categories}
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </header>
     );
 };
