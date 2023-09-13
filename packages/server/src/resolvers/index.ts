@@ -1,20 +1,11 @@
-import {
-    brands,
-    categories,
-    colors,
-    materials,
-    products,
-    sizes,
-    sorts,
-    types,
-} from 'entities';
+import * as mocked from 'entities';
 import { Filter } from 'filter';
 import type { Resolvers } from 'generated';
 
 export const resolvers: Resolvers = {
     Query: {
         products(_, { filter }) {
-            return new Filter(products, filter)
+            return new Filter(mocked.products, filter)
                 .byId('id')
                 .byRange('price')
                 .byCount('stock')
@@ -28,25 +19,25 @@ export const resolvers: Resolvers = {
                 .get();
         },
         brands() {
-            return brands;
+            return mocked.brands;
         },
         colors() {
-            return colors;
+            return mocked.colors;
         },
         sizes() {
-            return sizes;
+            return mocked.sizes;
         },
         materials() {
-            return materials;
+            return mocked.materials;
         },
         categories() {
-            return categories;
+            return mocked.categories;
         },
         types() {
-            return types;
+            return mocked.types;
         },
         sort() {
-            return sorts;
+            return mocked.sorts;
         },
     },
 };

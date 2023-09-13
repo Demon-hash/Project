@@ -1,6 +1,6 @@
 export class Filter<T, F> {
     private entities: T[] = [];
-    private readonly filter: F | undefined = undefined;
+    private readonly filter: F | undefined;
     private readonly limit: number;
     private readonly offset: number;
 

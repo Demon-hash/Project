@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "codegen": "graphql-codegen --config codegen.ts",
+    "codegen": "graphql-codegen -c codegen.ts",
     "dev": "npm run codegen && nodemon --watch src/** --ext ts --exec ts-node index.ts"
   },
   "dependencies": {

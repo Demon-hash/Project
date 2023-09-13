@@ -4,8 +4,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "codegen": "graphql-codegen --config codegen.ts",
-    "dev": "npm run codegen && vite",
+    "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
@@ -49,6 +48,7 @@
     "typescript": "^5.0.2",
     "vite": "^4.4.5",
     "vite-tsconfig-paths": "^4.2.0",
+    "vite-plugin-graphql-codegen": "^3.3.0",
     "zod": "^3.22.2"
   }
 }
