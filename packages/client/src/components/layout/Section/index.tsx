@@ -7,7 +7,7 @@ interface Properties {
 const Section: FC<Properties> = ({ title, desc }) => (
     <section className="py-12 text-center">
         <h1 className="text-4xl font-bold">{title}</h1>
-        <h3>{desc}</h3>
+        <h3 className="my-1">{desc}</h3>
     </section>
 );
 

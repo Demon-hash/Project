@@ -5,6 +5,7 @@ query getProducts($locale: String, $filter: InputProductsFilter) {
         stock
         price
         title
+        description
         color {
             value
         }

@@ -19,6 +19,12 @@ export const resolvers: Resolvers = {
                 .withPagination()
                 .get();
         },
+        categories(_, { filter, locale }) {
+            return new Filter(mocked.categories, filter, locale)
+                .byLocale('title')
+                .withPagination()
+                .get();
+        },
         brands(_, { locale }) {
             return new Filter(mocked.brands, undefined, locale)
                 .byLocale('title')
@@ -36,11 +42,6 @@ export const resolvers: Resolvers = {
         },
         materials(_, { locale }) {
             return new Filter(mocked.materials, undefined, locale)
-                .byLocale('title')
-                .get();
-        },
-        categories(_, { locale }) {
-            return new Filter(mocked.categories, undefined, locale)
                 .byLocale('title')
                 .get();
         },

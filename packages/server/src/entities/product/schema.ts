@@ -2,6 +2,7 @@ const PRODUCT_SCHEMA = `#graphql
 type Product {
     id: ID!
     title: String
+    description: String
     price: Int!
     stock: Int!
     imageUrl: String!

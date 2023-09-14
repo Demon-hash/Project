@@ -15,9 +15,8 @@ const mockProductData = {
     },
     sunglasses: {
         en: 'Red Sunglasses',
-        imageUrl:
-            'https://www.freepnglogos.com/uploads/goggles-png/red-goggles-sunglasses-png-transparent-images-23.png',
-        color: [COLOR('Black', 'black'), COLOR('Red', 'red')],
+        imageUrl: 'https://pngimg.com/uploads/sunglasses/sunglasses_PNG15.png',
+        color: [COLOR('Sky', 'sky'), COLOR('White', 'white')],
     },
     sneakers: {
         en: 'Running Sneakers',
@@ -31,7 +30,7 @@ const mockProductData = {
     },
     jackets: {
         en: 'Red Jacket',
-        imageUrl: 'https://pngimg.com/d/jacket_PNG8058.png',
+        imageUrl: 'https://pngimg.com/uploads/jacket/jacket_PNG8035.png',
         color: [COLOR('Black', 'black'), COLOR('Red', 'red')],
     },
     scarfs: {

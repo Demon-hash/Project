@@ -3,12 +3,12 @@
     "home": {
       "headers": [
         {
-          "title": "Discover Our Brand",
-          "desc": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium ad aperiam eos iusto"
+          "title": "Discover Our Categories",
+          "desc": "Our customers most often search for products in these categories"
         },
         {
-          "title": "Recent Arrivials",
-          "desc": "Lorem ipsum dolor sit amet, consectetur adipisicing elit"
+          "title": "Recent Arrivals",
+          "desc": "Explore the recently added products on our site and make your choice"
         }
       ]
     },

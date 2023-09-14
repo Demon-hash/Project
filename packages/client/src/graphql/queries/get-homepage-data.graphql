@@ -1,0 +1,18 @@
+query getHomepageData($locale: String, $categories: CategoriesFilter, $products: InputProductsFilter) {
+    categories(locale: $locale, filter: $categories) {
+        title
+        imageUrl
+    }
+    products(locale: $locale, filter: $products) {
+        id
+        title
+        description
+        imageUrl
+        color {
+            value
+        }
+        size {
+            value
+        }
+    }
+}

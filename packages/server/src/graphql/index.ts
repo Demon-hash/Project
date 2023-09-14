@@ -37,8 +37,14 @@ export type Brand = {
     value?: Maybe<Scalars['String']['output']>;
 };
 
+export type CategoriesFilter = {
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    offset?: InputMaybe<Scalars['Int']['input']>;
+};
+
 export type Category = {
     __typename?: 'Category';
+    imageUrl?: Maybe<Scalars['String']['output']>;
     title?: Maybe<Scalars['String']['output']>;
     value?: Maybe<Scalars['String']['output']>;
 };
@@ -79,6 +85,7 @@ export type Product = {
     brand?: Maybe<Array<Brand>>;
     category?: Maybe<Array<Category>>;
     color?: Maybe<Array<Color>>;
+    description?: Maybe<Scalars['String']['output']>;
     id: Scalars['ID']['output'];
     imageUrl: Scalars['String']['output'];
     material?: Maybe<Array<Material>>;
@@ -106,6 +113,7 @@ export type QueryBrandsArgs = {
 };
 
 export type QueryCategoriesArgs = {
+    filter?: InputMaybe<CategoriesFilter>;
     locale?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -261,6 +269,7 @@ export type DirectiveResolverFn<
 export type ResolversTypes = {
     Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
     Brand: ResolverTypeWrapper<Brand>;
+    CategoriesFilter: CategoriesFilter;
     Category: ResolverTypeWrapper<Category>;
     Color: ResolverTypeWrapper<Color>;
     ColorsFilter: ColorsFilter;
@@ -280,6 +289,7 @@ export type ResolversTypes = {
 export type ResolversParentTypes = {
     Boolean: Scalars['Boolean']['output'];
     Brand: Brand;
+    CategoriesFilter: CategoriesFilter;
     Category: Category;
     Color: Color;
     ColorsFilter: ColorsFilter;
@@ -310,6 +320,11 @@ export type CategoryResolvers<
     ParentType extends
         ResolversParentTypes['Category'] = ResolversParentTypes['Category'],
 > = {
+    imageUrl?: Resolver<
+        Maybe<ResolversTypes['String']>,
+        ParentType,
+        ContextType
+    >;
     title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     value?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -352,6 +367,11 @@ export type ProductResolvers<
     >;
     color?: Resolver<
         Maybe<Array<ResolversTypes['Color']>>,
+        ParentType,
+        ContextType
+    >;
+    description?: Resolver<
+        Maybe<ResolversTypes['String']>,
         ParentType,
         ContextType
     >;

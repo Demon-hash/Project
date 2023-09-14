@@ -2,10 +2,16 @@ const CATEGORY_SCHEMA = `#graphql
 type Category {
     title: String
     value: String
+    imageUrl: String
+}
+
+input CategoriesFilter {
+    offset: Int
+    limit: Int
 }
 
 type Query {
-    categories(locale: String): [Category]
+    categories(locale: String, filter: CategoriesFilter): [Category]
 }
 `;
 

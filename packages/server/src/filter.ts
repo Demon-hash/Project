@@ -1,8 +1,21 @@
-type Normalized<T> = {
+type Extend<T, B> = {
     [K in keyof T]: T[K];
-} & Partial<{
-    title: string;
-}>;
+} & Partial<B>;
+
+type Normalized<T> = Extend<
+    T,
+    {
+        title: string;
+    }
+>;
+
+type WithOffset<T> = Extend<
+    T,
+    {
+        offset: number;
+        limit: number;
+    }
+>;
 
 export default class Filter<T, F, L> {
     private entities: T[] = [];
@@ -11,10 +24,14 @@ export default class Filter<T, F, L> {
     private readonly limit: number;
     private readonly offset: number;
 
-    constructor(entities: T[], filter: F, locale: L) {
+    constructor(entities: T[], filter: WithOffset<F>, locale: L) {
+        const { offset = 0, limit = 100 } = filter ?? {};
+
         this.filter = filter;
         this.entities = entities;
         this.locale = locale;
+        this.offset = offset;
+        this.limit = limit;
     }
 
     byLocale(field: string): Filter<Normalized<T>, F, L> {
@@ -66,8 +83,11 @@ export default class Filter<T, F, L> {
         return this;
     }
 
-    withPagination() {
-        this.entities = this.entities.slice(this.offset, this.limit);
+    withPagination(): Filter<T, WithOffset<F>, L> {
+        this.entities = this.entities.slice(
+            this.offset,
+            this.offset + this.limit,
+        );
         return this;
     }
 
