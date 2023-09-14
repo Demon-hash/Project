@@ -5,9 +5,10 @@ import type { Resolvers } from 'generated';
 export const resolvers: Resolvers = {
     Query: {
         products(_, { filter, locale }) {
-            return new Filter(mocked.products, filter, locale)
+            const a = new Filter(mocked.products, filter, locale)
                 .byId('id')
                 .byLocale('title')
+                .byLocale('description')
                 .byRange('price')
                 .byCount('stock')
                 .byField('color')
@@ -18,6 +19,9 @@ export const resolvers: Resolvers = {
                 .byField('brand')
                 .withPagination()
                 .get();
+
+            console.log(a);
+            return a;
         },
         categories(_, { filter, locale }) {
             return new Filter(mocked.categories, filter, locale)

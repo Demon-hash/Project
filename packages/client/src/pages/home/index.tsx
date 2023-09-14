@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useGetHomepageDataQuery } from 'generated';
 import { twMerge } from 'tailwind-merge';
 import Carousel from 'components/Carousel';
-import { Products } from 'components/Shopping/Products';
+import ProductList from 'components/Shopping/ProductList';
 import Container from 'components/layout/Container';
 import Footer from 'components/layout/Footer';
 import Header from 'components/layout/Header';
@@ -71,8 +71,11 @@ const Home: FC = () => {
                     title={t('home.headers.1.title')}
                     desc={t('home.headers.1.desc')}
                 />
-                <Products products={data?.products} />
-                {/*<section className="grid gap-2 lg:gap-3 xl:gap-4 2xl:grid-cols-4 grid-cols-1 md:grid-cols-2"></section>*/}
+                <ProductList
+                    minimize
+                    className="grid gap-2 lg:gap-3 xl:gap-4 2xl:grid-cols-4 grid-cols-1 md:grid-cols-2"
+                    products={data?.products}
+                />
             </Container>
             <Footer />
         </>

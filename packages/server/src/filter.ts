@@ -1,15 +1,15 @@
-type Extend<T, B> = {
+type Normalize<T, P> = {
     [K in keyof T]: T[K];
-} & Partial<B>;
+} & Partial<P>;
 
-type Normalized<T> = Extend<
+type WithLocale<T> = Normalize<
     T,
     {
         title: string;
     }
 >;
 
-type WithOffset<T> = Extend<
+type WithOffset<T> = Normalize<
     T,
     {
         offset: number;
@@ -34,10 +34,10 @@ export default class Filter<T, F, L> {
         this.limit = limit;
     }
 
-    byLocale(field: string): Filter<Normalized<T>, F, L> {
+    byLocale(field: string): Filter<WithLocale<T>, F, L> {
         this.entities = this.entities.map(entity => ({
             ...entity,
-            title: entity?.[field]?.[this.locale ?? 'en'],
+            [field]: entity?.[field]?.[this.locale ?? 'en'],
         }));
         return this;
     }

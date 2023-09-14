@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useGetProductsQuery, useGetShopFiltersQuery } from 'generated';
 import type { ShopFilters } from 'zod-schemas/shop-filters';
 import { Breadcrumbs } from 'components/Breadcrumbs';
-import { Products } from 'components/Shopping/Products';
+import ProductList from 'components/Shopping/ProductList';
 import { useShopFiltersForm } from 'hooks/forms/use-shop-filters-form';
 import { ListWithCount } from './ListWithCount';
 import { PriceRange } from './PriceRange';
@@ -93,7 +93,10 @@ const Filters: FC<Properties> = ({ category }) => {
                 </div>
                 <div className="col-span-2 ml-4">
                     <div className="uppercase p-4 font-bold text-primary-foreground tracking-wider bg-primary h-14"></div>
-                    <Products products={data?.products} />
+                    <ProductList
+                        className="grid grid-cols-3 gap-2 py-4"
+                        products={data?.products}
+                    />
                 </div>
             </div>
         </>
