@@ -1,27 +1,39 @@
 {
-    "translation": {
-        "route": {
-            "home": "Home",
-            "auth": "Auth",
-            "login": "Log In",
-            "categories": "Categories"
+  "translation": {
+    "home": {
+      "headers": [
+        {
+          "title": "Discover Our Brand",
+          "desc": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium ad aperiam eos iusto"
         },
-        "categories": {
-            "men": "Men",
-            "women": "Women",
-            "children": "Children"
-        },
-        "cart": {
-            "add": "Add to cart"
-        },
-        "shop": {
-            "categories": "Categories",
-            "brands": "Brands",
-            "price": "Price",
-            "sort": "Sort By",
-            "sizes": "Sizes",
-            "materials": "Materials",
-            "colors": "Colors"
+        {
+          "title": "Recent Arrivials",
+          "desc": "Lorem ipsum dolor sit amet, consectetur adipisicing elit"
         }
+      ]
+    },
+    "route": {
+      "home": "Home",
+      "auth": "Auth",
+      "login": "Log In",
+      "categories": "Categories"
+    },
+    "categories": {
+      "men": "Men",
+      "women": "Women",
+      "children": "Children"
+    },
+    "cart": {
+      "add": "Add to cart"
+    },
+    "shop": {
+      "categories": "Categories",
+      "brands": "Brands",
+      "price": "Price",
+      "sort": "Sort By",
+      "sizes": "Sizes",
+      "materials": "Materials",
+      "colors": "Colors"
     }
+  }
 }

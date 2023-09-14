@@ -1,5 +1,3 @@
-import type { Category } from 'generated';
-
 export const CATEGORY = (en: string, value: string) => ({
     title: {
         en,
@@ -7,7 +5,7 @@ export const CATEGORY = (en: string, value: string) => ({
     value,
 });
 
-export const categories: Category[] = [
+export const categories: ReturnType<typeof CATEGORY>[] = [
     CATEGORY('Shirts', 'shirts'),
     CATEGORY('Sunglasses', 'sunglasses'),
     CATEGORY('Sneakers', 'sneakers'),

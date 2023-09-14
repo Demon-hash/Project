@@ -13,7 +13,7 @@ const client = new ApolloClient({
     connectToDevTools: DEV,
 });
 
-createRoot(document.getElementById('root')).render(
+createRoot(document.getElementById('root') as HTMLElement).render(
     <ApolloProvider client={client}>
         <RouterProvider router={routers} />,
     </ApolloProvider>,

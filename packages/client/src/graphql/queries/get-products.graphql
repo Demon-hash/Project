@@ -1,12 +1,10 @@
-query getProducts($filter: InputProductsFilter) {
-    products(filter: $filter) {
+query getProducts($locale: String, $filter: InputProductsFilter) {
+    products(locale: $locale, filter: $filter) {
         id
         imageUrl
         stock
         price
-        title {
-            en
-        }
+        title
         color {
             value
         }

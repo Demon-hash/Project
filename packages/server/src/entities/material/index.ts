@@ -1,5 +1,3 @@
-import type { Material } from 'generated';
-
 export const MATERIAL = (en: string, value: string) => ({
     title: {
         en,
@@ -7,7 +5,7 @@ export const MATERIAL = (en: string, value: string) => ({
     value,
 });
 
-export const materials: Material[] = [
+export const materials: ReturnType<typeof MATERIAL>[] = [
     MATERIAL('Synthetic', 'synthetic'),
     MATERIAL('Wool', 'wool'),
     MATERIAL('Linen', 'linen'),

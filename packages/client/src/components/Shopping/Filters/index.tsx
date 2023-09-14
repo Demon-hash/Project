@@ -1,5 +1,6 @@
-import { useDeferredValue } from 'react';
+import { type FC, useDeferredValue } from 'react';
 import { Form } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { useGetProductsQuery, useGetShopFiltersQuery } from 'generated';
 import type { ShopFilters } from 'zod-schemas/shop-filters';
 import { Breadcrumbs } from 'components/Breadcrumbs';
@@ -9,10 +10,17 @@ import { ListWithCount } from './ListWithCount';
 import { PriceRange } from './PriceRange';
 import { VariantsList } from './VariantsList';
 
-export const Filters = () => {
+interface Properties {
+    readonly category: string;
+}
+
+const Filters: FC<Properties> = ({ category }) => {
     const { control, watch } = useShopFiltersForm();
+    const { i18n } = useTranslation();
+
     const { data } = useGetProductsQuery({
         variables: {
+            locale: i18n.language,
             filter: useDeferredValue(
                 Object.entries(watch()).reduce(
                     (acc, [key, list]) => {
@@ -91,3 +99,5 @@ export const Filters = () => {
         </>
     );
 };
+
+export default Filters;

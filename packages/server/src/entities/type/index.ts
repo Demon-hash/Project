@@ -1,5 +1,3 @@
-import type { Type } from 'generated';
-
 export const TYPE = (en: string, value: string) => ({
     title: {
         en,
@@ -7,7 +5,7 @@ export const TYPE = (en: string, value: string) => ({
     value,
 });
 
-export const types: Type[] = [
+export const types: ReturnType<typeof TYPE>[] = [
     TYPE('Women', 'women'),
     TYPE('Men', 'men'),
     TYPE('Children', 'children'),

@@ -1,5 +1,3 @@
-import type { Size } from 'generated';
-
 export const SIZE = (en: string, value: string) => ({
     title: {
         en,
@@ -7,7 +5,7 @@ export const SIZE = (en: string, value: string) => ({
     value,
 });
 
-export const sizes: Size[] = [
+export const sizes: ReturnType<typeof SIZE>[] = [
     SIZE('XS', 'xs'),
     SIZE('S', 's'),
     SIZE('M', 'm'),

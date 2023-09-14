@@ -2,16 +2,16 @@ import { Menu } from 'lucide-react';
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { ROUTE } from 'constants/routers';
+import PATHS from 'paths';
 
-export const Header: FC = () => {
+const Header: FC = () => {
     const { t } = useTranslation();
     const categories = [
-        { title: 'women', url: ROUTE.WOMEN },
-        { title: 'men', url: ROUTE.MEN },
+        { title: 'women', url: PATHS.WOMEN },
+        { title: 'men', url: PATHS.MEN },
         {
             title: 'children',
-            url: ROUTE.CHILDREN,
+            url: PATHS.CHILDREN,
         },
     ].map(({ title, url }) => (
         <Link
@@ -28,7 +28,7 @@ export const Header: FC = () => {
             <nav className="flex h-12 relative">
                 <ul className="relative flex grow items-center w-100 px-2 lg:px-4 xl:px-6 2xl:px-8">
                     <li>
-                        <Link to={ROUTE.HOME}>MY WEBSHOP PROJECT NAME</Link>
+                        <Link to={PATHS.HOME}>MY WEBSHOP PROJECT NAME</Link>
                     </li>
                     <li className="grow flex items-end">
                         <Menu className="block lg:hidden ml-auto" />
@@ -41,3 +41,5 @@ export const Header: FC = () => {
         </header>
     );
 };
+
+export default Header;

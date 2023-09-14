@@ -1,11 +1,11 @@
 const SIZE_SCHEMA = `#graphql
 type Size {
-    title: Language
+    title: String
     value: String
 }
 
 type Query {
-    sizes: [Size]
+    sizes(locale: String): [Size]
 }
 `;
 

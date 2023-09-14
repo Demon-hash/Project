@@ -1,12 +1,22 @@
-export class Filter<T, F> {
+export class Filter<T, F, L> {
     private entities: T[] = [];
     private readonly filter: F | undefined;
+    private readonly locale: L | undefined;
     private readonly limit: number;
     private readonly offset: number;
 
-    constructor(entities: T[], filter: F) {
+    constructor(entities: T[], filter: F, locale: L) {
         this.filter = filter;
         this.entities = entities;
+        this.locale = locale;
+    }
+
+    byLocale(field: string) {
+        this.entities = this.entities.map(entity => ({
+            ...entity,
+            title: entity?.[field]?.[this.locale ?? 'en'],
+        }));
+        return this;
     }
 
     byId(field: string) {

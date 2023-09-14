@@ -35,20 +35,24 @@ export type Scalars = {
 
 export type Brand = {
     __typename?: 'Brand';
-    title?: Maybe<Language>;
+    title?: Maybe<Scalars['String']['output']>;
     value?: Maybe<Scalars['String']['output']>;
 };
 
 export type Category = {
     __typename?: 'Category';
-    title?: Maybe<Language>;
+    title?: Maybe<Scalars['String']['output']>;
     value?: Maybe<Scalars['String']['output']>;
 };
 
 export type Color = {
     __typename?: 'Color';
-    title?: Maybe<Language>;
+    title?: Maybe<Scalars['String']['output']>;
     value?: Maybe<Scalars['String']['output']>;
+};
+
+export type ColorsFilter = {
+    locale: Scalars['String']['input'];
 };
 
 export type InputProductsFilter = {
@@ -66,15 +70,9 @@ export type InputProductsFilter = {
     type?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-export type Language = {
-    __typename?: 'Language';
-    en?: Maybe<Scalars['String']['output']>;
-    ru?: Maybe<Scalars['String']['output']>;
-};
-
 export type Material = {
     __typename?: 'Material';
-    title?: Maybe<Language>;
+    title?: Maybe<Scalars['String']['output']>;
     value?: Maybe<Scalars['String']['output']>;
 };
 
@@ -89,7 +87,7 @@ export type Product = {
     price: Scalars['Int']['output'];
     size?: Maybe<Array<Size>>;
     stock: Scalars['Int']['output'];
-    title: Language;
+    title?: Maybe<Scalars['String']['output']>;
     type?: Maybe<Array<Type>>;
 };
 
@@ -105,29 +103,59 @@ export type Query = {
     types?: Maybe<Array<Maybe<Type>>>;
 };
 
+export type QueryBrandsArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type QueryCategoriesArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type QueryColorsArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type QueryMaterialsArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type QueryProductsArgs = {
     filter?: InputMaybe<InputProductsFilter>;
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type QuerySizesArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type QuerySortArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type QueryTypesArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type Size = {
     __typename?: 'Size';
-    title?: Maybe<Language>;
+    title?: Maybe<Scalars['String']['output']>;
     value?: Maybe<Scalars['String']['output']>;
 };
 
 export type Sort = {
     __typename?: 'Sort';
-    title?: Maybe<Language>;
+    title?: Maybe<Scalars['String']['output']>;
     value?: Maybe<Scalars['String']['output']>;
 };
 
 export type Type = {
     __typename?: 'Type';
-    title?: Maybe<Language>;
+    title?: Maybe<Scalars['String']['output']>;
     value?: Maybe<Scalars['String']['output']>;
 };
 
 export type GetProductsQueryVariables = Exact<{
+    locale?: InputMaybe<Scalars['String']['input']>;
     filter?: InputMaybe<InputProductsFilter>;
 }>;
 
@@ -139,62 +167,62 @@ export type GetProductsQuery = {
         imageUrl: string;
         stock: number;
         price: number;
-        title: { __typename?: 'Language'; en?: string | null };
+        title?: string | null;
         color?: Array<{ __typename?: 'Color'; value?: string | null }> | null;
     } | null> | null;
 };
 
-export type GetShopFiltersQueryVariables = Exact<{ [key: string]: never }>;
+export type GetShopFiltersQueryVariables = Exact<{
+    locale?: InputMaybe<Scalars['String']['input']>;
+}>;
 
 export type GetShopFiltersQuery = {
     __typename?: 'Query';
     brands?: Array<{
         __typename?: 'Brand';
+        title?: string | null;
         value?: string | null;
-        title?: { __typename?: 'Language'; en?: string | null } | null;
     } | null> | null;
     categories?: Array<{
         __typename?: 'Category';
+        title?: string | null;
         value?: string | null;
-        title?: { __typename?: 'Language'; en?: string | null } | null;
     } | null> | null;
     colors?: Array<{
         __typename?: 'Color';
+        title?: string | null;
         value?: string | null;
-        title?: { __typename?: 'Language'; en?: string | null } | null;
     } | null> | null;
     materials?: Array<{
         __typename?: 'Material';
+        title?: string | null;
         value?: string | null;
-        title?: { __typename?: 'Language'; en?: string | null } | null;
     } | null> | null;
     sizes?: Array<{
         __typename?: 'Size';
+        title?: string | null;
         value?: string | null;
-        title?: { __typename?: 'Language'; en?: string | null } | null;
     } | null> | null;
     types?: Array<{
         __typename?: 'Type';
+        title?: string | null;
         value?: string | null;
-        title?: { __typename?: 'Language'; en?: string | null } | null;
     } | null> | null;
     sort?: Array<{
         __typename?: 'Sort';
+        title?: string | null;
         value?: string | null;
-        title?: { __typename?: 'Language'; en?: string | null } | null;
     } | null> | null;
 };
 
 export const GetProductsDocument = gql`
-    query getProducts($filter: InputProductsFilter) {
-        products(filter: $filter) {
+    query getProducts($locale: String, $filter: InputProductsFilter) {
+        products(locale: $locale, filter: $filter) {
             id
             imageUrl
             stock
             price
-            title {
-                en
-            }
+            title
             color {
                 value
             }
@@ -214,6 +242,7 @@ export const GetProductsDocument = gql`
  * @example
  * const { data, loading, error } = useGetProductsQuery({
  *   variables: {
+ *      locale: // value for 'locale'
  *      filter: // value for 'filter'
  *   },
  * });
@@ -254,47 +283,33 @@ export function refetchGetProductsQuery(variables?: GetProductsQueryVariables) {
     return { query: GetProductsDocument, variables: variables };
 }
 export const GetShopFiltersDocument = gql`
-    query getShopFilters {
-        brands {
-            title {
-                en
-            }
+    query getShopFilters($locale: String) {
+        brands(locale: $locale) {
+            title
             value
         }
-        categories {
-            title {
-                en
-            }
+        categories(locale: $locale) {
+            title
             value
         }
-        colors {
-            title {
-                en
-            }
+        colors(locale: $locale) {
+            title
             value
         }
-        materials {
-            title {
-                en
-            }
+        materials(locale: $locale) {
+            title
             value
         }
-        sizes {
-            title {
-                en
-            }
+        sizes(locale: $locale) {
+            title
             value
         }
-        types {
-            title {
-                en
-            }
+        types(locale: $locale) {
+            title
             value
         }
-        sort {
-            title {
-                en
-            }
+        sort(locale: $locale) {
+            title
             value
         }
     }
@@ -312,6 +327,7 @@ export const GetShopFiltersDocument = gql`
  * @example
  * const { data, loading, error } = useGetShopFiltersQuery({
  *   variables: {
+ *      locale: // value for 'locale'
  *   },
  * });
  */

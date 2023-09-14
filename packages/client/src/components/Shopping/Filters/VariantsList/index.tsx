@@ -28,7 +28,7 @@ export const VariantsList = <C extends FieldValues>({
     name,
     control,
 }: Properties<C>) => {
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
 
     const { fields, append, replace } = useFieldArray<C>({
         control,
@@ -69,7 +69,7 @@ export const VariantsList = <C extends FieldValues>({
                                             )}
                                         ></span>
                                     )}
-                                    <span>{title?.[i18n.language]}</span>
+                                    <span>{title}</span>
                                 </Toggle>
                             </li>
                         ))}

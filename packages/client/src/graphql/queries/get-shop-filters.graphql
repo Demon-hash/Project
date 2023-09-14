@@ -1,44 +1,30 @@
-query getShopFilters {
-    brands {
-        title {
-            en
-        }
+query getShopFilters($locale: String) {
+    brands(locale: $locale) {
+        title
         value
     }
-    categories {
-        title {
-            en
-        }
+    categories(locale: $locale) {
+        title
         value
     }
-    colors {
-        title {
-            en
-        }
+    colors(locale: $locale) {
+        title
         value
     }
-    materials {
-        title {
-            en
-        }
+    materials(locale: $locale) {
+        title
         value
     }
-    sizes {
-        title {
-            en
-        }
+    sizes(locale: $locale) {
+        title
         value
     }
-    types {
-        title {
-            en
-        }
+    types(locale: $locale) {
+        title
         value
     }
-    sort {
-        title {
-            en
-        }
+    sort(locale: $locale) {
+        title
         value
     }
 }

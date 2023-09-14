@@ -1,6 +1,4 @@
-import type { Language } from 'generated';
-
 export interface Variant {
-    title: Language;
+    title: string;
     value: string;
 }

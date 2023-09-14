@@ -59,6 +59,7 @@ const mockProductData = {
     },
 };
 
+// @ts-ignore
 export const products: Product[] = new Array(20).fill(0).map((_, id) => {
     const categoryIndex = Math.floor(Math.random() * categories.length);
 

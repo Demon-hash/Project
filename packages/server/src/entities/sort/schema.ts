@@ -1,11 +1,11 @@
 const SORT_SCHEMA = `#graphql
 type Sort {
-    title: Language
+    title: String
     value: String
 }
 
 type Query {
-    sort: [Sort]
+    sort(locale: String): [Sort]
 }
 `;
 

@@ -1,5 +1,3 @@
-import type { Color } from 'generated';
-
 export const COLOR = (en: string, value: string) => ({
     title: {
         en,
@@ -7,7 +5,7 @@ export const COLOR = (en: string, value: string) => ({
     value,
 });
 
-export const colors: Color[] = [
+export const colors: ReturnType<typeof COLOR>[] = [
     COLOR('Red', 'red'),
     COLOR('Orange', 'orange'),
     COLOR('Yellow', 'yellow'),

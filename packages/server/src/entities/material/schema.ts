@@ -1,11 +1,11 @@
 const MATERIAL_SCHEMA = `#graphql
 type Material {
-    title: Language
+    title: String
     value: String
 }
 
 type Query {
-    materials: [Material]
+    materials(locale: String): [Material]
 }
 `;
 

@@ -1,89 +1,58 @@
 import { Trans } from 'react-i18next';
 import {
     Link,
-    Outlet,
     Route,
     createBrowserRouter,
     createRoutesFromElements,
 } from 'react-router-dom';
-import { Home } from '../Home';
+import Categories from 'pages/categories';
+import Home from 'pages/home';
+import PATHS from 'paths';
+import Filters from 'components/Shopping/Filters';
 
-export const enum ROUTE {
-    HOME = '/',
-    CATEGORIES = '/categories',
-    MEN = '/categories/men',
-    WOMEN = '/categories/women',
-    CHILDREN = '/categories/children',
-    AUTH = '/auth',
-    LOGIN = '/auth/login',
-}
+const categories: (keyof typeof PATHS)[] = ['WOMEN', 'MEN', 'CHILDREN'];
 
 export const routers = createBrowserRouter(
     createRoutesFromElements(
-        <Route
-            element={
-                <>
-                    <Outlet />
-                </>
-            }
-        >
+        <Route path={PATHS.HOME}>
             <Route
-                path={ROUTE.HOME}
+                index={true}
                 element={<Home />}
                 handle={{
                     crumb: () => (
-                        <Link to={ROUTE.HOME}>
+                        <Link to={PATHS.HOME}>
                             <Trans i18nKey="route.home" />
                         </Link>
                     ),
                 }}
+            ></Route>
+            <Route
+                path={PATHS.CATEGORIES}
+                element={<Categories />}
+                handle={{
+                    crumb: () => (
+                        <Link to={PATHS.CATEGORIES}>
+                            <Trans i18nKey="route.categories" />
+                        </Link>
+                    ),
+                }}
             >
-                <Route
-                    path={ROUTE.CATEGORIES}
-                    element={<Outlet />}
-                    handle={{
-                        crumb: () => (
-                            <Link to={ROUTE.CATEGORIES}>
-                                <Trans i18nKey="route.categories" />
-                            </Link>
-                        ),
-                    }}
-                >
+                {categories.map(category => (
                     <Route
-                        index
-                        path={ROUTE.WOMEN}
-                        lazy={() => import('../pages/login')}
+                        key={category}
+                        path={PATHS[category]}
+                        element={<Filters category={category} />}
                         handle={{
                             crumb: () => (
-                                <Link to={ROUTE.WOMEN}>
-                                    <Trans i18nKey="categories.women" />
+                                <Link to={PATHS[category]}>
+                                    <Trans
+                                        i18nKey={`categories.${category.toLowerCase()}`}
+                                    />
                                 </Link>
                             ),
                         }}
                     ></Route>
-                    <Route
-                        path={ROUTE.MEN}
-                        lazy={() => import('../pages/login')}
-                        handle={{
-                            crumb: () => (
-                                <Link to={ROUTE.MEN}>
-                                    <Trans i18nKey="categories.men" />
-                                </Link>
-                            ),
-                        }}
-                    ></Route>
-                    <Route
-                        path={ROUTE.CHILDREN}
-                        lazy={() => import('../pages/login')}
-                        handle={{
-                            crumb: () => (
-                                <Link to={ROUTE.CHILDREN}>
-                                    <Trans i18nKey="categories.children" />
-                                </Link>
-                            ),
-                        }}
-                    ></Route>
-                </Route>
+                ))}
             </Route>
         </Route>,
     ),

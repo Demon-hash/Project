@@ -1,11 +1,11 @@
 const BRAND_SCHEMA = `#graphql
 type Brand {
-    title: Language
+    title: String
     value: String
 }
 
 type Query {
-    brands: [Brand]
+    brands(locale: String): [Brand]
 }
 `;
 

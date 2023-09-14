@@ -1,5 +1,3 @@
-import type { Sort } from 'generated';
-
 export const SORT = (en: string, value: string) => ({
     title: {
         en,
@@ -7,7 +5,7 @@ export const SORT = (en: string, value: string) => ({
     value,
 });
 
-export const sorts: Sort[] = [
+export const sorts: ReturnType<typeof SORT>[] = [
     SORT('Popularity', 'popularity'),
     SORT('Rating', 'rating'),
     SORT('Newness', 'newness'),

@@ -1,7 +1,7 @@
 const PRODUCT_SCHEMA = `#graphql
 type Product {
     id: ID!
-    title: Language!
+    title: String
     price: Int!
     stock: Int!
     imageUrl: String!
@@ -29,7 +29,7 @@ input InputProductsFilter {
 }
 
 type Query {
-    products(filter: InputProductsFilter): [Product]
+    products(locale: String, filter: InputProductsFilter): [Product]
 }
 `;
 

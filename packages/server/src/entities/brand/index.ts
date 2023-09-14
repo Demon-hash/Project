@@ -1,21 +1,20 @@
-import type { Brand } from 'generated';
-
-export const BRAND = (en: string, value: string) => ({
+export const BRAND = (en: string, ru: string, value: string) => ({
     title: {
         en,
+        ru,
     },
     value,
 });
 
-export const brands: Brand[] = [
-    BRAND('Gucci', 'gucci'),
-    BRAND('Louis Vuitton', 'louis-vuitton'),
-    BRAND('Dior', 'dior'),
-    BRAND('Prada', 'prada'),
-    BRAND('Balenciaga', 'balenciaga'),
-    BRAND('Moncler', 'moncler'),
-    BRAND('Saint Laurent', 'saint-laurent'),
-    BRAND('Armani', 'armani'),
-    BRAND('Versace', 'versace'),
-    BRAND('Burberry', 'burberry'),
+export const brands: ReturnType<typeof BRAND>[] = [
+    BRAND('Gucci', 'Гучи', 'gucci'),
+    BRAND('Louis Vuitton', 'Луис Витон', 'louis-vuitton'),
+    BRAND('Dior', 'Диор', 'dior'),
+    BRAND('Prada', 'Прада', 'prada'),
+    BRAND('Balenciaga', 'Баланциага', 'balenciaga'),
+    BRAND('Moncler', 'Монклеар', 'moncler'),
+    BRAND('Saint Laurent', 'Сейнт Лаурент', 'saint-laurent'),
+    BRAND('Armani', 'Армани', 'armani'),
+    BRAND('Versace', 'Версаж', 'versace'),
+    BRAND('Burberry', 'Бурберри', 'burberry'),
 ];

@@ -12,7 +12,7 @@ interface Properties {
 }
 
 export const Products: FC<Properties> = ({ products }) => {
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
 
     const _colors = (color: Color[]) => (
         <div className="flex items-center justify-center my-4 space-x-2">
@@ -53,7 +53,7 @@ export const Products: FC<Properties> = ({ products }) => {
                 {_colors(color)}
                 <div className="my-4">
                     <h1 className="text-gray-50 text-2xl font-bold w-full">
-                        {title?.[i18n.language]}
+                        {title}
                     </h1>
                     {_sizes(['36', '38', '40', '42', '44'])}
                     <p className="my-2">

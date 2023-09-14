@@ -1,11 +1,11 @@
 const CATEGORY_SCHEMA = `#graphql
 type Category {
-    title: Language
+    title: String
     value: String
 }
 
 type Query {
-    categories: [Category]
+    categories(locale: String): [Category]
 }
 `;
 

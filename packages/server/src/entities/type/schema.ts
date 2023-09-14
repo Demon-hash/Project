@@ -1,11 +1,11 @@
 const TYPE_SCHEMA = `#graphql
 type Type {
-    title: Language
+    title: String
     value: String
 }
 
 type Query {
-    types: [Type]
+    types(locale: String): [Type]
 }
 `;
 

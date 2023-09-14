@@ -1,11 +1,15 @@
 const COLOR_SCHEMA = `#graphql
 type Color {
-    title: Language
+    title: String
     value: String
 }
 
+input ColorsFilter {
+    locale: String!
+}
+
 type Query {
-    colors: [Color]
+    colors(locale: String): [Color]
 }
 `;
 

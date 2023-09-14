@@ -25,7 +25,7 @@ export const ListWithCount = <C extends FieldValues>({
     title,
     variants,
 }: Properties<C>) => {
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
 
     const { fields, append, replace } = useFieldArray<C>({
         control,
@@ -65,7 +65,7 @@ export const ListWithCount = <C extends FieldValues>({
                                     htmlFor={value}
                                     className="text-accent-foreground leading-none cursor-pointer peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                                 >
-                                    {title?.[i18n.language]}
+                                    {title}
                                 </label>
                             </li>
                         ))}
