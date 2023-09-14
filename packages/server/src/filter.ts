@@ -1,4 +1,10 @@
-export class Filter<T, F, L> {
+type Normalized<T> = {
+    [K in keyof T]: T[K];
+} & Partial<{
+    title: string;
+}>;
+
+export default class Filter<T, F, L> {
     private entities: T[] = [];
     private readonly filter: F | undefined;
     private readonly locale: L | undefined;
@@ -11,7 +17,7 @@ export class Filter<T, F, L> {
         this.locale = locale;
     }
 
-    byLocale(field: string) {
+    byLocale(field: string): Filter<Normalized<T>, F, L> {
         this.entities = this.entities.map(entity => ({
             ...entity,
             title: entity?.[field]?.[this.locale ?? 'en'],
