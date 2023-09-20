@@ -3,7 +3,9 @@ import {
     type Control,
     Controller,
     type FieldArray,
+    type FieldArrayWithId,
     type FieldValues,
+    type Path,
     useFieldArray,
 } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -12,6 +14,13 @@ import { Toggle } from 'components/interactive/Toggle';
 import type { Variant } from 'shared/types';
 import { VARIANT_COLORS } from 'shared/variant-colors.ts';
 import Heading from '../Heading';
+
+type ExtendedFields<T extends FieldValues> = FieldArrayWithId<T, ArrayPath<T>> &
+    { value?: string }[];
+
+type Normalized<T extends FieldValues> =
+    | FieldArray<T, ArrayPath<T>>
+    | FieldArray<T, ArrayPath<T>>[];
 
 interface Properties<C extends FieldValues> {
     readonly name: ArrayPath<C>;
@@ -35,41 +44,50 @@ const VariantsList = <C extends FieldValues>({
         name,
     });
 
-    const onChange = (state: boolean, value: string) => {
+    const onChange = (state: boolean, value?: string | null) => {
+        if (typeof value !== 'string') {
+            return;
+        }
+
+        const cached = (fields as ExtendedFields<C>).filter(
+            field => field?.value !== value,
+        );
+
         return state
             ? append({ value } as FieldArray<C>)
-            : replace(fields.filter(field => field?.value !== value));
+            : replace(cached as Normalized<C>);
     };
 
     return (
         <Controller
-            name={name}
+            name={name as Path<C>}
             control={control}
             render={() => (
                 <>
                     <Heading title={t(title)} />
                     <ul className="px-4 grid lg:grid-cols-3 xl:grid-cols-4 gap-2">
-                        {variants?.map(({ title, value }) => (
+                        {variants?.map(variant => (
                             <li
                                 className="flex items-center justify-center py-1 font-light"
-                                key={value}
+                                key={variant?.value}
                             >
                                 <Toggle
-                                    id={value}
                                     className="relative flex items-center justify-center"
                                     onPressedChange={state =>
-                                        onChange(state, value)
+                                        onChange(state, variant?.value)
                                     }
                                 >
                                     {asColorList && (
                                         <span
                                             className={twMerge(
                                                 'mr-2 w-4 h-4 rounded-full',
-                                                VARIANT_COLORS[value],
+                                                VARIANT_COLORS?.[
+                                                    variant?.value as keyof typeof VARIANT_COLORS
+                                                ],
                                             )}
                                         ></span>
                                     )}
-                                    <span>{title}</span>
+                                    <span>{variant?.title}</span>
                                 </Toggle>
                             </li>
                         ))}

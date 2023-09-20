@@ -1,19 +1,28 @@
 import type { CheckedState } from '@radix-ui/react-checkbox';
 import {
+    type ArrayPath,
     type Control,
     Controller,
     type FieldArray,
+    type FieldArrayWithId,
     type FieldValues,
     type Path,
     useFieldArray,
 } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import CategoryCheckboxWithLabel from 'components/shopping/CategoryCheckboxWithLabel';
 import type { Variant } from 'shared/types';
+import CategoryCheckboxWithLabel from '../CategoryCheckboxWithLabel';
 import Heading from '../Heading';
 
+type ExtendedFields<T extends FieldValues> = FieldArrayWithId<T, ArrayPath<T>> &
+    { value?: string }[];
+
+type Normalized<T extends FieldValues> =
+    | FieldArray<T, ArrayPath<T>>
+    | FieldArray<T, ArrayPath<T>>[];
+
 interface Properties<C extends FieldValues> {
-    readonly name: Path<C>;
+    readonly name: ArrayPath<C>;
     readonly control: Control<C>;
     readonly title: string;
     readonly categories?: (Variant | null)[] | null;
@@ -36,14 +45,18 @@ const SubcategoriesList = <C extends FieldValues>({
             return;
         }
 
+        const cached = (fields as ExtendedFields<C>).filter(
+            field => field?.value !== value,
+        );
+
         return state
             ? append({ value } as FieldArray<C>)
-            : replace(fields.filter(field => field?.value !== value));
+            : replace(cached as Normalized<C>);
     };
 
     return (
         <Controller
-            name={name}
+            name={name as Path<C>}
             control={control}
             render={() => (
                 <>

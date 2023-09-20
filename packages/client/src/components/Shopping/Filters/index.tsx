@@ -8,7 +8,7 @@ import SubcategoriesList from 'components/shopping/SubcategoriesList';
 import VariantsList from 'components/shopping/VariantsList';
 import { useGetProductsQuery, useGetShopFiltersQuery } from 'generated';
 import { useShopFiltersForm } from 'hooks/forms/use-shop-filters-form';
-import normalize from './helpers';
+import normalize from './helpers.ts';
 
 interface Properties {
     category?: string;

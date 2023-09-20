@@ -6,7 +6,7 @@ on:
     branches: [ main ]
 
 jobs:
-  check:
+  syntax:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -20,4 +20,5 @@ jobs:
         run: npm ci
       - name: Lint checking
         run: npm run lint:check
-
+      - name: Types checking
+        run: npm run types:check

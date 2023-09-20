@@ -68,9 +68,11 @@ const Product: FC<Properties> = ({ product, minimize }) => {
                         </Button>
                     </div>
 
-                    <p className="text-gray-500 font-bold text-xl text-center">
-                        {formatNumberAsMoney(price)}
-                    </p>
+                    {price && (
+                        <p className="text-gray-500 font-bold text-xl text-center">
+                            {formatNumberAsMoney(price)}
+                        </p>
+                    )}
                 </>
             )}
         </div>
