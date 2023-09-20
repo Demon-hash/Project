@@ -4,7 +4,7 @@ module.exports = {
         'eslint:recommended',
         'plugin:@typescript-eslint/recommended',
     ],
-    ignorePatterns: ['dist', '.eslintrc.cjs', '**/node_modules/**'],
+    ignorePatterns: ['dist', '.eslintrc.cjs', '**/node_modules/**', '**/graphql/index.ts'],
     parser: '@typescript-eslint/parser',
     rules: {
         'no-duplicate-imports': ['error', { 'includeExports': true }],
