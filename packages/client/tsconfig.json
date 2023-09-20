@@ -22,5 +22,6 @@
       "utils": ["src/utils/index.ts"]
     }
   },
-  "exclude": ["dist"],
+  "include": ["src"],
+  "exclude": ["dist", "node_modules"],
 }
