@@ -8,9 +8,6 @@ import {
 import Categories from 'pages/categories';
 import Home from 'pages/home';
 import PATHS from 'paths';
-import Filters from 'components/Shopping/Filters';
-
-const categories: (keyof typeof PATHS)[] = ['WOMEN', 'MEN', 'CHILDREN'];
 
 export const routers = createBrowserRouter(
     createRoutesFromElements(
@@ -36,24 +33,7 @@ export const routers = createBrowserRouter(
                         </Link>
                     ),
                 }}
-            >
-                {categories.map(category => (
-                    <Route
-                        key={category}
-                        path={PATHS[category]}
-                        element={<Filters category={category} />}
-                        handle={{
-                            crumb: () => (
-                                <Link to={PATHS[category]}>
-                                    <Trans
-                                        i18nKey={`categories.${category.toLowerCase()}`}
-                                    />
-                                </Link>
-                            ),
-                        }}
-                    ></Route>
-                ))}
-            </Route>
+            ></Route>
         </Route>,
     ),
 );

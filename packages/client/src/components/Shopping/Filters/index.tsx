@@ -1,39 +1,26 @@
 import { type FC, useDeferredValue } from 'react';
 import { Form } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { useGetProductsQuery, useGetShopFiltersQuery } from 'generated';
 import type { ShopFilters } from 'zod-schemas/shop-filters';
-import { Breadcrumbs } from 'components/Breadcrumbs';
-import ProductList from 'components/Shopping/ProductList';
+import PriceRange from 'components/shopping/PriceRange';
+import ProductList from 'components/shopping/ProductList';
+import SubcategoriesList from 'components/shopping/SubcategoriesList';
+import VariantsList from 'components/shopping/VariantsList';
+import { useGetProductsQuery, useGetShopFiltersQuery } from 'generated';
 import { useShopFiltersForm } from 'hooks/forms/use-shop-filters-form';
-import { ListWithCount } from './ListWithCount';
-import { PriceRange } from './PriceRange';
-import { VariantsList } from './VariantsList';
+import normalize from './helpers';
 
 interface Properties {
-    readonly category: string;
+    category?: string;
 }
 
-const Filters: FC<Properties> = ({ category }) => {
+const Filters: FC<Properties> = () => {
     const { control, watch } = useShopFiltersForm();
     const { i18n } = useTranslation();
-
     const { data } = useGetProductsQuery({
         variables: {
             locale: i18n.language,
-            filter: useDeferredValue(
-                Object.entries(watch()).reduce(
-                    (acc, [key, list]) => {
-                        return {
-                            ...acc,
-                            [key]: list.map(({ value }) => value),
-                        };
-                    },
-                    {
-                        limit: 9,
-                    },
-                ),
-            ),
+            filter: useDeferredValue(normalize(watch)),
         },
     });
 
@@ -43,21 +30,19 @@ const Filters: FC<Properties> = ({ category }) => {
         <>
             <div className="py-8 grid grid-cols-3">
                 <div className="col-span-1">
-                    <h1 className="uppercase p-4 font-bold text-accent tracking-wider bg-primary h-14">
-                        <Breadcrumbs />
-                    </h1>
+                    <h1 className="uppercase p-4 font-bold text-accent tracking-wider bg-primary h-14"></h1>
                     <Form control={control}>
-                        <ListWithCount<ShopFilters>
+                        <SubcategoriesList<ShopFilters>
                             title="shop.categories"
                             name="category"
                             control={control}
-                            variants={filters?.categories}
+                            categories={filters?.categories}
                         />
-                        <ListWithCount<ShopFilters>
+                        <SubcategoriesList<ShopFilters>
                             title="shop.brands"
                             name="brand"
                             control={control}
-                            variants={filters?.brands}
+                            categories={filters?.brands}
                         />
                         <PriceRange<ShopFilters>
                             title="shop.price"

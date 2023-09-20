@@ -1,9 +1,7 @@
 const PATHS = {
     HOME: '/',
-    CATEGORIES: '/categories',
-    MEN: '/categories/men',
-    WOMEN: '/categories/women',
-    CHILDREN: '/categories/children',
+    CART: '/cart',
+    CATEGORIES: '/categories/:category',
     AUTH: '/auth',
     LOGIN: '/auth/login',
 } as const;

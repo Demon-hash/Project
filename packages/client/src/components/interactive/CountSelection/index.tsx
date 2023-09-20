@@ -1,7 +1,7 @@
 import { type ChangeEvent, forwardRef, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
-import { Button } from 'components/Button';
-import { Input } from 'components/Input';
+import Button from 'components/interactive/Button';
+import Input from 'components/interactive/Input';
 
 interface Properties {
     readonly amount?: number;
@@ -10,17 +10,9 @@ interface Properties {
     readonly max?: number;
 }
 
-export const Counter = forwardRef<HTMLDivElement, Properties>(
+const CountSelection = forwardRef<HTMLDivElement, Properties>(
     ({ className, amount, min, max }, ref) => {
         const [count, setCount] = useState(amount ?? 1);
-
-        const increment = () => {
-            setCount(prev => Math.min(prev + 1, max ?? Infinity));
-        };
-
-        const decrement = () => {
-            setCount(prev => Math.max(prev - 1, min ?? -Infinity));
-        };
 
         const onChange = (event: ChangeEvent<HTMLInputElement>) => {
             const number = parseInt(event.target.value, 10);
@@ -43,7 +35,12 @@ export const Counter = forwardRef<HTMLDivElement, Properties>(
                 )}
                 ref={ref}
             >
-                <Button type="button" onClick={decrement}>
+                <Button
+                    type="button"
+                    onClick={() => {
+                        setCount(prev => Math.max(prev - 1, min ?? -Infinity));
+                    }}
+                >
                     -
                 </Button>
                 <Input
@@ -52,10 +49,17 @@ export const Counter = forwardRef<HTMLDivElement, Properties>(
                     value={count}
                     onChange={onChange}
                 />
-                <Button type="button" onClick={increment}>
+                <Button
+                    type="button"
+                    onClick={() => {
+                        setCount(prev => Math.min(prev + 1, max ?? Infinity));
+                    }}
+                >
                     +
                 </Button>
             </div>
         );
     },
 );
+
+export default CountSelection;

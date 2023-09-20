@@ -6,7 +6,7 @@ import {
 } from 'react';
 import { twMerge } from 'tailwind-merge';
 
-export const Range = forwardRef<
+const Range = forwardRef<
     ElementRef<typeof SliderPrimitive.Root>,
     ComponentPropsWithoutRef<typeof SliderPrimitive.Root>
 >(({ className, ...props }, ref) => (
@@ -25,3 +25,5 @@ export const Range = forwardRef<
         <SliderPrimitive.Thumb className="block h-5 w-5 rounded-full shadow-neutral-950 shadow-sm bg-accent-foreground disabled:pointer-events-none disabled:opacity-50" />
     </SliderPrimitive.Root>
 ));
+
+export default Range;

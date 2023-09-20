@@ -6,7 +6,7 @@ import {
 } from 'react';
 import type { VariantProps } from 'class-variance-authority';
 import { twMerge } from 'tailwind-merge';
-import { toggleConfig } from './config';
+import { toggleConfig } from './config.ts';
 
 interface Properties
     extends ComponentPropsWithoutRef<typeof TogglePrimitive.Root>,

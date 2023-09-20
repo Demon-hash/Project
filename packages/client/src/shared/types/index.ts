@@ -1,4 +1,4 @@
 export interface Variant {
-    title: string;
-    value: string;
+    title?: string | null;
+    value?: string | null;
 }

@@ -1,10 +1,10 @@
 import { type FC, useMemo } from 'react';
-import type { Product } from 'generated';
 import { twMerge } from 'tailwind-merge';
-import ShopProduct from '../Product';
+import type { Product as Generated } from 'generated';
+import Product from '../Product';
 
 interface Properties {
-    readonly products?: Product[];
+    readonly products?: (Partial<Generated> | null)[] | null;
     readonly className?: string;
     readonly minimize?: boolean;
 }
@@ -13,8 +13,8 @@ const ProductList: FC<Properties> = ({ products, className, minimize }) => {
     const cached = useMemo(
         () =>
             products?.map(product => (
-                <ShopProduct
-                    key={product.id}
+                <Product
+                    key={product?.id}
                     minimize={minimize}
                     product={product}
                 />

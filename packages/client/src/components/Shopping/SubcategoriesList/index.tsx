@@ -8,32 +8,31 @@ import {
     useFieldArray,
 } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { Checkbox } from 'components/Checkbox';
+import CategoryCheckboxWithLabel from 'components/shopping/CategoryCheckboxWithLabel';
 import type { Variant } from 'shared/types';
-import { Heading } from '../Heading';
+import Heading from '../Heading';
 
 interface Properties<C extends FieldValues> {
     readonly name: Path<C>;
     readonly control: Control<C>;
     readonly title: string;
-    readonly variants?: Variant[];
+    readonly categories?: (Variant | null)[] | null;
 }
 
-export const ListWithCount = <C extends FieldValues>({
+const SubcategoriesList = <C extends FieldValues>({
     name,
     control,
     title,
-    variants,
+    categories,
 }: Properties<C>) => {
     const { t } = useTranslation();
-
     const { fields, append, replace } = useFieldArray<C>({
         control,
         name,
     });
 
-    const onChange = (state: CheckedState, value: string) => {
-        if (typeof state === 'string') {
+    const onChange = (state: CheckedState, value?: string | null) => {
+        if (typeof state === 'string' || typeof value !== 'string') {
             return;
         }
 
@@ -50,23 +49,17 @@ export const ListWithCount = <C extends FieldValues>({
                 <>
                     <Heading title={t(title)} />
                     <ul className="px-4">
-                        {variants?.map(({ title, value }) => (
+                        {categories?.map(category => (
                             <li
+                                key={category?.value}
                                 className="flex items-center py-1 space-x-4 font-light"
-                                key={value}
                             >
-                                <Checkbox
-                                    id={value}
-                                    onCheckedChange={state =>
-                                        onChange(state, value)
+                                <CategoryCheckboxWithLabel
+                                    category={category}
+                                    onChange={state =>
+                                        onChange(state, category?.value)
                                     }
                                 />
-                                <label
-                                    htmlFor={value}
-                                    className="text-accent-foreground leading-none cursor-pointer peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                                >
-                                    {title}
-                                </label>
                             </li>
                         ))}
                     </ul>
@@ -75,3 +68,5 @@ export const ListWithCount = <C extends FieldValues>({
         />
     );
 };
+
+export default SubcategoriesList;

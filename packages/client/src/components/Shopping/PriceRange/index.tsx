@@ -1,21 +1,27 @@
 import {
+    type ArrayPath,
     type Control,
     Controller,
+    type FieldArray,
     type FieldValues,
     type Path,
     useFieldArray,
 } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { Range } from 'components/Range';
-import { Heading } from '../Heading';
+import Range from 'components/interactive/Range';
+import Heading from '../Heading';
+
+type Normalized<T extends FieldValues> =
+    | FieldArray<T, ArrayPath<T>>
+    | FieldArray<T, ArrayPath<T>>[];
 
 interface Properties<C extends FieldValues> {
-    readonly name: Path<C>;
+    readonly name: ArrayPath<C>;
     readonly control: Control<C>;
     readonly title: string;
 }
 
-export const PriceRange = <C extends FieldValues>({
+const PriceRange = <C extends FieldValues>({
     title,
     control,
     name,
@@ -27,13 +33,22 @@ export const PriceRange = <C extends FieldValues>({
         name,
     });
 
-    const onChange = (values?: number[]) => {
-        replace(values?.map(value => ({ value })));
+    const onChange = (range?: number | number[]) => {
+        if (range === undefined) {
+            return;
+        }
+
+        if (Array.isArray(range)) {
+            const values = range?.map(value => ({ value }));
+            return replace((values ?? []) as Normalized<C>);
+        }
+
+        replace([{ value: range }] as Normalized<C>);
     };
 
     return (
         <Controller
-            name={name}
+            name={name as Path<C>}
             control={control}
             render={() => (
                 <>
@@ -49,3 +64,5 @@ export const PriceRange = <C extends FieldValues>({
         />
     );
 };
+
+export default PriceRange;

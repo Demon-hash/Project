@@ -8,20 +8,20 @@ import {
 } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { twMerge } from 'tailwind-merge';
-import { Toggle } from 'components/Toggle';
+import { Toggle } from 'components/interactive/Toggle';
 import type { Variant } from 'shared/types';
-import { VARIANT_COLORS } from 'shared/variant-colors';
-import { Heading } from '../Heading';
+import { VARIANT_COLORS } from 'shared/variant-colors.ts';
+import Heading from '../Heading';
 
 interface Properties<C extends FieldValues> {
     readonly name: ArrayPath<C>;
     readonly control: Control<C>;
     readonly title: string;
-    readonly variants?: Variant[];
+    readonly variants?: (Variant | null)[] | null;
     readonly asColorList?: boolean;
 }
 
-export const VariantsList = <C extends FieldValues>({
+const VariantsList = <C extends FieldValues>({
     title,
     variants,
     asColorList,
@@ -79,3 +79,5 @@ export const VariantsList = <C extends FieldValues>({
         />
     );
 };
+
+export default VariantsList;

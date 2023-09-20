@@ -2,7 +2,7 @@ import { Slot } from '@radix-ui/react-slot';
 import { type ButtonHTMLAttributes, forwardRef } from 'react';
 import type { VariantProps } from 'class-variance-authority';
 import { twMerge } from 'tailwind-merge';
-import { buttonConfig } from './config';
+import { buttonConfig } from './config.ts';
 
 interface ButtonProps
     extends ButtonHTMLAttributes<HTMLButtonElement>,
@@ -10,7 +10,7 @@ interface ButtonProps
     readonly asChild?: boolean;
 }
 
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ({ className, variant, size, asChild = false, ...props }, ref) => {
         const Comp = asChild ? Slot : 'button';
         return (
@@ -25,3 +25,5 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         );
     },
 );
+
+export default Button;

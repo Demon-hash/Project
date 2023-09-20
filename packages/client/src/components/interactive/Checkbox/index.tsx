@@ -7,7 +7,7 @@ import {
 } from 'react';
 import { twMerge } from 'tailwind-merge';
 
-export const Checkbox = forwardRef<
+const Checkbox = forwardRef<
     ElementRef<typeof CheckboxPrimitive.Root>,
     ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>
 >(({ className, ...props }, ref) => (
@@ -26,3 +26,5 @@ export const Checkbox = forwardRef<
         </CheckboxPrimitive.Indicator>
     </CheckboxPrimitive.Root>
 ));
+
+export default Checkbox;

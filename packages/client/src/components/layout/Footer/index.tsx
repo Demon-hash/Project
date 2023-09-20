@@ -1,51 +1,74 @@
 import type { FC } from 'react';
+import PATHS from 'paths';
 
-const Footer: FC = () => (
-    <footer className="border-t border-foreground h-64 mt-8 px-2 lg:px-4 xl:px-6 2xl:px-8">
-        <div className="flex justify-between my-8 m-auto">
-            <section>
-                <h1 className="font-bold my-2">Get to Know Us</h1>
-                <ul>
-                    <li>Careers</li>
-                    <li>Blog</li>
-                    <li>About Amazon</li>
-                    <li>Investor Relations</li>
-                    <li>Amazon Devices</li>
-                    <li>Amazon Science</li>
-                </ul>
-            </section>
-            <section>
-                <h1 className="font-bold my-2">Contact Us</h1>
-                <ul>
-                    <li>Amazon Business Card</li>
-                    <li>Shop with Points</li>
-                    <li>Reload Your Balance</li>
-                    <li>Amazon Currency Converter</li>
-                </ul>
-            </section>
-            <section>
-                <h1 className="font-bold my-2">Amazon Payment Products</h1>
-                <ul>
-                    <li>Amazon Business Card</li>
-                    <li>Shop with Points</li>
-                    <li>Reload Your Balance</li>
-                    <li>Amazon Currency Converter</li>
-                </ul>
-            </section>
-            <section>
-                <h1 className="font-bold my-2">Amazon Payment Products</h1>
-                <div className="w-96 h-48 bg-foreground"></div>
-            </section>
-        </div>
+const Footer: FC = () => {
+    const links = [
+        {
+            header: 'Get to Know Us',
+            data: [
+                'Careers',
+                'Blog',
+                'About',
+                'Investor Relations',
+                'Amazon Devices',
+                'Amazon Science',
+            ],
+        },
+        {
+            header: 'Contact Us',
+            data: [
+                'Amazon Business Card',
+                'Shop with Points',
+                'Reload Your Balance',
+                'Amazon Currency Converter',
+            ],
+        },
+        {
+            header: 'Amazon Payment Products',
+            data: [
+                'Amazon Business Card',
+                'Shop with Points',
+                'Reload Your Balance',
+                'Amazon Currency Converter',
+            ],
+        },
+        {
+            header: 'Payment Products',
+            data: [
+                'Amazon Business Card',
+                'Shop with Points',
+                'Reload Your Balance',
+                'Amazon Currency Converter',
+            ],
+        },
+    ];
 
-        <article className="text-center">
-            © 2023{' '}
-            <a href="/" className="hover:underline">
-                MY WEBSGOP NAME™
-            </a>
-            . All Rights Reserved.
-        </article>
-    </footer>
-);
+    const year = new Date().getFullYear();
+
+    return (
+        <footer className="border-t border-foreground h-64 mt-8 px-2 lg:px-4 xl:px-6 2xl:px-8">
+            <div className="grid gap-3 grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 content-center my-8 m-auto 3xl:w-[50%]">
+                {links.map(({ header, data }) => (
+                    <section key={header} className="text-center lg:text-left">
+                        <h1 className="font-bold">{header}</h1>
+                        <ul className="my-2">
+                            {data.map(item => (
+                                <li key={item}>{item}</li>
+                            ))}
+                        </ul>
+                    </section>
+                ))}
+            </div>
+
+            <article className="text-center pb-4">
+                © {year + ' '}
+                <a href={PATHS.HOME} className="hover:underline">
+                    MY WEBSITE
+                </a>
+                . All Rights Reserved.
+            </article>
+        </footer>
+    );
+};
 
 export default Footer;
