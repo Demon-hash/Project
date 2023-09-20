@@ -2,12 +2,12 @@ import { type FC, useDeferredValue } from 'react';
 import { Form } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import type { ShopFilters } from 'zod-schemas/shop-filters';
-import PriceRange from 'components/shopping/PriceRange';
-import ProductList from 'components/shopping/ProductList';
-import SubcategoriesList from 'components/shopping/SubcategoriesList';
-import VariantsList from 'components/shopping/VariantsList';
 import { useGetProductsQuery, useGetShopFiltersQuery } from 'generated';
 import { useShopFiltersForm } from 'hooks/forms/use-shop-filters-form';
+import PriceRange from '../PriceRange';
+import ProductList from '../ProductList';
+import SubcategoriesList from '../SubcategoriesList';
+import VariantsList from '../VariantsList';
 import normalize from './helpers.ts';
 
 interface Properties {

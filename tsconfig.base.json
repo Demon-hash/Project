@@ -9,6 +9,7 @@
     "noEmit": true,
     "strict": true,
     "allowImportingTsExtensions": true,
+    "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
     "baseUrl": ".",
     "moduleResolution": "node"
