@@ -9,7 +9,7 @@ interface Properties {
     readonly minimize?: boolean;
 }
 
-const ProductList: FC<Properties> = ({ products, className, minimize }) => {
+const ProductsList: FC<Properties> = ({ products, className, minimize }) => {
     const cached = useMemo(
         () =>
             products?.map(product => (
@@ -24,4 +24,4 @@ const ProductList: FC<Properties> = ({ products, className, minimize }) => {
     return <div className={twMerge(className)}>{cached}</div>;
 };
 
-export default ProductList;
+export default ProductsList;

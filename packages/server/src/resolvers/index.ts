@@ -11,12 +11,12 @@ export const resolvers: Resolvers = {
                 .byLocale('description')
                 .byRange('price')
                 .byCount('stock')
-                .byField('color')
-                .byField('size')
-                .byField('type')
-                .byField('material')
-                .byField('category')
-                .byField('brand')
+                .byField('color', 'title')
+                .byField('size', 'title')
+                .byField('type', 'title')
+                .byField('material', 'title')
+                .byField('category', 'title')
+                .byField('brand', 'title')
                 .withPagination()
                 .get();
         },

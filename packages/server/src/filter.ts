@@ -17,6 +17,13 @@ type WithOffset<T> = Normalize<
     }
 >;
 
+const localize = <T, L>(entities: T[], field?: string, locale?: L) => {
+    return entities.map(entity => ({
+        ...entity,
+        [field]: entity?.[field]?.[locale ?? 'en'],
+    }));
+};
+
 export default class Filter<T, F, L> {
     private entities: T[] = [];
     private readonly filter: F | undefined;
@@ -35,10 +42,7 @@ export default class Filter<T, F, L> {
     }
 
     byLocale(field: string): Filter<WithLocale<T>, F, L> {
-        this.entities = this.entities.map(entity => ({
-            ...entity,
-            [field]: entity?.[field]?.[this.locale ?? 'en'],
-        }));
+        this.entities = localize(this.entities, field, this.locale);
         return this;
     }
 
@@ -58,7 +62,7 @@ export default class Filter<T, F, L> {
         return this;
     }
 
-    byField(field: string) {
+    byField(field: string, locale = '') {
         const data = this.filter?.[field] ?? [];
 
         this.entities = this.entities.filter(entity => {
@@ -66,6 +70,16 @@ export default class Filter<T, F, L> {
                 ? entity?.[field]?.some(v => data.includes(v.value))
                 : true;
         });
+
+        if (locale.length) {
+            this.entities = this.entities.map(entity => {
+                return {
+                    ...entity,
+                    [field]: localize(entity?.[field], locale, this.locale),
+                };
+            });
+        }
+
         return this;
     }
 

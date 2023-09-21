@@ -1,6 +1,6 @@
 import type { FC } from 'react';
-import { Link } from 'react-router-dom';
-import PATHS from 'paths';
+import { useNavigate } from 'react-router-dom';
+import { LINKS, PARAMS } from 'links';
 import { twMerge } from 'tailwind-merge';
 import type { Category as Generated } from 'generated';
 
@@ -10,14 +10,12 @@ interface Properties {
 }
 
 const Category: FC<Properties> = ({ category, largeImage }) => {
-    const { title, imageUrl } = category ?? {};
+    const { title, imageUrl, value } = category ?? {};
+    const navigate = useNavigate();
+    const link = LINKS.CATEGORIES.replace(PARAMS.categories, value ?? '');
+
     return (
-        <Link
-            to={PATHS.CATEGORIES.replace(
-                /:category/,
-                title?.toLowerCase() ?? '',
-            )}
-        >
+        <div className="cursor-pointer" onClick={() => navigate(link)}>
             <img
                 src={imageUrl ?? ''}
                 alt={title ?? ''}
@@ -32,7 +30,7 @@ const Category: FC<Properties> = ({ category, largeImage }) => {
             <span className="absolute bg-white text-foreground top-2 left-2 lg:top-4 lg:left-4 rounded-sm px-3 py-2">
                 {title}
             </span>
-        </Link>
+        </div>
     );
 };
 

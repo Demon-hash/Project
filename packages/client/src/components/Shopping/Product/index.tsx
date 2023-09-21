@@ -1,11 +1,13 @@
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { twMerge } from 'tailwind-merge';
+import { useNavigate } from 'react-router-dom';
+import { LINKS, PARAMS } from 'links';
 import Button from 'components/interactive/Button';
 import CountSelection from 'components/interactive/CountSelection';
+import SizesList from 'components/shopping/SizesList';
 import type { Product as Generated } from 'generated';
-import { VARIANT_COLORS } from 'shared/variant-colors.ts';
 import { formatNumberAsMoney } from 'utils';
+import ColorsList from '../ColorsList';
 
 interface Properties {
     readonly product?: Partial<Generated> | null;
@@ -13,12 +15,18 @@ interface Properties {
 }
 
 const Product: FC<Properties> = ({ product, minimize }) => {
-    const { t } = useTranslation();
-    const { id, title, description, price, imageUrl, stock, color } =
+    const { id, title, description, price, imageUrl, stock, color, size } =
         product ?? {};
+    const { t } = useTranslation();
+    const navigate = useNavigate();
+    const link = LINKS.PRODUCT.replace(PARAMS.product, id ?? '');
 
     return (
-        <div className="p-4 relative col-span-1" key={id}>
+        <div
+            key={id}
+            className="p-4 relative col-span-1 cursor-pointer hover:shadow-2xl"
+            onClick={() => navigate(link)}
+        >
             {/*<div className="absolute bg-orange-600 px-2 rounded-sm text-white">*/}
             {/*    -50%*/}
             {/*</div>*/}
@@ -31,34 +39,14 @@ const Product: FC<Properties> = ({ product, minimize }) => {
                 loading="lazy"
                 className="max-h-52 m-auto"
             />
-            <div className="flex items-center justify-center my-4 space-x-2">
-                {color?.map(({ value }) => (
-                    <div
-                        className={twMerge(
-                            VARIANT_COLORS?.[
-                                value as keyof typeof VARIANT_COLORS
-                            ],
-                            'h-4 w-4 rounded-full',
-                        )}
-                    ></div>
-                ))}
-            </div>
+            <ColorsList centred colors={color} />
             <div className="my-4">
                 <h1 className="text-gray-50 text-2xl font-bold w-full">
                     {title}
                 </h1>
                 <p className="my-2 truncate">{description}</p>
-                <div className="flex items-center my-4 space-x-2">
-                    {['36', '38', '40', '42', '44']?.map(val => (
-                        <div
-                            key={val}
-                            className="border border-border px-2 rounded-sm"
-                        >
-                            {val}
-                        </div>
-                    ))}
-                </div>
             </div>
+            <SizesList sizes={size} />
             {!minimize && (
                 <>
                     <div className="flex items-center justify-between">

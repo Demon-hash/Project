@@ -6,7 +6,7 @@ import Container from 'components/layout/Container';
 import Footer from 'components/layout/Footer';
 import Header from 'components/layout/Header';
 import Section from 'components/layout/Section';
-import ProductList from 'components/shopping/ProductList';
+import ProductsList from 'components/shopping/ProductsList';
 import { useGetHomepageDataQuery } from 'generated';
 
 const Home: FC = () => {
@@ -49,7 +49,7 @@ const Home: FC = () => {
                     title={t('home.headers.1.title')}
                     desc={t('home.headers.1.desc')}
                 />
-                <ProductList
+                <ProductsList
                     minimize
                     className="grid gap-2 lg:gap-3 xl:gap-4 2xl:grid-cols-4 grid-cols-1 md:grid-cols-2"
                     products={data?.products}

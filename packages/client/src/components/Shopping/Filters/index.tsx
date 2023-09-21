@@ -5,7 +5,7 @@ import type { ShopFilters } from 'zod-schemas/shop-filters';
 import { useGetProductsQuery, useGetShopFiltersQuery } from 'generated';
 import { useShopFiltersForm } from 'hooks/forms/use-shop-filters-form';
 import PriceRange from '../PriceRange';
-import ProductList from '../ProductList';
+import ProductsList from '../ProductsList';
 import SubcategoriesList from '../SubcategoriesList';
 import VariantsList from '../VariantsList';
 import normalize from './helpers.ts';
@@ -78,7 +78,7 @@ const Filters: FC<Properties> = () => {
                 </div>
                 <div className="col-span-2 ml-4">
                     <div className="uppercase p-4 font-bold text-primary-foreground tracking-wider bg-primary h-14"></div>
-                    <ProductList
+                    <ProductsList
                         className="grid grid-cols-3 gap-2 py-4"
                         products={data?.products}
                     />

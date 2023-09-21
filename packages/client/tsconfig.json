@@ -32,8 +32,8 @@
       "pages/*": [
         "./pages/*"
       ],
-      "paths": [
-        "./constants/paths.ts"
+      "links": [
+        "./constants/links.ts"
       ],
       "zod-schemas/*": [
         "./zod-schemas/*"

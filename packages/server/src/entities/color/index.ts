@@ -1,21 +1,22 @@
-export const COLOR = (en: string, value: string) => ({
+export const COLOR = (en: string, ru: string, value: string) => ({
     title: {
         en,
+        ru,
     },
     value,
 });
 
 export const colors: ReturnType<typeof COLOR>[] = [
-    COLOR('Red', 'red'),
-    COLOR('Orange', 'orange'),
-    COLOR('Yellow', 'yellow'),
-    COLOR('Green', 'green'),
-    COLOR('Sky', 'sky'),
-    COLOR('Blue', 'blue'),
-    COLOR('Violet', 'violet'),
-    COLOR('Purple', 'purple'),
-    COLOR('Pink', 'pink'),
-    COLOR('White', 'white'),
-    COLOR('Gray', 'gray'),
-    COLOR('Black', 'black'),
+    COLOR('Red', 'Красный', 'red'),
+    COLOR('Orange', 'Ораньжевый', 'orange'),
+    COLOR('Yellow', 'Желтый', 'yellow'),
+    COLOR('Green', 'Зелёный', 'green'),
+    COLOR('Sky', 'Голубой', 'sky'),
+    COLOR('Blue', 'Синий', 'blue'),
+    COLOR('Violet', 'Лиловый', 'violet'),
+    COLOR('Purple', 'Фиолетовый', 'purple'),
+    COLOR('Pink', 'Розовый', 'pink'),
+    COLOR('White', 'Белый', 'white'),
+    COLOR('Gray', 'Серый', 'gray'),
+    COLOR('Black', 'Чёрный', 'black'),
 ];

@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import PATHS from 'paths';
+import { LINKS } from 'links';
 
 const Footer: FC = () => {
     const links = [
@@ -46,7 +46,10 @@ const Footer: FC = () => {
     const year = new Date().getFullYear();
 
     return (
-        <footer className="border-t border-foreground h-64 mt-8 px-2 lg:px-4 xl:px-6 2xl:px-8">
+        <footer
+            role="contentinfo"
+            className="border-t border-foreground h-64 mt-8 px-2 lg:px-4 xl:px-6 2xl:px-8"
+        >
             <div className="grid gap-3 grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 content-center my-8 m-auto 3xl:w-[50%]">
                 {links.map(({ header, data }) => (
                     <section key={header} className="text-center lg:text-left">
@@ -62,7 +65,7 @@ const Footer: FC = () => {
 
             <article className="text-center pb-4">
                 © {year + ' '}
-                <a href={PATHS.HOME} className="hover:underline">
+                <a href={LINKS.HOME} className="hover:underline">
                     MY WEBSITE
                 </a>
                 . All Rights Reserved.

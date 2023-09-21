@@ -1,19 +1,22 @@
 import { ShoppingCart } from 'lucide-react';
 import type { FC } from 'react';
 import { Link } from 'react-router-dom';
-import PATHS from 'paths';
+import { LINKS } from 'links';
 
 const Header: FC = () => {
     return (
-        <header className="w-100 border-b border-foreground sticky top-0 bg-background z-50">
+        <header
+            role="banner"
+            className="w-100 border-b border-foreground sticky top-0 bg-background z-50"
+        >
             <nav className="flex h-12 relative m-auto 3xl:w-[50%]">
                 <ul className="relative flex grow items-center w-100 px-2 lg:px-5 xl:px-6 2xl:px-9">
                     <li>
-                        <Link to={PATHS.HOME}>MY SHOP NAME</Link>
+                        <Link to={LINKS.HOME}>MY SHOP NAME</Link>
                     </li>
                     <li className="grow flex items-end">
                         <Link
-                            to={PATHS.CART}
+                            to={LINKS.CART}
                             className="ml-auto relative right-3"
                         >
                             <ShoppingCart />

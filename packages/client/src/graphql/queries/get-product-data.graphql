@@ -1,14 +1,11 @@
-query getHomepageData($locale: String, $categories: CategoriesFilter, $products: InputProductsFilter) {
-    categories(locale: $locale, filter: $categories) {
-        title
-        imageUrl
-        value
-    }
+query GetProductData($locale: String, $products: InputProductsFilter) {
     products(locale: $locale, filter: $products) {
         id
         title
         description
         imageUrl
+        price
+        stock
         color {
             title
             value

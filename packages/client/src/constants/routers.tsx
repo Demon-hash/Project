@@ -1,39 +1,19 @@
-import { Trans } from 'react-i18next';
 import {
-    Link,
     Route,
     createBrowserRouter,
     createRoutesFromElements,
 } from 'react-router-dom';
+import { LINKS } from 'links';
 import Categories from 'pages/categories';
 import Home from 'pages/home';
-import PATHS from 'paths';
+import Product from 'pages/product';
 
 export const routers = createBrowserRouter(
     createRoutesFromElements(
-        <Route path={PATHS.HOME}>
-            <Route
-                index={true}
-                element={<Home />}
-                handle={{
-                    crumb: () => (
-                        <Link to={PATHS.HOME}>
-                            <Trans i18nKey="route.home" />
-                        </Link>
-                    ),
-                }}
-            ></Route>
-            <Route
-                path={PATHS.CATEGORIES}
-                element={<Categories />}
-                handle={{
-                    crumb: () => (
-                        <Link to={PATHS.CATEGORIES}>
-                            <Trans i18nKey="route.categories" />
-                        </Link>
-                    ),
-                }}
-            ></Route>
+        <Route path={LINKS.HOME}>
+            <Route index element={<Home />}></Route>
+            <Route path={LINKS.CATEGORIES} element={<Categories />}></Route>
+            <Route path={LINKS.PRODUCT} element={<Product />}></Route>
         </Route>,
     ),
 );

@@ -174,6 +174,7 @@ export type GetHomepageDataQuery = {
         __typename?: 'Category';
         title?: string | null;
         imageUrl?: string | null;
+        value?: string | null;
     } | null> | null;
     products?: Array<{
         __typename?: 'Product';
@@ -181,8 +182,44 @@ export type GetHomepageDataQuery = {
         title?: string | null;
         description?: string | null;
         imageUrl: string;
-        color?: Array<{ __typename?: 'Color'; value?: string | null }> | null;
-        size?: Array<{ __typename?: 'Size'; value?: string | null }> | null;
+        color?: Array<{
+            __typename?: 'Color';
+            title?: string | null;
+            value?: string | null;
+        }> | null;
+        size?: Array<{
+            __typename?: 'Size';
+            title?: string | null;
+            value?: string | null;
+        }> | null;
+    } | null> | null;
+};
+
+export type GetProductDataQueryVariables = Exact<{
+    locale?: InputMaybe<Scalars['String']['input']>;
+    products?: InputMaybe<InputProductsFilter>;
+}>;
+
+export type GetProductDataQuery = {
+    __typename?: 'Query';
+    products?: Array<{
+        __typename?: 'Product';
+        id: string;
+        title?: string | null;
+        description?: string | null;
+        imageUrl: string;
+        price: number;
+        stock: number;
+        color?: Array<{
+            __typename?: 'Color';
+            title?: string | null;
+            value?: string | null;
+        }> | null;
+        size?: Array<{
+            __typename?: 'Size';
+            title?: string | null;
+            value?: string | null;
+        }> | null;
     } | null> | null;
 };
 
@@ -257,6 +294,7 @@ export const GetHomepageDataDocument = gql`
         categories(locale: $locale, filter: $categories) {
             title
             imageUrl
+            value
         }
         products(locale: $locale, filter: $products) {
             id
@@ -264,9 +302,11 @@ export const GetHomepageDataDocument = gql`
             description
             imageUrl
             color {
+                title
                 value
             }
             size {
+                title
                 value
             }
         }
@@ -329,6 +369,83 @@ export function refetchGetHomepageDataQuery(
     variables?: GetHomepageDataQueryVariables,
 ) {
     return { query: GetHomepageDataDocument, variables: variables };
+}
+export const GetProductDataDocument = gql`
+    query GetProductData($locale: String, $products: InputProductsFilter) {
+        products(locale: $locale, filter: $products) {
+            id
+            title
+            description
+            imageUrl
+            price
+            stock
+            color {
+                title
+                value
+            }
+            size {
+                title
+                value
+            }
+        }
+    }
+`;
+
+/**
+ * __useGetProductDataQuery__
+ *
+ * To run a query within a React component, call `useGetProductDataQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetProductDataQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetProductDataQuery({
+ *   variables: {
+ *      locale: // value for 'locale'
+ *      products: // value for 'products'
+ *   },
+ * });
+ */
+export function useGetProductDataQuery(
+    baseOptions?: Apollo.QueryHookOptions<
+        GetProductDataQuery,
+        GetProductDataQueryVariables
+    >,
+) {
+    const options = { ...defaultOptions, ...baseOptions };
+    return Apollo.useQuery<GetProductDataQuery, GetProductDataQueryVariables>(
+        GetProductDataDocument,
+        options,
+    );
+}
+export function useGetProductDataLazyQuery(
+    baseOptions?: Apollo.LazyQueryHookOptions<
+        GetProductDataQuery,
+        GetProductDataQueryVariables
+    >,
+) {
+    const options = { ...defaultOptions, ...baseOptions };
+    return Apollo.useLazyQuery<
+        GetProductDataQuery,
+        GetProductDataQueryVariables
+    >(GetProductDataDocument, options);
+}
+export type GetProductDataQueryHookResult = ReturnType<
+    typeof useGetProductDataQuery
+>;
+export type GetProductDataLazyQueryHookResult = ReturnType<
+    typeof useGetProductDataLazyQuery
+>;
+export type GetProductDataQueryResult = Apollo.QueryResult<
+    GetProductDataQuery,
+    GetProductDataQueryVariables
+>;
+export function refetchGetProductDataQuery(
+    variables?: GetProductDataQueryVariables,
+) {
+    return { query: GetProductDataDocument, variables: variables };
 }
 export const GetProductsDocument = gql`
     query getProducts($locale: String, $filter: InputProductsFilter) {
