@@ -220,6 +220,21 @@ export type GetProductDataQuery = {
             title?: string | null;
             value?: string | null;
         }> | null;
+        material?: Array<{
+            __typename?: 'Material';
+            title?: string | null;
+            value?: string | null;
+        }> | null;
+        brand?: Array<{
+            __typename?: 'Brand';
+            title?: string | null;
+            value?: string | null;
+        }> | null;
+        type?: Array<{
+            __typename?: 'Type';
+            title?: string | null;
+            value?: string | null;
+        }> | null;
     } | null> | null;
 };
 
@@ -384,6 +399,18 @@ export const GetProductDataDocument = gql`
                 value
             }
             size {
+                title
+                value
+            }
+            material {
+                title
+                value
+            }
+            brand {
+                title
+                value
+            }
+            type {
                 title
                 value
             }

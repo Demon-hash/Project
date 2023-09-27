@@ -14,6 +14,8 @@
       "entities": ["./src/entities/index.ts"],
       "filter": ["./src/filter.ts"],
       "schema": ["./src/entities/schema.ts"],
+      "utils/*": ["./src/utils/*"],
+      "utils": ["./src/utils/index.ts"],
     },
     "sourceMap": false
   },

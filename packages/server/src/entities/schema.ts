@@ -1,4 +1,5 @@
 import BRAND_SCHEMA from './brand/schema';
+import CART_SCHEMA from './cart/schema';
 import CATEGORY_SCHEMA from './category/schema';
 import COLOR_SCHEMA from './color/schema';
 import MATERIAL_SCHEMA from './material/schema';
@@ -16,6 +17,7 @@ const files = [
     TYPE_SCHEMA,
     SORT_SCHEMA,
     PRODUCT_SCHEMA,
+    CART_SCHEMA,
 ];
 
 export const schema = files.join(' ');

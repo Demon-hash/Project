@@ -1,6 +1,7 @@
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
+import Button from 'components/interactive/Button';
 import CountSelection from 'components/interactive/CountSelection';
 import Container from 'components/layout/Container';
 import Footer from 'components/layout/Footer';
@@ -25,6 +26,8 @@ const Product: FC = () => {
 
     const product = data?.products?.[0];
 
+    console.log(product);
+
     return (
         <>
             <Header />
@@ -32,46 +35,46 @@ const Product: FC = () => {
                 {loading ? (
                     <div>Loading...</div>
                 ) : (
-                    <div className="flex justify-between">
-                        <section className="w-1/3 m-auto">
-                            <img
-                                src={product?.imageUrl}
-                                alt={product?.title ?? '*'}
-                            />
-                        </section>
-                        <section className="w-1/3">
-                            <p className="font-light">
-                                <span className="uppercase">
-                                    Product Code:{' '}
-                                </span>
-                                <span>{product?.id}</span>
-                            </p>
-                            <h1 className="font-bold text-2xl uppercase tracking-wide">
-                                {product?.title}
-                            </h1>
-                            <p className="my-4 font-light">
-                                {product?.description}
-                            </p>
-
-                            <section>
-                                <h2 className="font-bold text-md uppercase">
-                                    Color Available
-                                </h2>
-                                <ColorsList colors={product?.color} />
+                    <section>
+                        <div className="flex justify-center my-4">
+                            <section className="w-1/3">
+                                <img
+                                    src={product?.imageUrl}
+                                    alt={product?.title ?? '*'}
+                                    loading="lazy"
+                                />
                             </section>
-
-                            <section>
-                                <h2 className="font-bold text-md uppercase">
-                                    Size Available
-                                </h2>
-                                <SizesList sizes={product?.size} />
+                            <section className="w-1/3 ml-16">
+                                <h1 className="font-bold text-2xl uppercase tracking-wide">
+                                    {product?.title}
+                                </h1>
+                                <h3 className="my-2 text-lg font-bold tracking-widest">
+                                    {formatNumberAsMoney(product?.price)}
+                                </h3>
+                                <section className="my-4">
+                                    <hr />
+                                    <p className="my-4 font-light">
+                                        {product?.description}
+                                    </p>
+                                    <hr />
+                                </section>
+                                <section>
+                                    <h1 className="text-md font-bold uppercase tracking-widest">
+                                        Variants
+                                    </h1>
+                                    <ColorsList colors={product?.color} />
+                                </section>
+                                <section>
+                                    <h1 className="text-md font-bold uppercase tracking-widest">
+                                        Sizes
+                                    </h1>
+                                    <SizesList sizes={product?.size} />
+                                </section>
+                                <CountSelection min={1} max={product?.stock} />
+                                <Button>Add to Cart</Button>
                             </section>
-                            <h3 className="text-lg font-bold tracking-widest">
-                                {formatNumberAsMoney(product?.price)}
-                            </h3>
-                            <CountSelection min={1} max={product?.stock} />
-                        </section>
-                    </div>
+                        </div>
+                    </section>
                 )}
             </Container>
             <Footer />

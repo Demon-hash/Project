@@ -37,6 +37,18 @@ export type Brand = {
     value?: Maybe<Scalars['String']['output']>;
 };
 
+export type Cart = {
+    __typename?: 'Cart';
+    id?: Maybe<Scalars['ID']['output']>;
+    items?: Maybe<Array<Maybe<CartItem>>>;
+};
+
+export type CartItem = {
+    __typename?: 'CartItem';
+    count: Scalars['Int']['output'];
+    product: Product;
+};
+
 export type CategoriesFilter = {
     limit?: InputMaybe<Scalars['Int']['input']>;
     offset?: InputMaybe<Scalars['Int']['input']>;
@@ -57,6 +69,12 @@ export type Color = {
 
 export type ColorsFilter = {
     locale: Scalars['String']['input'];
+};
+
+export type InputCartsFilter = {
+    id?: InputMaybe<Scalars['ID']['input']>;
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    offset?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type InputProductsFilter = {
@@ -99,6 +117,7 @@ export type Product = {
 export type Query = {
     __typename?: 'Query';
     brands?: Maybe<Array<Maybe<Brand>>>;
+    carts?: Maybe<Array<Maybe<Cart>>>;
     categories?: Maybe<Array<Maybe<Category>>>;
     colors?: Maybe<Array<Maybe<Color>>>;
     materials?: Maybe<Array<Maybe<Material>>>;
@@ -109,6 +128,11 @@ export type Query = {
 };
 
 export type QueryBrandsArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type QueryCartsArgs = {
+    filter?: InputMaybe<InputCartsFilter>;
     locale?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -269,11 +293,14 @@ export type DirectiveResolverFn<
 export type ResolversTypes = {
     Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
     Brand: ResolverTypeWrapper<Brand>;
+    Cart: ResolverTypeWrapper<Cart>;
+    CartItem: ResolverTypeWrapper<CartItem>;
     CategoriesFilter: CategoriesFilter;
     Category: ResolverTypeWrapper<Category>;
     Color: ResolverTypeWrapper<Color>;
     ColorsFilter: ColorsFilter;
     ID: ResolverTypeWrapper<Scalars['ID']['output']>;
+    InputCartsFilter: InputCartsFilter;
     InputProductsFilter: InputProductsFilter;
     Int: ResolverTypeWrapper<Scalars['Int']['output']>;
     Material: ResolverTypeWrapper<Material>;
@@ -289,11 +316,14 @@ export type ResolversTypes = {
 export type ResolversParentTypes = {
     Boolean: Scalars['Boolean']['output'];
     Brand: Brand;
+    Cart: Cart;
+    CartItem: CartItem;
     CategoriesFilter: CategoriesFilter;
     Category: Category;
     Color: Color;
     ColorsFilter: ColorsFilter;
     ID: Scalars['ID']['output'];
+    InputCartsFilter: InputCartsFilter;
     InputProductsFilter: InputProductsFilter;
     Int: Scalars['Int']['output'];
     Material: Material;
@@ -312,6 +342,30 @@ export type BrandResolvers<
 > = {
     title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     value?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type CartResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['Cart'] = ResolversParentTypes['Cart'],
+> = {
+    id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+    items?: Resolver<
+        Maybe<Array<Maybe<ResolversTypes['CartItem']>>>,
+        ParentType,
+        ContextType
+    >;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type CartItemResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['CartItem'] = ResolversParentTypes['CartItem'],
+> = {
+    count?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    product?: Resolver<ResolversTypes['Product'], ParentType, ContextType>;
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -409,6 +463,12 @@ export type QueryResolvers<
         ContextType,
         Partial<QueryBrandsArgs>
     >;
+    carts?: Resolver<
+        Maybe<Array<Maybe<ResolversTypes['Cart']>>>,
+        ParentType,
+        ContextType,
+        Partial<QueryCartsArgs>
+    >;
     categories?: Resolver<
         Maybe<Array<Maybe<ResolversTypes['Category']>>>,
         ParentType,
@@ -485,6 +545,8 @@ export type TypeResolvers<
 
 export type Resolvers<ContextType = any> = {
     Brand?: BrandResolvers<ContextType>;
+    Cart?: CartResolvers<ContextType>;
+    CartItem?: CartItemResolvers<ContextType>;
     Category?: CategoryResolvers<ContextType>;
     Color?: ColorResolvers<ContextType>;
     Material?: MaterialResolvers<ContextType>;

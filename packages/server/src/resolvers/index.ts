@@ -20,6 +20,13 @@ export const resolvers: Resolvers = {
                 .withPagination()
                 .get();
         },
+        carts(_, { filter, locale }) {
+            return new Filter(mocked.carts, filter, locale)
+                .byId('id')
+                .byField('items.product', 'title')
+                .byField('items.product', 'description')
+                .get();
+        },
         categories(_, { filter, locale }) {
             return new Filter(mocked.categories, filter, locale)
                 .byLocale('title')

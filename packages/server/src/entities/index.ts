@@ -6,3 +6,4 @@ export { products } from './product';
 export { sizes } from './size';
 export { types } from './type';
 export { sorts } from './sort';
+export { carts } from './cart';

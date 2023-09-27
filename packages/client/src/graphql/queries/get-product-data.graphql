@@ -14,5 +14,17 @@ query GetProductData($locale: String, $products: InputProductsFilter) {
             title
             value
         }
+        material {
+            title
+            value
+        }
+        brand {
+            title
+            value
+        }
+        type {
+            title
+            value
+        }
     }
 }

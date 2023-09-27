@@ -1,28 +1,5 @@
-type Normalize<T, P> = {
-    [K in keyof T]: T[K];
-} & Partial<P>;
-
-type WithLocale<T> = Normalize<
-    T,
-    {
-        title: string;
-    }
->;
-
-type WithOffset<T> = Normalize<
-    T,
-    {
-        offset: number;
-        limit: number;
-    }
->;
-
-const localize = <T, L>(entities: T[], field?: string, locale?: L) => {
-    return entities.map(entity => ({
-        ...entity,
-        [field]: entity?.[field]?.[locale ?? 'en'],
-    }));
-};
+import type { WithOffset } from 'utils';
+import { type WithLocale, localization, translate } from 'utils/localization';
 
 export default class Filter<T, F, L> {
     private entities: T[] = [];
@@ -42,7 +19,9 @@ export default class Filter<T, F, L> {
     }
 
     byLocale(field: string): Filter<WithLocale<T>, F, L> {
-        this.entities = localize(this.entities, field, this.locale);
+        this.entities = this.entities.map(entity =>
+            translate(entity, field, this.locale),
+        );
         return this;
     }
 
@@ -62,24 +41,19 @@ export default class Filter<T, F, L> {
         return this;
     }
 
-    byField(field: string, locale = '') {
+    byField(field: string, search = undefined) {
         const data = this.filter?.[field] ?? [];
-
-        this.entities = this.entities.filter(entity => {
+        this.entities = localization(
+            this.entities,
+            field,
+            search,
+            this.locale,
+            field.split('.'),
+        ).filter(entity => {
             return data.length
                 ? entity?.[field]?.some(v => data.includes(v.value))
                 : true;
         });
-
-        if (locale.length) {
-            this.entities = this.entities.map(entity => {
-                return {
-                    ...entity,
-                    [field]: localize(entity?.[field], locale, this.locale),
-                };
-            });
-        }
-
         return this;
     }
 

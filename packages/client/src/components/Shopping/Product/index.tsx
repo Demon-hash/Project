@@ -4,10 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import { LINKS, PARAMS } from 'links';
 import Button from 'components/interactive/Button';
 import CountSelection from 'components/interactive/CountSelection';
-import SizesList from 'components/shopping/SizesList';
 import type { Product as Generated } from 'generated';
 import { formatNumberAsMoney } from 'utils';
 import ColorsList from '../ColorsList';
+import SizesList from '../SizesList';
 
 interface Properties {
     readonly product?: Partial<Generated> | null;
