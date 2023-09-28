@@ -1,9 +1,32 @@
 import { ShoppingCart } from 'lucide-react';
 import type { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { LINKS } from 'links';
+import { useGetCartProductsCountQuery } from 'generated';
 
 const Header: FC = () => {
+    const { i18n } = useTranslation();
+    const { data } = useGetCartProductsCountQuery({
+        variables: {
+            locale: i18n.language,
+            filter: {
+                id: 'test',
+            },
+        },
+    });
+
+    const count =
+        data?.carts?.reduce(
+            (final, entity) =>
+                final +
+                (entity?.items?.reduce(
+                    (acc, cur) => acc + (cur?.count ?? 0),
+                    0,
+                ) ?? 0),
+            0,
+        ) ?? 0;
+
     return (
         <header
             role="banner"
@@ -20,9 +43,11 @@ const Header: FC = () => {
                             className="ml-auto relative right-3"
                         >
                             <ShoppingCart />
-                            <div className="bg-red-600 absolute rounded-sm text-sm text-center -right-3 -top-1 px-1">
-                                9+
-                            </div>
+                            {!!count && (
+                                <div className="bg-red-600 absolute rounded-sm text-sm text-center -right-3 -top-1 px-1">
+                                    {count}
+                                </div>
+                            )}
                         </Link>
                     </li>
                 </ul>

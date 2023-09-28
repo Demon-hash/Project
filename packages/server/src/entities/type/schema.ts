@@ -4,6 +4,12 @@ type Type {
     value: String
 }
 
+input TypeInput {
+    title: String
+    value: String
+}
+
+
 type Query {
     types(locale: String): [Type]
 }

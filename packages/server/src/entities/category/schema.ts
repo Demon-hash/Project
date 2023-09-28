@@ -5,10 +5,17 @@ type Category {
     imageUrl: String
 }
 
+input CategoryInput {
+    title: String
+    value: String
+    imageUrl: String
+}
+
 input CategoriesFilter {
     offset: Int
     limit: Int
 }
+
 
 type Query {
     categories(locale: String, filter: CategoriesFilter): [Category]

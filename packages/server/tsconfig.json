@@ -14,8 +14,10 @@
       "entities": ["./src/entities/index.ts"],
       "filter": ["./src/filter.ts"],
       "schema": ["./src/entities/schema.ts"],
-      "utils/*": ["./src/utils/*"],
+      "queries": ["./src/queries/index.ts"],
+      "mutations": ["./src/mutations/index.ts"],
       "utils": ["./src/utils/index.ts"],
+      "utils/*": ["./src/utils/*"],
     },
     "sourceMap": false
   },

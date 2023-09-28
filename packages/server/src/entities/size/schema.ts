@@ -4,6 +4,12 @@ type Size {
     value: String
 }
 
+input SizeInput {
+    title: String
+    value: String
+}
+
+
 type Query {
     sizes(locale: String): [Size]
 }

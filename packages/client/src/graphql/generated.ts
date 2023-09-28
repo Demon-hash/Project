@@ -39,6 +39,23 @@ export type Brand = {
     value?: Maybe<Scalars['String']['output']>;
 };
 
+export type BrandInput = {
+    title?: InputMaybe<Scalars['String']['input']>;
+    value?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type Cart = {
+    __typename?: 'Cart';
+    id: Scalars['ID']['output'];
+    items?: Maybe<Array<Maybe<CartItem>>>;
+};
+
+export type CartItem = {
+    __typename?: 'CartItem';
+    count: Scalars['Int']['output'];
+    product: Product;
+};
+
 export type CategoriesFilter = {
     limit?: InputMaybe<Scalars['Int']['input']>;
     offset?: InputMaybe<Scalars['Int']['input']>;
@@ -51,14 +68,36 @@ export type Category = {
     value?: Maybe<Scalars['String']['output']>;
 };
 
+export type CategoryInput = {
+    imageUrl?: InputMaybe<Scalars['String']['input']>;
+    title?: InputMaybe<Scalars['String']['input']>;
+    value?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type Color = {
     __typename?: 'Color';
     title?: Maybe<Scalars['String']['output']>;
     value?: Maybe<Scalars['String']['output']>;
 };
 
+export type ColorInput = {
+    title?: InputMaybe<Scalars['String']['input']>;
+    value?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type ColorsFilter = {
     locale: Scalars['String']['input'];
+};
+
+export type InputAddCartProduct = {
+    count: Scalars['Int']['input'];
+    id: Scalars['ID']['input'];
+};
+
+export type InputCartsFilter = {
+    id?: InputMaybe<Scalars['ID']['input']>;
+    limit?: InputMaybe<Scalars['Int']['input']>;
+    offset?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type InputProductsFilter = {
@@ -76,10 +115,36 @@ export type InputProductsFilter = {
     type?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
+export type Localization = {
+    __typename?: 'Localization';
+    en: Scalars['String']['output'];
+    ru?: Maybe<Scalars['String']['output']>;
+};
+
+export type LocalizationInput = {
+    en: Scalars['String']['input'];
+    ru?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type Material = {
     __typename?: 'Material';
     title?: Maybe<Scalars['String']['output']>;
     value?: Maybe<Scalars['String']['output']>;
+};
+
+export type MaterialInput = {
+    title?: InputMaybe<Scalars['String']['input']>;
+    value?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type Mutation = {
+    __typename?: 'Mutation';
+    addProductsInCart?: Maybe<Cart>;
+};
+
+export type MutationAddProductsInCartArgs = {
+    id?: InputMaybe<Scalars['ID']['input']>;
+    products: Array<InputMaybe<InputAddCartProduct>>;
 };
 
 export type Product = {
@@ -101,6 +166,7 @@ export type Product = {
 export type Query = {
     __typename?: 'Query';
     brands?: Maybe<Array<Maybe<Brand>>>;
+    carts?: Maybe<Array<Maybe<Cart>>>;
     categories?: Maybe<Array<Maybe<Category>>>;
     colors?: Maybe<Array<Maybe<Color>>>;
     materials?: Maybe<Array<Maybe<Material>>>;
@@ -111,6 +177,11 @@ export type Query = {
 };
 
 export type QueryBrandsArgs = {
+    locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type QueryCartsArgs = {
+    filter?: InputMaybe<InputCartsFilter>;
     locale?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -150,16 +221,106 @@ export type Size = {
     value?: Maybe<Scalars['String']['output']>;
 };
 
+export type SizeInput = {
+    title?: InputMaybe<Scalars['String']['input']>;
+    value?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type Sort = {
     __typename?: 'Sort';
     title?: Maybe<Scalars['String']['output']>;
     value?: Maybe<Scalars['String']['output']>;
 };
 
+export type SortInput = {
+    title?: InputMaybe<Scalars['String']['input']>;
+    value?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type Type = {
     __typename?: 'Type';
     title?: Maybe<Scalars['String']['output']>;
     value?: Maybe<Scalars['String']['output']>;
+};
+
+export type TypeInput = {
+    title?: InputMaybe<Scalars['String']['input']>;
+    value?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type AddItemInCartMutationVariables = Exact<{
+    id?: InputMaybe<Scalars['ID']['input']>;
+    products:
+        | Array<InputMaybe<InputAddCartProduct>>
+        | InputMaybe<InputAddCartProduct>;
+}>;
+
+export type AddItemInCartMutation = {
+    __typename?: 'Mutation';
+    addProductsInCart?: { __typename?: 'Cart'; id: string } | null;
+};
+
+export type GetCartProductsCountQueryVariables = Exact<{
+    locale?: InputMaybe<Scalars['String']['input']>;
+    filter?: InputMaybe<InputCartsFilter>;
+}>;
+
+export type GetCartProductsCountQuery = {
+    __typename?: 'Query';
+    carts?: Array<{
+        __typename?: 'Cart';
+        items?: Array<{ __typename?: 'CartItem'; count: number } | null> | null;
+    } | null> | null;
+};
+
+export type GetCartQueryVariables = Exact<{
+    locale?: InputMaybe<Scalars['String']['input']>;
+    filter?: InputMaybe<InputCartsFilter>;
+}>;
+
+export type GetCartQuery = {
+    __typename?: 'Query';
+    carts?: Array<{
+        __typename?: 'Cart';
+        id: string;
+        items?: Array<{
+            __typename?: 'CartItem';
+            count: number;
+            product: {
+                __typename?: 'Product';
+                id: string;
+                title?: string | null;
+                description?: string | null;
+                stock: number;
+                price: number;
+                imageUrl: string;
+                brand?: Array<{
+                    __typename?: 'Brand';
+                    title?: string | null;
+                }> | null;
+                size?: Array<{
+                    __typename?: 'Size';
+                    value?: string | null;
+                }> | null;
+                type?: Array<{
+                    __typename?: 'Type';
+                    value?: string | null;
+                }> | null;
+                color?: Array<{
+                    __typename?: 'Color';
+                    title?: string | null;
+                }> | null;
+                category?: Array<{
+                    __typename?: 'Category';
+                    title?: string | null;
+                }> | null;
+                material?: Array<{
+                    __typename?: 'Material';
+                    title?: string | null;
+                }> | null;
+            };
+        } | null> | null;
+    } | null> | null;
 };
 
 export type GetHomepageDataQueryVariables = Exact<{
@@ -300,6 +461,207 @@ export type GetShopFiltersQuery = {
     } | null> | null;
 };
 
+export const AddItemInCartDocument = gql`
+    mutation AddItemInCart($id: ID, $products: [InputAddCartProduct]!) {
+        addProductsInCart(id: $id, products: $products) {
+            id
+        }
+    }
+`;
+export type AddItemInCartMutationFn = Apollo.MutationFunction<
+    AddItemInCartMutation,
+    AddItemInCartMutationVariables
+>;
+
+/**
+ * __useAddItemInCartMutation__
+ *
+ * To run a mutation, you first call `useAddItemInCartMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAddItemInCartMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [addItemInCartMutation, { data, loading, error }] = useAddItemInCartMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      products: // value for 'products'
+ *   },
+ * });
+ */
+export function useAddItemInCartMutation(
+    baseOptions?: Apollo.MutationHookOptions<
+        AddItemInCartMutation,
+        AddItemInCartMutationVariables
+    >,
+) {
+    const options = { ...defaultOptions, ...baseOptions };
+    return Apollo.useMutation<
+        AddItemInCartMutation,
+        AddItemInCartMutationVariables
+    >(AddItemInCartDocument, options);
+}
+export type AddItemInCartMutationHookResult = ReturnType<
+    typeof useAddItemInCartMutation
+>;
+export type AddItemInCartMutationResult =
+    Apollo.MutationResult<AddItemInCartMutation>;
+export type AddItemInCartMutationOptions = Apollo.BaseMutationOptions<
+    AddItemInCartMutation,
+    AddItemInCartMutationVariables
+>;
+export const GetCartProductsCountDocument = gql`
+    query GetCartProductsCount($locale: String, $filter: InputCartsFilter) {
+        carts(locale: $locale, filter: $filter) {
+            items {
+                count
+            }
+        }
+    }
+`;
+
+/**
+ * __useGetCartProductsCountQuery__
+ *
+ * To run a query within a React component, call `useGetCartProductsCountQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetCartProductsCountQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetCartProductsCountQuery({
+ *   variables: {
+ *      locale: // value for 'locale'
+ *      filter: // value for 'filter'
+ *   },
+ * });
+ */
+export function useGetCartProductsCountQuery(
+    baseOptions?: Apollo.QueryHookOptions<
+        GetCartProductsCountQuery,
+        GetCartProductsCountQueryVariables
+    >,
+) {
+    const options = { ...defaultOptions, ...baseOptions };
+    return Apollo.useQuery<
+        GetCartProductsCountQuery,
+        GetCartProductsCountQueryVariables
+    >(GetCartProductsCountDocument, options);
+}
+export function useGetCartProductsCountLazyQuery(
+    baseOptions?: Apollo.LazyQueryHookOptions<
+        GetCartProductsCountQuery,
+        GetCartProductsCountQueryVariables
+    >,
+) {
+    const options = { ...defaultOptions, ...baseOptions };
+    return Apollo.useLazyQuery<
+        GetCartProductsCountQuery,
+        GetCartProductsCountQueryVariables
+    >(GetCartProductsCountDocument, options);
+}
+export type GetCartProductsCountQueryHookResult = ReturnType<
+    typeof useGetCartProductsCountQuery
+>;
+export type GetCartProductsCountLazyQueryHookResult = ReturnType<
+    typeof useGetCartProductsCountLazyQuery
+>;
+export type GetCartProductsCountQueryResult = Apollo.QueryResult<
+    GetCartProductsCountQuery,
+    GetCartProductsCountQueryVariables
+>;
+export function refetchGetCartProductsCountQuery(
+    variables?: GetCartProductsCountQueryVariables,
+) {
+    return { query: GetCartProductsCountDocument, variables: variables };
+}
+export const GetCartDocument = gql`
+    query GetCart($locale: String, $filter: InputCartsFilter) {
+        carts(locale: $locale, filter: $filter) {
+            id
+            items {
+                product {
+                    id
+                    title
+                    description
+                    stock
+                    price
+                    imageUrl
+                    brand {
+                        title
+                    }
+                    size {
+                        value
+                    }
+                    type {
+                        value
+                    }
+                    color {
+                        title
+                    }
+                    category {
+                        title
+                    }
+                    material {
+                        title
+                    }
+                }
+                count
+            }
+        }
+    }
+`;
+
+/**
+ * __useGetCartQuery__
+ *
+ * To run a query within a React component, call `useGetCartQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetCartQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetCartQuery({
+ *   variables: {
+ *      locale: // value for 'locale'
+ *      filter: // value for 'filter'
+ *   },
+ * });
+ */
+export function useGetCartQuery(
+    baseOptions?: Apollo.QueryHookOptions<GetCartQuery, GetCartQueryVariables>,
+) {
+    const options = { ...defaultOptions, ...baseOptions };
+    return Apollo.useQuery<GetCartQuery, GetCartQueryVariables>(
+        GetCartDocument,
+        options,
+    );
+}
+export function useGetCartLazyQuery(
+    baseOptions?: Apollo.LazyQueryHookOptions<
+        GetCartQuery,
+        GetCartQueryVariables
+    >,
+) {
+    const options = { ...defaultOptions, ...baseOptions };
+    return Apollo.useLazyQuery<GetCartQuery, GetCartQueryVariables>(
+        GetCartDocument,
+        options,
+    );
+}
+export type GetCartQueryHookResult = ReturnType<typeof useGetCartQuery>;
+export type GetCartLazyQueryHookResult = ReturnType<typeof useGetCartLazyQuery>;
+export type GetCartQueryResult = Apollo.QueryResult<
+    GetCartQuery,
+    GetCartQueryVariables
+>;
+export function refetchGetCartQuery(variables?: GetCartQueryVariables) {
+    return { query: GetCartDocument, variables: variables };
+}
 export const GetHomepageDataDocument = gql`
     query getHomepageData(
         $locale: String

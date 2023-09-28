@@ -1,21 +1,14 @@
-import type { Product } from 'generated';
-import { products } from '../product';
-
-interface Items {
-    readonly product: Product;
-    readonly count: number;
+export interface Cart {
+    readonly id: string;
+    readonly products: {
+        readonly id: string;
+        readonly count: number;
+    }[];
 }
 
-export const CART = (id: string, items: Items[]) => ({
+export const CART = ({ id, products }: Cart) => ({
     id,
-    items,
+    products,
 });
 
-export const carts: ReturnType<typeof CART>[] = [
-    CART('5454', [
-        {
-            product: products[0],
-            count: 1,
-        },
-    ]),
-];
+export const carts: ReturnType<typeof CART>[] = [];

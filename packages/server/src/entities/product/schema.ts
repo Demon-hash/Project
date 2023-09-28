@@ -15,7 +15,7 @@ type Product {
 }
 
 input InputProductsFilter {
-    id: ID
+    id: [ID]
     price: [Int]
     stock: Int
     color: [String]

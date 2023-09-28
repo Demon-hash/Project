@@ -1,67 +1,22 @@
-import * as mocked from 'entities';
-import Filter from 'filter';
+import * as mutation from 'mutations';
+import * as query from 'queries';
 import type { Resolvers } from 'generated';
 
 export const resolvers: Resolvers = {
     Query: {
-        products(_, { filter, locale }) {
-            return new Filter(mocked.products, filter, locale)
-                .byId('id')
-                .byLocale('title')
-                .byLocale('description')
-                .byRange('price')
-                .byCount('stock')
-                .byField('color', 'title')
-                .byField('size', 'title')
-                .byField('type', 'title')
-                .byField('material', 'title')
-                .byField('category', 'title')
-                .byField('brand', 'title')
-                .withPagination()
-                .get();
-        },
-        carts(_, { filter, locale }) {
-            return new Filter(mocked.carts, filter, locale)
-                .byId('id')
-                .byField('items.product', 'title')
-                .byField('items.product', 'description')
-                .get();
-        },
-        categories(_, { filter, locale }) {
-            return new Filter(mocked.categories, filter, locale)
-                .byLocale('title')
-                .withPagination()
-                .get();
-        },
-        brands(_, { locale }) {
-            return new Filter(mocked.brands, undefined, locale)
-                .byLocale('title')
-                .get();
-        },
-        colors(_, { locale }) {
-            return new Filter(mocked.colors, undefined, locale)
-                .byLocale('title')
-                .get();
-        },
-        sizes(_, { locale }) {
-            return new Filter(mocked.sizes, undefined, locale)
-                .byLocale('title')
-                .get();
-        },
-        materials(_, { locale }) {
-            return new Filter(mocked.materials, undefined, locale)
-                .byLocale('title')
-                .get();
-        },
-        types(_, { locale }) {
-            return new Filter(mocked.types, undefined, locale)
-                .byLocale('title')
-                .get();
-        },
-        sort(_, { locale }) {
-            return new Filter(mocked.sorts, undefined, locale)
-                .byLocale('title')
-                .get();
-        },
+        products: (_, { filter, locale }) => query.products(filter, locale),
+        categories: (_, { filter, locale }) => query.categories(filter, locale),
+        brands: (_, { locale }) => query.brands(undefined, locale),
+        colors: (_, { locale }) => query.colors(undefined, locale),
+        sizes: (_, { locale }) => query.sizes(undefined, locale),
+        materials: (_, { locale }) => query.materials(undefined, locale),
+        types: (_, { locale }) => query.types(undefined, locale),
+        sort: (_, { locale }) => query.sort(undefined, locale),
+        // @ts-ignore
+        carts: (_, { filter, locale }) => query.carts(filter, locale),
+    },
+    Mutation: {
+        addCartProducts: (_, { id, products }) =>
+            mutation.addCartProducts(id, products),
     },
 };

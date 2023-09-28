@@ -1,0 +1,7 @@
+query GetCartProductsCount($locale: String, $filter: InputCartsFilter) {
+    carts(locale: $locale, filter: $filter) {
+        products {
+            count
+        }
+    }
+}

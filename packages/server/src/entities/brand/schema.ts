@@ -4,6 +4,11 @@ type Brand {
     value: String
 }
 
+input BrandInput {
+    title: String
+    value: String
+}
+
 type Query {
     brands(locale: String): [Brand]
 }

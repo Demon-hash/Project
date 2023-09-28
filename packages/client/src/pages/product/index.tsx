@@ -8,7 +8,7 @@ import Footer from 'components/layout/Footer';
 import Header from 'components/layout/Header';
 import ColorsList from 'components/shopping/ColorsList';
 import SizesList from 'components/shopping/SizesList';
-import { useGetProductDataQuery } from 'generated';
+import { useAddItemInCartMutation, useGetProductDataQuery } from 'generated';
 import { formatNumberAsMoney } from 'utils';
 
 const Product: FC = () => {
@@ -25,8 +25,17 @@ const Product: FC = () => {
     });
 
     const product = data?.products?.[0];
-
-    console.log(product);
+    const [addCartItem] = useAddItemInCartMutation({
+        variables: {
+            id: 'test',
+            products: [
+                {
+                    id: product?.id ?? '',
+                    count: 1,
+                },
+            ],
+        },
+    });
 
     return (
         <>
@@ -71,7 +80,9 @@ const Product: FC = () => {
                                     <SizesList sizes={product?.size} />
                                 </section>
                                 <CountSelection min={1} max={product?.stock} />
-                                <Button>Add to Cart</Button>
+                                <Button onClick={() => addCartItem()}>
+                                    Add to Cart
+                                </Button>
                             </section>
                         </div>
                     </section>

@@ -4,6 +4,11 @@ type Material {
     value: String
 }
 
+input MaterialInput {
+    title: String
+    value: String
+}
+
 type Query {
     materials(locale: String): [Material]
 }

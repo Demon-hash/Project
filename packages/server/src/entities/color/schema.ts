@@ -4,6 +4,11 @@ type Color {
     value: String
 }
 
+input ColorInput {
+    title: String
+    value: String
+}
+
 input ColorsFilter {
     locale: String!
 }

@@ -4,6 +4,11 @@ type Sort {
     value: String
 }
 
+input SortInput {
+    title: String
+    value: String
+}
+
 type Query {
     sort(locale: String): [Sort]
 }

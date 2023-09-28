@@ -1,0 +1,3 @@
+mutation AddItemInCart($id: ID!, $products: [InputAddCartProduct]!) {
+    addCartProducts(id: $id, products: $products)
+}

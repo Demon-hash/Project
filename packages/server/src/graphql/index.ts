@@ -22,6 +22,9 @@ export type Incremental<T> =
               ? T[P]
               : never;
       };
+export type RequireFields<T, K extends keyof T> = Omit<T, K> & {
+    [P in K]-?: NonNullable<T[P]>;
+};
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
     ID: { input: string; output: string };
@@ -37,10 +40,15 @@ export type Brand = {
     value?: Maybe<Scalars['String']['output']>;
 };
 
+export type BrandInput = {
+    title?: InputMaybe<Scalars['String']['input']>;
+    value?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type Cart = {
     __typename?: 'Cart';
-    id?: Maybe<Scalars['ID']['output']>;
-    items?: Maybe<Array<Maybe<CartItem>>>;
+    id: Scalars['ID']['output'];
+    products?: Maybe<Array<Maybe<CartItem>>>;
 };
 
 export type CartItem = {
@@ -61,14 +69,30 @@ export type Category = {
     value?: Maybe<Scalars['String']['output']>;
 };
 
+export type CategoryInput = {
+    imageUrl?: InputMaybe<Scalars['String']['input']>;
+    title?: InputMaybe<Scalars['String']['input']>;
+    value?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type Color = {
     __typename?: 'Color';
     title?: Maybe<Scalars['String']['output']>;
     value?: Maybe<Scalars['String']['output']>;
 };
 
+export type ColorInput = {
+    title?: InputMaybe<Scalars['String']['input']>;
+    value?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type ColorsFilter = {
     locale: Scalars['String']['input'];
+};
+
+export type InputAddCartProduct = {
+    count: Scalars['Int']['input'];
+    id: Scalars['ID']['input'];
 };
 
 export type InputCartsFilter = {
@@ -81,7 +105,7 @@ export type InputProductsFilter = {
     brand?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     category?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     color?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-    id?: InputMaybe<Scalars['ID']['input']>;
+    id?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
     limit?: InputMaybe<Scalars['Int']['input']>;
     material?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     offset?: InputMaybe<Scalars['Int']['input']>;
@@ -92,10 +116,36 @@ export type InputProductsFilter = {
     type?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
+export type Localization = {
+    __typename?: 'Localization';
+    en: Scalars['String']['output'];
+    ru?: Maybe<Scalars['String']['output']>;
+};
+
+export type LocalizationInput = {
+    en: Scalars['String']['input'];
+    ru?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type Material = {
     __typename?: 'Material';
     title?: Maybe<Scalars['String']['output']>;
     value?: Maybe<Scalars['String']['output']>;
+};
+
+export type MaterialInput = {
+    title?: InputMaybe<Scalars['String']['input']>;
+    value?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type Mutation = {
+    __typename?: 'Mutation';
+    addCartProducts?: Maybe<Scalars['ID']['output']>;
+};
+
+export type MutationAddCartProductsArgs = {
+    id: Scalars['ID']['input'];
+    products: Array<InputMaybe<InputAddCartProduct>>;
 };
 
 export type Product = {
@@ -172,16 +222,31 @@ export type Size = {
     value?: Maybe<Scalars['String']['output']>;
 };
 
+export type SizeInput = {
+    title?: InputMaybe<Scalars['String']['input']>;
+    value?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type Sort = {
     __typename?: 'Sort';
     title?: Maybe<Scalars['String']['output']>;
     value?: Maybe<Scalars['String']['output']>;
 };
 
+export type SortInput = {
+    title?: InputMaybe<Scalars['String']['input']>;
+    value?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type Type = {
     __typename?: 'Type';
     title?: Maybe<Scalars['String']['output']>;
     value?: Maybe<Scalars['String']['output']>;
+};
+
+export type TypeInput = {
+    title?: InputMaybe<Scalars['String']['input']>;
+    value?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
@@ -293,46 +358,68 @@ export type DirectiveResolverFn<
 export type ResolversTypes = {
     Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
     Brand: ResolverTypeWrapper<Brand>;
+    BrandInput: BrandInput;
     Cart: ResolverTypeWrapper<Cart>;
     CartItem: ResolverTypeWrapper<CartItem>;
     CategoriesFilter: CategoriesFilter;
     Category: ResolverTypeWrapper<Category>;
+    CategoryInput: CategoryInput;
     Color: ResolverTypeWrapper<Color>;
+    ColorInput: ColorInput;
     ColorsFilter: ColorsFilter;
     ID: ResolverTypeWrapper<Scalars['ID']['output']>;
+    InputAddCartProduct: InputAddCartProduct;
     InputCartsFilter: InputCartsFilter;
     InputProductsFilter: InputProductsFilter;
     Int: ResolverTypeWrapper<Scalars['Int']['output']>;
+    Localization: ResolverTypeWrapper<Localization>;
+    LocalizationInput: LocalizationInput;
     Material: ResolverTypeWrapper<Material>;
+    MaterialInput: MaterialInput;
+    Mutation: ResolverTypeWrapper<{}>;
     Product: ResolverTypeWrapper<Product>;
     Query: ResolverTypeWrapper<{}>;
     Size: ResolverTypeWrapper<Size>;
+    SizeInput: SizeInput;
     Sort: ResolverTypeWrapper<Sort>;
+    SortInput: SortInput;
     String: ResolverTypeWrapper<Scalars['String']['output']>;
     Type: ResolverTypeWrapper<Type>;
+    TypeInput: TypeInput;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
     Boolean: Scalars['Boolean']['output'];
     Brand: Brand;
+    BrandInput: BrandInput;
     Cart: Cart;
     CartItem: CartItem;
     CategoriesFilter: CategoriesFilter;
     Category: Category;
+    CategoryInput: CategoryInput;
     Color: Color;
+    ColorInput: ColorInput;
     ColorsFilter: ColorsFilter;
     ID: Scalars['ID']['output'];
+    InputAddCartProduct: InputAddCartProduct;
     InputCartsFilter: InputCartsFilter;
     InputProductsFilter: InputProductsFilter;
     Int: Scalars['Int']['output'];
+    Localization: Localization;
+    LocalizationInput: LocalizationInput;
     Material: Material;
+    MaterialInput: MaterialInput;
+    Mutation: {};
     Product: Product;
     Query: {};
     Size: Size;
+    SizeInput: SizeInput;
     Sort: Sort;
+    SortInput: SortInput;
     String: Scalars['String']['output'];
     Type: Type;
+    TypeInput: TypeInput;
 };
 
 export type BrandResolvers<
@@ -350,8 +437,8 @@ export type CartResolvers<
     ParentType extends
         ResolversParentTypes['Cart'] = ResolversParentTypes['Cart'],
 > = {
-    id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-    items?: Resolver<
+    id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+    products?: Resolver<
         Maybe<Array<Maybe<ResolversTypes['CartItem']>>>,
         ParentType,
         ContextType
@@ -394,6 +481,16 @@ export type ColorResolvers<
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type LocalizationResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['Localization'] = ResolversParentTypes['Localization'],
+> = {
+    en?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    ru?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type MaterialResolvers<
     ContextType = any,
     ParentType extends
@@ -402,6 +499,19 @@ export type MaterialResolvers<
     title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     value?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
     __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type MutationResolvers<
+    ContextType = any,
+    ParentType extends
+        ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation'],
+> = {
+    addCartProducts?: Resolver<
+        Maybe<ResolversTypes['ID']>,
+        ParentType,
+        ContextType,
+        RequireFields<MutationAddCartProductsArgs, 'id' | 'products'>
+    >;
 };
 
 export type ProductResolvers<
@@ -549,7 +659,9 @@ export type Resolvers<ContextType = any> = {
     CartItem?: CartItemResolvers<ContextType>;
     Category?: CategoryResolvers<ContextType>;
     Color?: ColorResolvers<ContextType>;
+    Localization?: LocalizationResolvers<ContextType>;
     Material?: MaterialResolvers<ContextType>;
+    Mutation?: MutationResolvers<ContextType>;
     Product?: ProductResolvers<ContextType>;
     Query?: QueryResolvers<ContextType>;
     Size?: SizeResolvers<ContextType>;

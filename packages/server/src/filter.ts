@@ -71,6 +71,12 @@ export default class Filter<T, F, L> {
         return this;
     }
 
+    withNormalizer<R>(
+        callback: (entities: T[]) => Filter<R, F, L>,
+    ): Filter<R, F, L> {
+        return callback.bind(this)(this.entities);
+    }
+
     withPagination(): Filter<T, WithOffset<F>, L> {
         this.entities = this.entities.slice(
             this.offset,

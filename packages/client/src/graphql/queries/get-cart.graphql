@@ -1,0 +1,34 @@
+query GetCart($locale: String, $filter: InputCartsFilter) {
+    carts(locale: $locale, filter: $filter) {
+        id
+        products {
+            product {
+                id
+                title
+                description
+                stock
+                price
+                imageUrl
+                brand {
+                    title
+                }
+                size {
+                    value
+                }
+                type {
+                    value
+                }
+                color {
+                    title
+                }
+                category {
+                    title
+                }
+                material {
+                    title
+                }
+            }
+            count
+        }
+    }
+}
