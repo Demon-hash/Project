@@ -41,12 +41,15 @@
       "graphql/*": [
         "./graphql/*"
       ],
+      "storage": [
+        "./storage/index.ts"
+      ],
       "generated": [
         "./graphql/generated.ts"
       ],
       "utils": [
         "./utils/index.ts"
-      ]
+      ],
     }
   },
   "exclude": [

@@ -105,7 +105,7 @@ export type InputProductsFilter = {
     brand?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     category?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     color?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-    id?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+    id?: InputMaybe<Scalars['ID']['input']>;
     limit?: InputMaybe<Scalars['Int']['input']>;
     material?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
     offset?: InputMaybe<Scalars['Int']['input']>;
@@ -141,10 +141,15 @@ export type MaterialInput = {
 export type Mutation = {
     __typename?: 'Mutation';
     addCartProducts?: Maybe<Scalars['ID']['output']>;
+    createCart?: Maybe<Scalars['ID']['output']>;
 };
 
 export type MutationAddCartProductsArgs = {
     id: Scalars['ID']['input'];
+    products: Array<InputMaybe<InputAddCartProduct>>;
+};
+
+export type MutationCreateCartArgs = {
     products: Array<InputMaybe<InputAddCartProduct>>;
 };
 
@@ -511,6 +516,12 @@ export type MutationResolvers<
         ParentType,
         ContextType,
         RequireFields<MutationAddCartProductsArgs, 'id' | 'products'>
+    >;
+    createCart?: Resolver<
+        Maybe<ResolversTypes['ID']>,
+        ParentType,
+        ContextType,
+        RequireFields<MutationCreateCartArgs, 'products'>
     >;
 };
 

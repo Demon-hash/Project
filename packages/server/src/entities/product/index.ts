@@ -132,17 +132,29 @@ export const products: ReturnType<typeof PRODUCT>[] = new Array(20)
             price: Math.floor(Math.random() * 1000),
             stock: Math.floor(Math.random() * 10),
             color,
-            size: [
+            size: new Set([
                 sizes[Math.floor(Math.random() * sizes.length)],
                 sizes[Math.floor(Math.random() * sizes.length)],
                 sizes[Math.floor(Math.random() * sizes.length)],
-            ],
-            material: [materials[Math.floor(Math.random() * materials.length)]],
-            category: [categories[categoryIndex]],
-            type: [
+            ]),
+            material: new Set([
+                materials[Math.floor(Math.random() * materials.length)],
+            ]),
+            category: new Set([categories[categoryIndex]]),
+            type: new Set([
                 types[Math.floor(Math.random() * types.length)],
                 types[Math.floor(Math.random() * types.length)],
-            ],
-            brand: [brands[Math.floor(Math.random() * brands.length)]],
+            ]),
+            brand: new Set([brands[Math.floor(Math.random() * brands.length)]]),
         };
     });
+
+export const productsById = products.reduce((acc, { id, ...rest }) => {
+    return {
+        ...acc,
+        [id]: {
+            id,
+            ...rest,
+        },
+    };
+}, {});

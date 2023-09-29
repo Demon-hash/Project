@@ -1,17 +1,20 @@
 import { ShoppingCart } from 'lucide-react';
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { LINKS } from 'links';
+import type { RootState } from 'storage';
 import { useGetCartProductsCountQuery } from 'generated';
 
 const Header: FC = () => {
+    const id = useSelector((state: RootState) => state.cart.id) ?? '';
     const { i18n } = useTranslation();
     const { data } = useGetCartProductsCountQuery({
         variables: {
             locale: i18n.language,
             filter: {
-                id: 'test',
+                id,
             },
         },
     });
@@ -20,7 +23,7 @@ const Header: FC = () => {
         data?.carts?.reduce(
             (final, entity) =>
                 final +
-                (entity?.items?.reduce(
+                (entity?.products?.reduce(
                     (acc, cur) => acc + (cur?.count ?? 0),
                     0,
                 ) ?? 0),

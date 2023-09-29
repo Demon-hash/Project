@@ -1,6 +1,9 @@
-import type { FC } from 'react';
+import { type FC, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import type { RootState } from 'storage';
+import { setId } from 'storage/slices/cart.ts';
 import Button from 'components/interactive/Button';
 import CountSelection from 'components/interactive/CountSelection';
 import Container from 'components/layout/Container';
@@ -12,6 +15,8 @@ import { useAddItemInCartMutation, useGetProductDataQuery } from 'generated';
 import { formatNumberAsMoney } from 'utils';
 
 const Product: FC = () => {
+    const storage = useSelector((state: RootState) => state.cart);
+    const dispatch = useDispatch();
     const { productId: id } = useParams();
     const { i18n } = useTranslation();
 
@@ -25,9 +30,9 @@ const Product: FC = () => {
     });
 
     const product = data?.products?.[0];
-    const [addCartItem] = useAddItemInCartMutation({
+    const [addCartItem, { data: cart }] = useAddItemInCartMutation({
         variables: {
-            id: 'test',
+            id: storage?.id ?? '',
             products: [
                 {
                     id: product?.id ?? '',
@@ -36,6 +41,13 @@ const Product: FC = () => {
             ],
         },
     });
+
+    useEffect(() => {
+        if (cart === null || cart === undefined) {
+            return;
+        }
+        dispatch(setId(cart.addCartProducts));
+    }, [dispatch, cart]);
 
     return (
         <>

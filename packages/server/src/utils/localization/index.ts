@@ -47,13 +47,12 @@ export function localizeByNesting<T, L, F extends string, P extends string[]>(
     locale: L,
     path: P,
 ) {
-    const extracted = path.shift();
+    const extracted = path.length > 1 ? path.shift() : path[0];
     if (typeof extracted !== 'string') {
         return data;
     }
 
     const current = data?.[extracted];
-
     if (Array.isArray(current)) {
         return {
             ...data,

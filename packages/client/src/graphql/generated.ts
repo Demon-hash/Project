@@ -47,7 +47,7 @@ export type BrandInput = {
 export type Cart = {
     __typename?: 'Cart';
     id: Scalars['ID']['output'];
-    items?: Maybe<Array<Maybe<CartItem>>>;
+    products?: Maybe<Array<Maybe<CartItem>>>;
 };
 
 export type CartItem = {
@@ -139,11 +139,16 @@ export type MaterialInput = {
 
 export type Mutation = {
     __typename?: 'Mutation';
-    addProductsInCart?: Maybe<Cart>;
+    addCartProducts?: Maybe<Scalars['ID']['output']>;
+    createCart?: Maybe<Scalars['ID']['output']>;
 };
 
-export type MutationAddProductsInCartArgs = {
-    id?: InputMaybe<Scalars['ID']['input']>;
+export type MutationAddCartProductsArgs = {
+    id: Scalars['ID']['input'];
+    products: Array<InputMaybe<InputAddCartProduct>>;
+};
+
+export type MutationCreateCartArgs = {
     products: Array<InputMaybe<InputAddCartProduct>>;
 };
 
@@ -249,7 +254,7 @@ export type TypeInput = {
 };
 
 export type AddItemInCartMutationVariables = Exact<{
-    id?: InputMaybe<Scalars['ID']['input']>;
+    id: Scalars['ID']['input'];
     products:
         | Array<InputMaybe<InputAddCartProduct>>
         | InputMaybe<InputAddCartProduct>;
@@ -257,7 +262,7 @@ export type AddItemInCartMutationVariables = Exact<{
 
 export type AddItemInCartMutation = {
     __typename?: 'Mutation';
-    addProductsInCart?: { __typename?: 'Cart'; id: string } | null;
+    addCartProducts?: string | null;
 };
 
 export type GetCartProductsCountQueryVariables = Exact<{
@@ -269,7 +274,10 @@ export type GetCartProductsCountQuery = {
     __typename?: 'Query';
     carts?: Array<{
         __typename?: 'Cart';
-        items?: Array<{ __typename?: 'CartItem'; count: number } | null> | null;
+        products?: Array<{
+            __typename?: 'CartItem';
+            count: number;
+        } | null> | null;
     } | null> | null;
 };
 
@@ -283,7 +291,7 @@ export type GetCartQuery = {
     carts?: Array<{
         __typename?: 'Cart';
         id: string;
-        items?: Array<{
+        products?: Array<{
             __typename?: 'CartItem';
             count: number;
             product: {
@@ -462,10 +470,8 @@ export type GetShopFiltersQuery = {
 };
 
 export const AddItemInCartDocument = gql`
-    mutation AddItemInCart($id: ID, $products: [InputAddCartProduct]!) {
-        addProductsInCart(id: $id, products: $products) {
-            id
-        }
+    mutation AddItemInCart($id: ID!, $products: [InputAddCartProduct]!) {
+        addCartProducts(id: $id, products: $products)
     }
 `;
 export type AddItemInCartMutationFn = Apollo.MutationFunction<
@@ -515,7 +521,7 @@ export type AddItemInCartMutationOptions = Apollo.BaseMutationOptions<
 export const GetCartProductsCountDocument = gql`
     query GetCartProductsCount($locale: String, $filter: InputCartsFilter) {
         carts(locale: $locale, filter: $filter) {
-            items {
+            products {
                 count
             }
         }
@@ -582,7 +588,7 @@ export const GetCartDocument = gql`
     query GetCart($locale: String, $filter: InputCartsFilter) {
         carts(locale: $locale, filter: $filter) {
             id
-            items {
+            products {
                 product {
                     id
                     title

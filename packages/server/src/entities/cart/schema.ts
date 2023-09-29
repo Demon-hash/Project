@@ -26,6 +26,7 @@ type Query {
 }
 
 type Mutation {
+    createCart(products: [InputAddCartProduct]!): ID
     addCartProducts(id: ID!, products: [InputAddCartProduct]!): ID
 }
 `;
