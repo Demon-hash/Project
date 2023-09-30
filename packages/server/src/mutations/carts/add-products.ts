@@ -9,7 +9,7 @@ export const addCartProducts = (
     const cart = carts.find(c => c.id === id);
     if (cart) {
         cart.products.push(...products);
-        return cart.id;
+        return cart;
     }
 
     return createCart(products);

@@ -1,81 +1,43 @@
-import type { Normalize } from '../index';
+import type { Localization, Product } from 'generated';
+import type { PRODUCT } from '../../entities/product';
 
-export type WithLocale<T> = Normalize<
-    T,
-    {
-        title: string;
-    }
->;
+export const translate = (field: object, locale: string): string =>
+    field?.[locale] ?? field?.['en'] ?? `Provide localization for ${locale}`;
+export const translateArray = (
+    group: { title: Localization }[],
+    locale: string,
+) => {
+    return group.map(({ title, ...rest }) => ({
+        title: translate(title, locale),
+        ...rest,
+    }));
+};
 
-export function localization<T, L, P extends string[]>(
-    data: T[],
-    field?: string,
-    search?: string,
-    locale?: L,
-    path?: P,
-): T[] | WithLocale<T>[] {
-    if (path.length > 1) {
-        return data.map(entity =>
-            localizeByNesting(entity, search, locale, path),
-        );
-    }
-
-    return data.map(entity => {
-        if (Array.isArray(entity?.[field])) {
-            return {
-                ...entity,
-                [field]: entity[field].map((each: T) =>
-                    translate(each, search, locale),
-                ),
-            };
-        }
-
-        return translate(entity, field, locale);
-    });
-}
-
-export function translate<T, L>(data: T, field?: string, locale?: L) {
-    return {
-        ...data,
-        [field]: data?.[field]?.[locale] ?? data?.[field]?.['en'],
-    };
-}
-
-export function localizeByNesting<T, L, F extends string, P extends string[]>(
-    data: T,
-    field: F,
-    locale: L,
-    path: P,
-) {
-    const extracted = path.length > 1 ? path.shift() : path[0];
-    if (typeof extracted !== 'string') {
-        return data;
-    }
-
-    const current = data?.[extracted];
-    if (Array.isArray(current)) {
-        return {
-            ...data,
-            [extracted]: current.map(entity =>
-                localizeByNesting(entity, field, locale, path),
-            ),
-        };
-    }
+export const product = (
+    product: ReturnType<typeof PRODUCT>,
+    locale: string,
+): Product => {
+    const {
+        title,
+        description,
+        material,
+        brand,
+        category,
+        color,
+        size,
+        type,
+        ...rest
+    } = product;
 
     return {
-        ...data,
-        [extracted]: __detectNestingLocalization(current, field, locale),
+        title: translate(title, locale),
+        description: translate(description, locale),
+        color: translateArray(color, locale),
+        material: translateArray(material, locale),
+        brand: translateArray(brand, locale),
+        category: translateArray(category, locale),
+        size: translateArray(size, locale),
+        type: translateArray(type, locale),
+        ...rest,
     };
-}
-
-function __detectNestingLocalization<T, L>(
-    data: T | T[],
-    field?: string,
-    locale?: L,
-) {
-    if (Array.isArray(data)) {
-        return data.map(each => translate(each, field, locale));
-    }
-
-    return translate(data, field, locale);
-}
+};

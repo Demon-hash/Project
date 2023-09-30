@@ -1,12 +1,11 @@
 const CART_SCHEMA = `#graphql
 
-input InputCartsFilter {
-    id: ID
-    limit: Int
-    offset: Int
+input InputAddCartProduct {
+    id: ID!
+    count: Int!
 }
 
-input InputAddCartProduct {
+type ReferenceToCartProduct {
     id: ID!
     count: Int!
 }
@@ -21,13 +20,24 @@ type Cart {
     products: [CartItem]
 }
 
+type ReferenceToCart {
+    id: ID!
+    products: [ReferenceToCartProduct]
+}
+
+input InputCartsFilter {
+    id: [ID]
+    limit: Int
+    offset: Int
+}
+
 type Query {
     carts(locale: String, filter: InputCartsFilter): [Cart]
 }
 
 type Mutation {
-    createCart(products: [InputAddCartProduct]!): ID
-    addCartProducts(id: ID!, products: [InputAddCartProduct]!): ID
+    createCart(products: [InputAddCartProduct]!): ReferenceToCart
+    addCartProducts(id: ID!, products: [InputAddCartProduct]!): ReferenceToCart
 }
 `;
 

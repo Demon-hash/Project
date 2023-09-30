@@ -41,6 +41,9 @@
       "graphql/*": [
         "./graphql/*"
       ],
+      "storage/*": [
+        "./storage/*"
+      ],
       "storage": [
         "./storage/index.ts"
       ],

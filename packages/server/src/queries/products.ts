@@ -1,18 +1,23 @@
+import Builder from 'builder';
 import { products as mocked } from 'entities';
-import Filter from 'filter';
+import type { Product } from 'generated';
+import { id, locale, range, text } from 'utils/filters';
+import { product as translate } from 'utils/localization';
 
-export const products = <F, L>(filter: F, locale: L) =>
-    new Filter(mocked, filter, locale)
-        .byId('id')
-        .byLocale('title')
-        .byLocale('description')
-        .byRange('price')
-        .byCount('stock')
-        .byField('color', 'title')
-        .byField('size', 'title')
-        .byField('type', 'title')
-        .byField('material', 'title')
-        .byField('category', 'title')
-        .byField('brand', 'title')
-        .withPagination()
-        .get();
+export const products = <F>(filter: F, localization: string) =>
+    new Builder(mocked, filter, localization)
+        .resolve(entities => {
+            const products: Product[] = entities.map(product =>
+                translate(product, localization),
+            );
+            return new Builder(products, filter, localization);
+        })
+        .filter(['id'], id)
+        .filter(['title', 'description'], text)
+        .filter(
+            ['color', 'material', 'brand', 'category', 'size', 'type'],
+            locale,
+        )
+        .filter(['price', 'stock'], range)
+        .paginate()
+        .build();

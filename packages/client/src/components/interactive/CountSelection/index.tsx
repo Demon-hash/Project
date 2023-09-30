@@ -1,4 +1,4 @@
-import { type ChangeEvent, forwardRef, useState } from 'react';
+import { type ChangeEvent, forwardRef, useEffect, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 import Button from 'components/interactive/Button';
 import Input from 'components/interactive/Input';
@@ -8,11 +8,16 @@ interface Properties {
     readonly className?: string;
     readonly min?: number;
     readonly max?: number;
+    readonly onValueChange?: (value: number) => void;
 }
 
 const CountSelection = forwardRef<HTMLDivElement, Properties>(
-    ({ className, amount, min, max }, ref) => {
+    ({ className, amount, min, max, onValueChange }, ref) => {
         const [count, setCount] = useState(amount ?? 1);
+
+        useEffect(() => {
+            onValueChange?.(count);
+        }, [count, onValueChange]);
 
         const onChange = (event: ChangeEvent<HTMLInputElement>) => {
             const number = parseInt(event.target.value, 10);

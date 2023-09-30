@@ -15,9 +15,9 @@ type Product {
 }
 
 input InputProductsFilter {
-    id: ID
+    id: [ID]
     price: [Int]
-    stock: Int
+    stock: [Int]
     color: [String]
     size: [String]
     material: [String]
@@ -25,6 +25,8 @@ input InputProductsFilter {
     brand: [String]
     type: [String]
     sort: [String]
+    title: String
+    description: String
     limit: Int
     offset: Int
 }

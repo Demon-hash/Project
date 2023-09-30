@@ -132,29 +132,40 @@ export const products: ReturnType<typeof PRODUCT>[] = new Array(20)
             price: Math.floor(Math.random() * 1000),
             stock: Math.floor(Math.random() * 10),
             color,
-            size: new Set([
-                sizes[Math.floor(Math.random() * sizes.length)],
-                sizes[Math.floor(Math.random() * sizes.length)],
-                sizes[Math.floor(Math.random() * sizes.length)],
-            ]),
-            material: new Set([
-                materials[Math.floor(Math.random() * materials.length)],
-            ]),
-            category: new Set([categories[categoryIndex]]),
-            type: new Set([
-                types[Math.floor(Math.random() * types.length)],
-                types[Math.floor(Math.random() * types.length)],
-            ]),
-            brand: new Set([brands[Math.floor(Math.random() * brands.length)]]),
+            size: Array.from(
+                new Set([
+                    sizes[Math.floor(Math.random() * sizes.length)],
+                    sizes[Math.floor(Math.random() * sizes.length)],
+                    sizes[Math.floor(Math.random() * sizes.length)],
+                ]),
+            ),
+            material: Array.from(
+                new Set([
+                    materials[Math.floor(Math.random() * materials.length)],
+                ]),
+            ),
+            category: Array.from(new Set([categories[categoryIndex]])),
+            type: Array.from(
+                new Set([
+                    types[Math.floor(Math.random() * types.length)],
+                    types[Math.floor(Math.random() * types.length)],
+                ]),
+            ),
+            brand: Array.from(
+                new Set([brands[Math.floor(Math.random() * brands.length)]]),
+            ),
         };
     });
 
-export const productsById = products.reduce((acc, { id, ...rest }) => {
-    return {
-        ...acc,
-        [id]: {
-            id,
-            ...rest,
-        },
-    };
-}, {});
+export const productsById = products.reduce(
+    (acc, { id, ...rest }) => {
+        return {
+            ...acc,
+            [id]: {
+                id,
+                ...rest,
+            },
+        };
+    },
+    {} as Record<string, Product>,
+);

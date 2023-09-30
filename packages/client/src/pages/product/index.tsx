@@ -1,22 +1,19 @@
 import { type FC, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import type { RootState } from 'storage';
-import { setId } from 'storage/slices/cart.ts';
-import Button from 'components/interactive/Button';
-import CountSelection from 'components/interactive/CountSelection';
+import { useAppDispatch } from 'storage';
+import { update } from 'storage/product';
 import Container from 'components/layout/Container';
 import Footer from 'components/layout/Footer';
 import Header from 'components/layout/Header';
+import AddProductInCart from 'components/shopping/AddProductInCart';
 import ColorsList from 'components/shopping/ColorsList';
 import SizesList from 'components/shopping/SizesList';
-import { useAddItemInCartMutation, useGetProductDataQuery } from 'generated';
+import { useGetProductDataQuery } from 'generated';
 import { formatNumberAsMoney } from 'utils';
 
 const Product: FC = () => {
-    const storage = useSelector((state: RootState) => state.cart);
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const { productId: id } = useParams();
     const { i18n } = useTranslation();
 
@@ -30,24 +27,14 @@ const Product: FC = () => {
     });
 
     const product = data?.products?.[0];
-    const [addCartItem, { data: cart }] = useAddItemInCartMutation({
-        variables: {
-            id: storage?.id ?? '',
-            products: [
-                {
-                    id: product?.id ?? '',
-                    count: 1,
-                },
-            ],
-        },
-    });
 
     useEffect(() => {
-        if (cart === null || cart === undefined) {
+        if (loading) {
             return;
         }
-        dispatch(setId(cart.addCartProducts));
-    }, [dispatch, cart]);
+
+        dispatch(update(product));
+    }, [product, loading, dispatch]);
 
     return (
         <>
@@ -79,22 +66,7 @@ const Product: FC = () => {
                                     </p>
                                     <hr />
                                 </section>
-                                <section>
-                                    <h1 className="text-md font-bold uppercase tracking-widest">
-                                        Variants
-                                    </h1>
-                                    <ColorsList colors={product?.color} />
-                                </section>
-                                <section>
-                                    <h1 className="text-md font-bold uppercase tracking-widest">
-                                        Sizes
-                                    </h1>
-                                    <SizesList sizes={product?.size} />
-                                </section>
-                                <CountSelection min={1} max={product?.stock} />
-                                <Button onClick={() => addCartItem()}>
-                                    Add to Cart
-                                </Button>
+                                <AddProductInCart product={product} />
                             </section>
                         </div>
                     </section>

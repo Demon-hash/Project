@@ -8,5 +8,5 @@ export const createCart = (products: InputAddCartProduct[]) => {
     });
 
     carts.push(cart);
-    return cart.id;
+    return cart;
 };

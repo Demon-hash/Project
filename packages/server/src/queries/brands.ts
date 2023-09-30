@@ -1,5 +1,14 @@
+import Builder from 'builder';
 import { brands as mocked } from 'entities';
-import Filter from 'filter';
+import { translateArray } from 'utils/localization';
 
-export const brands = <F, L>(filter: F, locale: L) =>
-    new Filter(mocked, filter, locale).byLocale('title').get();
+export const brands = <F>(filter: F, locale: string) =>
+    new Builder(mocked, filter, locale)
+        .resolve(entities => {
+            return new Builder(
+                translateArray(entities, locale),
+                filter,
+                locale,
+            );
+        })
+        .build();

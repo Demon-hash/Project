@@ -1,3 +1,9 @@
 mutation AddItemInCart($id: ID!, $products: [InputAddCartProduct]!) {
-    addCartProducts(id: $id, products: $products)
+    addCartProducts(id: $id, products: $products) {
+        id
+        products {
+            id
+            count
+        }
+    }
 }

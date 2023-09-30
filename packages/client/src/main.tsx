@@ -16,9 +16,9 @@ export const client = new ApolloClient({
 });
 
 createRoot(document.getElementById('root') as HTMLElement).render(
-    <Provider store={store}>
-        <ApolloProvider client={client}>
-            <RouterProvider router={routers} />,
-        </ApolloProvider>
-    </Provider>,
+    <ApolloProvider client={client}>
+        <Provider store={store}>
+            <RouterProvider router={routers} />
+        </Provider>
+    </ApolloProvider>,
 );

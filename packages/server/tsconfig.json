@@ -12,7 +12,7 @@
       "generated": ["./src/graphql/index.ts"],
       "resolvers": ["./src/resolvers/index.ts"],
       "entities": ["./src/entities/index.ts"],
-      "filter": ["./src/filter.ts"],
+      "builder": ["./src/builder.ts"],
       "schema": ["./src/entities/schema.ts"],
       "queries": ["./src/queries/index.ts"],
       "mutations": ["./src/mutations/index.ts"],

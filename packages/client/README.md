@@ -1,9 +1,10 @@
 ### Code
+
 ```tsx
 import type { FC, ReactNode } from 'react';
-import { Breadcrumbs } from 'components/Breadcrumbs';
-import { useShopFiltersForm } from 'hooks/forms/use-shop-filters-form';
-import { config } from './config';
+import Header from 'components/layout/Header';
+import Footer from 'components/layout/Footer';
+import Container from 'components/layout/Container';
 
 const CONSTANT_NAME = 'something';
 
@@ -12,14 +13,16 @@ interface Properties {
     readonly children?: ReactNode;
 }
 
-const PageLayout: FC<Properties> = ({ initialValue, children }) => {
+const PageLayout: FC<Properties> = ({ initialValue }) => {
     let variableName;
     const [value, setValue] = useState(initialValue);
-    
+
     return <>
-        <header></header>>
-        <main>{children}</main>>
-        <footer></footer>
+        <Header />
+        <Container>
+            {value}
+        </Container>
+        <Footer />
     </>;
 }
 

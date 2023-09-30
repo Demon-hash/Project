@@ -1,34 +1,13 @@
-import { ShoppingCart } from 'lucide-react';
+import { ShoppingCart, User2 } from 'lucide-react';
 import type { FC } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { LINKS } from 'links';
-import type { RootState } from 'storage';
-import { useGetCartProductsCountQuery } from 'generated';
+import { useAppSelector } from 'storage';
+import { selectCartProducts } from 'storage/cart';
 
 const Header: FC = () => {
-    const id = useSelector((state: RootState) => state.cart.id) ?? '';
-    const { i18n } = useTranslation();
-    const { data } = useGetCartProductsCountQuery({
-        variables: {
-            locale: i18n.language,
-            filter: {
-                id,
-            },
-        },
-    });
-
-    const count =
-        data?.carts?.reduce(
-            (final, entity) =>
-                final +
-                (entity?.products?.reduce(
-                    (acc, cur) => acc + (cur?.count ?? 0),
-                    0,
-                ) ?? 0),
-            0,
-        ) ?? 0;
+    const products = useAppSelector(selectCartProducts) ?? [];
+    const count = products.reduce((acc, cur) => acc + (cur?.count ?? 0), 0);
 
     return (
         <header
@@ -41,17 +20,17 @@ const Header: FC = () => {
                         <Link to={LINKS.HOME}>MY SHOP NAME</Link>
                     </li>
                     <li className="grow flex items-end">
-                        <Link
-                            to={LINKS.CART}
-                            className="ml-auto relative right-3"
-                        >
-                            <ShoppingCart />
-                            {!!count && (
-                                <div className="bg-red-600 absolute rounded-sm text-sm text-center -right-3 -top-1 px-1">
-                                    {count}
-                                </div>
-                            )}
-                        </Link>
+                        <section className="ml-auto relative right-3 flex gap-4">
+                            <User2 />
+                            <Link to={LINKS.CART}>
+                                <ShoppingCart />
+                                {!!count && (
+                                    <div className="bg-red-600 absolute rounded-sm text-sm text-center -right-3 -top-1 px-1">
+                                        {count > 9 ? '9+' : count}
+                                    </div>
+                                )}
+                            </Link>
+                        </section>
                     </li>
                 </ul>
             </nav>
